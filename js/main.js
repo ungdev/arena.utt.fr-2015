@@ -1,13 +1,15 @@
 'use strict';
 
-var $window     = $(window);
-var $body       = $(document.body);
-var $cookies    = $('#cookies');
-var $menu       = $('#menu-opener');
-var $realMenu   = $('#real-menu');
-var $nav        = $('header nav').first();
-var $scrollMenu = $('#scrollMenu');
-var $subscribe  = $('form#subscribe');
+var $window          = $(window);
+var $body            = $(document.body);
+var $cookies         = $('#cookies');
+var $menu            = $('#menu-opener');
+var $realMenu        = $('#real-menu');
+var $nav             = $('header nav').first();
+var $scrollMenu      = $('#scrollMenu');
+var $subscribe       = $('#subscribe');
+var $mail            = $('input[name=subscription_email]');
+var $subscribeButton = $('#subscribe > input[type=submit]');
 
 // Heartbug
 var k = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],
@@ -75,15 +77,17 @@ function checkForScroll () {
 checkForScroll();
 
 // Email subscription
-var $mail = $('input[name=subscription_email]');
-var $subscribeButton = $('#subscribe>input[type=submit]');
-$mail.on('keydown', function (e) {
+$mail.on('keyup', function (e) {
     if (e.keyCode === 13 || e.charCode === 13 || e.which === 13) {
-        if ( ! $subscribeButton.attr('disabled')) {
+        if (!$subscribeButton.attr('disabled')) {
             return $subscribe.submit();
         }
     } else {
-        ($mail.val().length == 0) ? $subscribeButton.attr('disabled', 'disabled')  : $subscribeButton.removeAttr('disabled');
+        if ($mail.val().length == 0) {
+            $subscribeButton.attr('disabled', '');
+        } else {
+            $subscribeButton.removeAttr('disabled');
+        }
     }
 });
 

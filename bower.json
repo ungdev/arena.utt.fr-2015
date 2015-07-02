@@ -1,0 +1,35 @@
+{
+  "name": "ua2015",
+  "version": "1.0.0",
+  "homepage": "https://github.com/ungdev/arena.utt.fr-2105",
+  "authors": [
+    "Gabriel Juchault <gabriel.juchault@gmail.com>"
+  ],
+  "description": "UTT Arena 2015",
+  "main": "index.html",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "UTT",
+    "Arena",
+    "Cube",
+    "Game",
+    "Gaming"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "jquery.easing": "~1.3.1",
+    "selectize": "~0.12.1",
+    "parallax.js": "~1.3.2",
+    "iCheck": "~1.0.2"
+  }
+}

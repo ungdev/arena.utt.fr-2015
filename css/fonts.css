@@ -1,0 +1,69 @@
+/* average-regular - latin */
+@font-face {
+  font-family: 'Average';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/Average_400.eot');
+  src: local('Average'), local('Average-Regular'),
+       url('../fonts/Average_400.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/Average_400.woff2') format('woff2'),
+       url('../fonts/Average_400.woff') format('woff'),
+       url('../fonts/Average_400.ttf') format('truetype'),
+       url('../fonts/Average_400.svg#Average') format('svg');
+}
+
+/* roboto-slab-regular - latin */
+@font-face {
+  font-family: 'Roboto Slab';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/Roboto_Slab_400.eot');
+  src: local('Roboto Slab Regular'), local('RobotoSlab-Regular'),
+       url('../fonts/Roboto_Slab_400.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/Roboto_Slab_400.woff2') format('woff2'),
+       url('../fonts/Roboto_Slab_400.woff') format('woff'),
+       url('../fonts/Roboto_Slab_400.ttf') format('truetype'),
+       url('../fonts/Roboto_Slab_400.svg#RobotoSlab') format('svg');
+}
+
+/* open-sans-300 - latin */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: url('../fonts/Open_Sans_300.eot');
+  src: local('Open Sans Light'), local('OpenSans-Light'),
+       url('../fonts/Open_Sans_300.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/Open_Sans_300.woff2') format('woff2'),
+       url('../fonts/Open_Sans_300.woff') format('woff'),
+       url('../fonts/Open_Sans_300.ttf') format('truetype'),
+       url('../fonts/Open_Sans_300.svg#OpenSans') format('svg');
+}
+
+/* open-sans-regular - latin */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/Open_Sans_400.eot');
+  src: local('Open Sans'), local('OpenSans'),
+       url('../fonts/Open_Sans_400.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/Open_Sans_400.woff2') format('woff2'),
+       url('../fonts/Open_Sans_400.woff') format('woff'),
+       url('../fonts/Open_Sans_400.ttf') format('truetype'),
+       url('../fonts/Open_Sans_400.svg#OpenSans') format('svg');
+}
+
+/* open-sans-700 - latin */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../fonts/Open_Sans_700.eot');
+  src: local('Open Sans Bold'), local('OpenSans-Bold'),
+       url('../fonts/Open_Sans_700.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/Open_Sans_700.woff2') format('woff2'),
+       url('../fonts/Open_Sans_700.woff') format('woff'),
+       url('../fonts/Open_Sans_700.ttf') format('truetype'),
+       url('../fonts/Open_Sans_700.svg#OpenSans') format('svg');
+}

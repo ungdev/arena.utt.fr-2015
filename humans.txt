@@ -1,0 +1,17 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Gabriel Juchault -- Project Leader
+
+# THANKS
+
+    UNG, UTT Net Group -- NPO organisating the event
+    YUAN -- Arthas Background
+    李昂 (Leon) -- Hydralisk Background
+    GeorgeStratulat -- Nidalee Background
+    WB Games, Rocksteady, Warner Bros -- Batman Background
+    Chris Lie, Lius Lasahido -- Street Fighter 4 Background
+    JiroJh -- Dota 2 Background
+    Valve -- Team Fortress 2 Background

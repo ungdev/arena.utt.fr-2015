@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="fr" data-pos="-80">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+        <meta name="description" content="L'UTT Arena 2015 ouvre ses portes aux Cube !">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/png" href="img/logo16.png">
+        <link rel="shortcut icon" href="favicon.ico">
+        <link rel="apple-touch-icon" href="img/logo128.png">
+
+        <link rel="stylesheet" href="css/lib/boilerplate.css">
+        <link rel="stylesheet" href="node_modules/icheck/skins/flat/aero.css">
+        <link rel="stylesheet" href="node_modules/selectize/dist/css/selectize.default.css">
+
+        <link rel="stylesheet" href="css/fonts.css">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/header.css">
+        <link rel="stylesheet" href="css/modal.css">
+        <link rel="stylesheet" href="css/inputs.css">
+        <link rel="stylesheet" href="css/account.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <title>UTT Arena 2015</title>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">Vous utilisez un navigateur <strong>obsolète</strong>. Veuillez le <a href="http://browsehappy.com/">mettre à jour</a> pour améliorer votre expérience.</p>
+        <![endif]-->
+        <img src="img/logo.png" width="420" id="logo" alt="UTT Arena logo">
+
+        <div id="background-modal"></div>
+        <div class="modal" id="teeshirt-modal">
+            <div class="modal-header">Tee-Shirt UTT Arena</div>
+            <a href="#" class="close">&times;</a>
+            <div class="modal-body">
+                <div class="center">
+                    <img src="img/teeshirt.jpg" alt="Tee-Shirt UTT Arena" height="400" width="267">
+                </div>
+                <br>
+                <br>
+                Le tee-shirt est d'un grammage de 125g/m<sup>2</sup>, et sérigraphié.
+            </div>
+        </div>
+
+        <header>
+            <h1><a href="/">UTT Arena 2015</a></h1>
+            <nav>
+                <ul>
+                    <li><div class="left-mask"></div><a href="#event">Évènement</a><div class="separator"></div></li>
+                    <li><a href="#infos">Infos pratiques</a><div class="separator"></div></li>
+                    <li><a href="#partners">Partenaires</a><div class="separator"></div></li>
+                    <li><a href="#register">Inscription</a><div class="separator"></div></li>
+                    <li><a href="account.html">Mon compte</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section class="module parallax parallax-1"></section>
+            <section class="module content">
+                <div class="panel container account">
+                    <h1>Gestion du compte</h1>
+                    <ul class="tabs accountLinks">
+                        <li class="active">INFORMATIONS PERSONNELLES</li>
+                        <li>PAIEMENT</li>
+                        <li>SPOTLIGHTS/ÉQUIPE</li>
+                    </ul>
+                    <br>
+                    <span class="content">
+                        <h2>Informations personnelles</h2>
+                        <p><em>Ne remplissez que le champ « Nouvel email » pour changer votre email, ou que les champs « Nouveau mot de passe » et « Nouveau mot de passe (confirmation) » pour changer uniquement votre mot de passe.</em></p>
+                        <form action="" method="post" autocomplete="off">
+                            <input type="password" name="password" class="password" placeholder="Mot de passe actuel (requis)">
+                            <br>
+                            <input type="password" name="new_password" class="password" placeholder="Nouveau mot de passe" spellcheck="false">
+                            <input type="password" name="new_password_confirmation" class="password" placeholder="Nouveau mot de passe (confirmation)" spellcheck="false">
+                            <input type="email" name="new_email" class="email" placeholder="Nouvel email" spellcheck="false">
+                            <input type="submit" class="button" value="Changer mes informations personnelles">
+                        </form>
+                    </span>
+                    <span class="content">
+                        <h2>Paiement</h2>
+                        <form action="" method="post">
+                            <p>
+                                Prix éligible : Prévente étudiant UTT
+                                Prix : 10 €
+                            </p>
+                            <label>
+                                <input type="checkbox" class="checkbox" id="teeshirt">
+                                &nbsp; Je veux réserver un <a href="#" data-modal="teeshirt-modal">tee-shirt</a> (10€) ! <span class="modified">Sauvegardé !</span>
+                            </label>
+                            <br>
+                            <br>
+                            <select id="teeshirtSize" disabled>
+                                <option value="xs">XS</option>
+                                <option value="s">S</option>
+                                <option value="m">M</option>
+                                <option value="l">L</option>
+                                <option value="xl">XL</option>
+                                <option value="xxl">XXL</option>
+                            </select>
+                            <input type="submit" class="button" value="Payer avec PayPal">
+                        </form>
+                        <br>
+                        [[OU]] <p><em>Vous avez déjà payé votre place (ainsi qu'un tee-shirt) ! Merci !</em></p>
+                    </span>
+                    <span class="content">
+                        <h2>Équipe</h2>
+                        <h3>Rejoindre une équipe</h3>
+                        <p>
+                            <em>Rejoindre une équipe est soumis à la validation du capitaine de cette équipe.</em>
+                        </p>
+                        <form action="" method="post">
+                            <select name="team">
+                                <optgroup label="Counter-Strike: Global Offensive">
+                                    <option value="team1">Team 1</option>
+                                </optgroup>
+                                <optgroup label="League of Legends">
+                                    <option value="team2">Team 2</option>
+                                </optgroup>
+                            </select>
+                            <input type="submit" class="button" value="Rejoindre !">
+                        </form>
+                        <h3>Créer une équipe</h3>
+                        <p>
+                            <em>
+                                Attention, ne créez pas une équipe si vous ne comptez pas vous<br>
+                                inscrire à un spotlight. Cette opération sera irréversible.
+                            </em>
+                            <br>
+                            <strong>
+                                Si vous comptez à vous inscrire à un spotlight seul (Hearthstone, SF4)<br>
+                                créez tout de même une équipe !
+                            </strong>
+                        </p>
+                        <form action="" method="post">
+                            <select name="game" id="game">
+                                <option value="csgo">Counter-Strike : Global Offensive</option>
+                                <option value="lol">League of Legends</option>
+                                <option value="hearthstone">Hearthstone</option>
+                                <option value="usf4">Ultimate Street-Figther 4</option>
+                            </select>
+                            <input type="text" class="text team" placeholder="Nom de l'équipe">
+                            <input type="submit" class="button" value="Créer une équipe">
+                        </form>
+                        [[OU]]
+                        <h3>Mon équipe</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nom de l'équipier</th>
+                                    <th>Place payée</th>
+                                    <th></th>
+                                    <th>Transférer le capitanat</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>flan</td>
+                                    <td class="yes">oui</td>
+                                    <td>
+                                        <em>Accepter l'équipier avant</em>
+                                    </td>
+                                    <td>
+                                        <form action="" method="post">
+                                            <input type="submit" class="button" value="Accepter">
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>bouasse</td>
+                                    <td class="no">non</td>
+                                    <td>
+                                        <form action="" method="post">
+                                            <input type="submit" class="button" value="Transférer">
+                                        </form>
+                                    </td>
+                                    <td class="yes">
+                                        oui
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h3>Placement de l'équipe</h3>
+                    </span>
+                    <span class="content">
+                        Inscription à un spotlight
+                        Liste des decks hearthstone
+                    </span>
+                </div>
+            </section>
+            <section class="module parallax parallax-2"></section>
+            <section class="module content">
+                <div class="panel container footer">
+                    <a href="https://facebook.com/UTTArena">
+                        <img src="img/facebook.png" alt="Facebook">
+                    </a>
+                    <a href="https://twitter.com/UTTArena">
+                        <img src="img/twitter.png" alt="Twitter">
+                    </a>
+                    <a href="https://youtube.com/UTTNetGroup">
+                        <img src="img/youtube.png" alt="YouTube">
+                    </a>
+                    <a href="mailto:arena@utt.fr">
+                        <img src="img/email.png" alt="EMail">
+                    </a>
+                    <span class="space"></span>
+                    <a href="#">Conditions générales d'utilisation</a>
+                    <span class="space"></span>
+                    <a href="#">Cookies</a>
+                    <span class="space"></span>
+                    <a href="#">Crédits</a>
+                </div>
+            </section>
+        </main>
+
+        <script src="js/lib/raf.js"></script>
+        <script src="node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="node_modules/jquery.easing/jquery.easing.min.js"></script>
+        <script src="node_modules/icheck/icheck.min.js"></script>
+        <script src="node_modules/parallax.js/parallax.min.js"></script>
+        <script src="node_modules/selectize/dist/js/standalone/selectize.min.js"></script>
+
+        <script src="js/main.js"></script>
+        <script src="js/tabs.js"></script>
+        <script src="js/faq.js"></script>
+        <script src="js/links.js"></script>
+        <script src="js/modal.js"></script>
+        <script src="js/account.js"></script>
+    </body>
+</html>

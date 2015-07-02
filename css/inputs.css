@@ -1,0 +1,139 @@
+form {
+    margin-top: 20px;
+    max-width: 600px;
+}
+
+input {
+    color: #222;
+    display: block;
+    height: 35px;
+    margin: 15px 0;
+    width: 100%;
+}
+
+.selectize-control input {
+    height: auto;
+}
+
+input.text, input.password, input.email {
+    background-color: #263638;
+    background-repeat: no-repeat;
+    background-size: 24px;
+    background-position: 5px 50%;
+    border: 1px solid #555;
+    color: #888;
+    padding-left: 40px;
+
+    -webkit-border-radius: 3px;
+       -moz-border-radius: 3px;
+            border-radius: 3px;
+
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+input.text {
+    background-image: url('../img/user.png');
+}
+
+input.text[disabled] {
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0.2) 10px,
+        rgba(0, 0, 0, 0.3) 10px,
+        rgba(0, 0, 0, 0.3) 20px
+    ), url('../img/user.png') 5px 50% no-repeat;
+}
+
+input.email {
+    background-image: url('../img/email.png');
+}
+
+input.email[disabled] {
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0.2) 10px,
+        rgba(0, 0, 0, 0.3) 10px,
+        rgba(0, 0, 0, 0.3) 20px
+    ), url('../img/email.png') 5px 50% no-repeat;
+}
+
+input.team {
+    background-image: url('../img/team.png');
+}
+
+input.team[disabled] {
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0.2) 10px,
+        rgba(0, 0, 0, 0.3) 10px,
+        rgba(0, 0, 0, 0.3) 20px
+    ), url('../img/team.png') 5px 50% no-repeat;
+}
+
+input.password {
+    background-image: url('../img/password.png');
+}
+
+input.password[disabled] {
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0.2) 10px,
+        rgba(0, 0, 0, 0.3) 10px,
+        rgba(0, 0, 0, 0.3) 20px
+    ), url('../img/password.png') 5px 50% no-repeat;
+}
+
+input.button {
+    background: rgb(52, 152, 219);
+    background: -moz-linear-gradient(top, rgb(52, 152, 219) 0%, rgb(74, 163, 223) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgb(52, 152, 219)), color-stop(100%, rgb(74, 163, 223)));
+    background: -webkit-linear-gradient(top, rgb(52, 152, 219) 0%, rgb(74, 163, 223) 100%);
+    background: -o-linear-gradient(top, rgb(52, 152, 219) 0%, rgb(74, 163, 223) 100%);
+    background: -ms-linear-gradient(top, rgb(52, 152, 219) 0%, rgb(74, 163, 223) 100%);
+    background: linear-gradient(to bottom, rgb(52, 152, 219) 0%, rgb(74, 163, 223) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#3498db', endColorstr = '#4aa3df', GradientType = 0);
+
+    border: 0;
+    color: #fff;
+    padding-bottom: 3px;
+
+    -webkit-border-radius: 3px;
+       -moz-border-radius: 3px;
+            border-radius: 3px;
+
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+       -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+
+    -webkit-transition: all .2s ease;
+       -moz-transition: all .2s ease;
+         -o-transition: all .2s ease;
+            transition: all .2s ease;
+}
+
+input.button:focus {
+    outline: 0;
+}
+
+input.button:active {
+    -webkit-box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+       -moz-box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+}
+
+input.button[disabled] {
+    background: rgb(135, 135, 135);
+    background: -moz-linear-gradient(top, rgb(135, 135, 135) 0%, rgb(148, 148, 148) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgb(135, 135, 135)), color-stop(100%, rgb(148, 148, 148)));
+    background: -webkit-linear-gradient(top, rgb(135, 135, 135) 0%, rgb(148, 148, 148) 100%);
+    background: -o-linear-gradient(top, rgb(135, 135, 135) 0%, rgb(148, 148, 148) 100%);
+    background: -ms-linear-gradient(top, rgb(135, 135, 135) 0%, rgb(148, 148, 148) 100%);
+    background: linear-gradient(to bottom, rgb(135, 135, 135) 0%, rgb(148, 148, 148) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#878787', endColorstr = '#949494', GradientType = 0);
+}

@@ -1,20 +1,7 @@
 'use strict';
 
-var $img       = $('.account img');
 var $teeshirt  = $('#teeshirt');
 var $modified  = $('.modified');
-var imgTimeout = 0;
-
-$('.account img')
-    .mouseenter(function () {
-        imgTimeout = setTimeout(function () {
-            $img.css('height', '600px').css('width', '400px');
-        }, 1000);
-    })
-    .mouseleave(function () {
-        clearTimeout(imgTimeout);
-        $img.removeAttr('style');
-    });
 
 $teeshirt.on('ifToggled', function () {
     $modified.stop().css('opacity', 0);

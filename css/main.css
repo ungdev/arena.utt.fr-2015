@@ -316,3 +316,18 @@ main table span {
         padding: 50px;
     }
 }
+
+@media (max-width: 500px) {
+    .module.parallax.parallax-1 {
+        background-position: 50% 0 !important;
+    }
+
+    main > section > div {
+        font-size: 14px;
+        padding: 20px;
+    }
+
+    main .event > .content > span, main .spotlights > span {
+        width: calc(50% - 30px);
+    }
+}

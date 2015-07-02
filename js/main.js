@@ -77,7 +77,7 @@ checkForScroll();
 // Email subscription
 var $mail = $('input[name=subscription_email]');
 var $subscribeButton = $('#subscribe>input[type=submit]');
-$mail.on('keypress', function (e) {
+$mail.on('keydown', function (e) {
     if (e.keyCode === 13 || e.charCode === 13 || e.which === 13) {
         if ( ! $subscribeButton.attr('disabled')) {
             return $subscribe.submit();

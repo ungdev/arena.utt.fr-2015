@@ -1,9 +1,12 @@
 'use strict';
 
-var $body     = $(document.body);
-var $cookies  = $('#cookies');
-var $menu     = $('#menu-opener');
-var $realMenu = $('#real-menu');
+var $window     = $(window);
+var $body       = $(document.body);
+var $cookies    = $('#cookies');
+var $menu       = $('#menu-opener');
+var $realMenu   = $('#real-menu');
+var $nav        = $('header nav').first();
+var $scrollMenu = $('#scrollMenu');
 
 // Heartbug
 var k = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],
@@ -54,3 +57,18 @@ $cookies.children('a').click(function (e) {
     $cookies.fadeOut();
     return false;
 });
+
+// Scroll menu
+function checkForScroll () {
+    var posOriginalMenu = $nav.offset().top - $window.scrollTop() + $nav.height();
+
+    if (posOriginalMenu < 10) {
+        $scrollMenu.css('top', 0);
+    } else {
+        $scrollMenu.css('top', -75);
+    }
+
+    requestAnimationFrame(checkForScroll);
+}
+
+checkForScroll();

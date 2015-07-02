@@ -10,7 +10,7 @@ $('a[href^="#"]').click(function (e) {
     });
 
     $('html, body').animate({
-        scrollTop: $target.offset().top
+        scrollTop: $target.offset().top - 30
     }, 2000, 'easeOutExpo');
 
     return false;

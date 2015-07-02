@@ -64,6 +64,39 @@ header nav {
     z-index: 50;
 }
 
+#scrollMenu {
+    border-bottom: 1px solid #fff;
+    left: 0;
+    position: fixed;
+    top: -75px;
+    width: 100%;
+
+    -webkit-transition: top .6s ease;
+       -moz-transition: top .6s ease;
+         -o-transition: top .6s ease;
+            transition: top .6s ease;
+}
+
+#scrollMenu ul {
+    height: 65px;
+    margin: 0;
+}
+
+#scrollMenu ul li {
+    height: 65px;
+    line-height: 65px;
+    width: 16.666666667%;
+}
+
+#scrollMenu ul li .separator {
+    height: 75px;
+}
+
+#scrollMenu img {
+    position: relative;
+    top: -3px;
+}
+
 header nav ul {
     border: 1px solid #263238;
     height: 50px;

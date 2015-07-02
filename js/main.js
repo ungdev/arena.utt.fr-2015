@@ -7,6 +7,7 @@ var $menu       = $('#menu-opener');
 var $realMenu   = $('#real-menu');
 var $nav        = $('header nav').first();
 var $scrollMenu = $('#scrollMenu');
+var $subscribe  = $('form#subscribe');
 
 // Heartbug
 var k = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],
@@ -72,3 +73,32 @@ function checkForScroll () {
 }
 
 checkForScroll();
+
+// Email subscription
+var $mail = $('input[name=subscription_email]');
+var $subscribeButton = $('#subscribe>input[type=submit]');
+$mail.on('keypress', function (e) {
+    if (e.keyCode === 13 || e.charCode === 13 || e.which === 13) {
+        if ( ! $subscribeButton.attr('disabled')) {
+            return $subscribe.submit();
+        }
+    } else {
+        ($mail.val().length == 0) ? $subscribeButton.attr('disabled', 'disabled')  : $subscribeButton.removeAttr('disabled');
+    }
+});
+
+$subscribe.on('submit', function (e) {
+    e.preventDefault();
+    // Don't be a regex hipster: rely on the browser
+    // and the server for the email validation.
+    var $form = $(this);
+    console.log($form.action);
+    $.post($form.attr('action'), { 'email': $mail.val() }, function (data) {
+        $subscribeButton.val(data.message);
+        if (data.status === 'success') {
+            $subscribeButton.attr('disabled', 'disabled').css('background', 'green');
+        } else {
+            $subscribeButton.css('background', 'red');
+        }
+    });
+});

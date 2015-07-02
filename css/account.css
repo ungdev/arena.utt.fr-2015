@@ -3,17 +3,6 @@ ul.tabs.accountLinks li {
     width: 33.333333333%;
 }
 
-/* TEESHIRT PICTURE */
-.account img {
-    height: 300px;
-    width: 200px;
-
-    -webkit-transition: height .2s ease, width .2s ease;
-       -moz-transition: height .2s ease, width .2s ease;
-         -o-transition: height .2s ease, width .2s ease;
-            transition: height .2s ease, width .2s ease;
-}
-
 /* MAXIMUM BUTTON/INPUT SIZE */
 .account input.button, .account > .content > form > input {
     max-width: 600px;
@@ -49,4 +38,12 @@ main .account table td {
 
 .account table .no {
     color: red;
+}
+
+/* PLACEMENT */
+.placement {
+    background-color: rgba(255, 0, 0, 0.5);
+    position: relative;
+    height: 16.5px;
+    width: 71px;
 }

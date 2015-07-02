@@ -40,7 +40,7 @@ main {
     background: rgba(0, 0, 0, 0.2);
 }
 
-main a {
+main a, a {
     color: #3498db;
     text-decoration: none;
 }

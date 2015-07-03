@@ -97,6 +97,10 @@ header nav {
     top: -3px;
 }
 
+#scrollMenuTop img {
+    cursor: pointer;
+}
+
 header nav ul {
     border: 1px solid #263238;
     height: 50px;
@@ -242,5 +246,17 @@ header nav ul li a:hover:before {
 
     #real-menu {
         margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    #logo {
+        height: 209.714285709px;
+        width: 240px;
+    }
+
+    header h1 {
+        font-size: 50px;
+        top: 200px;
     }
 }

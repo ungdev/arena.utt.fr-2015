@@ -317,9 +317,13 @@ main table span {
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 768px) {
     .module.parallax.parallax-1 {
         background-position: 50% 0 !important;
+    }
+
+    main h1 {
+        margin-right: 35px !important;
     }
 
     main > section > div {
@@ -328,6 +332,36 @@ main table span {
     }
 
     main .event > .content > span, main .spotlights > span {
-        width: calc(50% - 30px);
+        width: 100%;
+    }
+
+    main .event > .content > span:nth-child(even), main .spotlights > span:nth-child(even) {
+        margin-left: 0;
+    }
+
+    blockquote {
+        margin: 5px;
+    }
+
+    main div ul.tabs.infosLinks li {
+        width: 33.333333333%;
+    }
+
+    main div > ul.tabs li {
+        width: 33.333333333%;
+    }
+
+    #register form {
+        min-width: 0;
+    }
+
+    main .partners > img:not(:first-child) {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    main div > ul.tabs li {
+        width: 50%;
     }
 }

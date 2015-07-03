@@ -358,6 +358,16 @@ main table span {
     main .partners > img:not(:first-child) {
         margin-left: 0;
     }
+
+    main table td, main table th {
+        min-width: 0;
+    }
+
+    main table span {
+        padding: 2px;
+        right: -7px;
+        top: -10px;
+    }
 }
 
 @media (max-width: 600px) {

@@ -2,12 +2,144 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+        <meta name="description" content="L'UTT Arena 2015 ouvre ses portes aux Cube !">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta property="og:title" content="UTT Arena 2015">
+        <meta property="og:site_name" content="UTT Arena 2015">
+        <meta property="og:url" content="http://arena.utt.fr/">
+        <meta property="og:description" content="Les 4-5-6 décembre 2015 se déroule au Parc des Expositions de Troyes l'UTT Arena, une « LAN Party » (un rassemblement de passionnés du jeu-vidéo, qui viennent jouer ensemble durant tout un week-end). Cet évènement est composé non seulement de compétitions de haut-niveau (« Spotlights ») mais aussi d'animations diverses, de tournois organisés par les joueurs eux-même, un coin détente, de la nourriture sympa ; Bref, tout pour passer un week-end exceptionnel ! L'UTT Arena est organisée par l'UNG : une association de l'Université de Technologie de Troyes.">
+        <meta property="og:type" content="website">
+        <meta property="og:locale" content="fr_FR">
+        <meta property="article:author" content="https://github.com/ungdev">
+        <meta property="article:publisher" content="https://www.facebook.com/assouttnetgroup">
+        <meta property="og:image" content="http://arena.utt.fr/img/oggamers.jpg">
+        <meta property="og:image" content="http://arena.utt.fr/img/bg7.jpg">
+        <meta property="og:image" content="http://arena.utt.fr/img/oglogo.png">
+
+        <title>{% block title %}UTT Arena 2015{% endblock %}</title>
+        {% stylesheets
+        'vendors/iCheck/skins/flat/aero.css'
+        'css/*.css'
+         filter='cssrewrite' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+        <!--[if lt IE 8]>
+        <p class="browserupgrade">Vous utilisez un navigateur <strong>obsolète</strong>. Veuillez le <a href="http://browsehappy.com/">mettre à jour</a> pour améliorer votre expérience.</p>
+        <![endif]-->
+        {% image 'img/logo.png' output='/images/logo.png' %}
+        <img src="{{ asset_url }}"  width="420" id="logo" alt="UTT Arena logo"/>
+        {% endimage %}
+        <header>
+            <h1><a href="/">UTT Arena 2015</a></h1>
+            <nav>
+                <ul>
+                    <li>
+                        <div class="left-mask"></div>
+                        <a href="{{ path('homepage') }}#event">Évènement</a><div class="separator"></div>
+                    </li>
+                    <li><a href="{{ path('homepage') }}#infos">Infos pratiques</a><div class="separator"></div></li>
+                    <li><a href="{{ path('homepage') }}#partners">Partenaires</a><div class="separator"></div></li>
+                    <li><a href="{{ path('homepage') }}#register">Inscription</a><div class="separator"></div></li>
+                    <li><a href="{{ path('homepage') }}#" data-modal="login-modal">Connexion</a></li>
+                </ul>
+            </nav>
+
+            <nav id="scrollMenu">
+                <ul>
+                    <li id="scrollMenuTop">
+                        {% image 'img/logo60White.png' output='/images/logo.png' %}
+                        <img src="{{ asset_url }}" alt="UTT Arena 2015" height="48" width="56"/>
+                        {% endimage %}
+                        <div class="separator"></div>
+                    </li>
+                    <li><a href="{{ path('homepage') }}#event">Évènement</a><div class="separator"></div></li>
+                    <li><a href="{{ path('homepage') }}#infos">Infos pratiques</a><div class="separator"></div></li>
+                    <li><a href="{{ path('homepage') }}#partners">Partenaires</a><div class="separator"></div></li>
+                    <li><a href="{{ path('homepage') }}#register">Inscription</a><div class="separator"></div></li>
+                    <li><a href="#" data-modal="login-modal">Connexion</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div id="cookies">
+            En naviguant sur notre site, vous acceptez l’utilisation de cookies pour vous proposer une navigation optimale et nous permettre de réaliser des statistiques de visites.
+            <a href="#">&times;</a>
+            <script id="cookiesScript">
+                var $cookies       = document.getElementById('cookies');
+                var $cookiesScript = document.getElementById('cookiesScript');
+
+                if (localStorage.hasOwnProperty('cookie')) {
+                    $cookies.parentNode.removeChild($cookies);
+                }
+                $cookiesScript.parentNode.removeChild($cookiesScript);
+            </script>
+        </div>
+
+        <div id="background-modal"></div>
+        <div class="modal" id="login-modal">
+            <div class="modal-header">Connexion</div>
+            <a href="#" class="close">&times;</a>
+            <div class="modal-body">
+                <form action="" method="post" autocomplete="off">
+                    <p>
+                        <em>
+                            L'inscription est fermée pour le moment ! Attendez quelques jours !<br>
+                            Suivez la <a href="https://facebook.com/UTTArena">page Facebook</a> pour les toutes dernières informations !
+                        </em>
+                    </p>
+                    <input type="text" name="login" id="login" class="text" placeholder="Nom d'utilisateur ou email" spellcheck="false" disabled>
+                    <input type="password" name="password" id="password" class="password" placeholder="Mot de passe" spellcheck="false" disabled>
+                    <input type="submit" value="Connexion" class="button" disabled>
+                </form>
+            </div>
+        </div>
         {% block body %}{% endblock %}
+        <section class="module parallax parallax-7"></section>
+        <section class="module content">
+            <div class="panel container footer">
+                <a href="https://facebook.com/UTTArena">
+                    {% image 'img/facebook.png' output='/images/facebook.png' %}
+                    <img src="{{ asset_url }}"  alt="Facebook"/>
+                    {% endimage %}
+                </a>
+                <a href="https://twitter.com/UTTArena">
+                    {% image 'img/twitter.png' output='/images/twitter.png' %}
+                    <img src="{{ asset_url }}"  alt="twitter"/>
+                    {% endimage %}
+                </a>
+                <a href="https://youtube.com/UTTNetGroup">
+                    {% image 'img/youtube.png' output='/images/youtube.png' %}
+                    <img src="{{ asset_url }}"  alt="Youtube"/>
+                    {% endimage %}
+                </a>
+                <a href="mailto:arena@utt.fr">
+                    {% image 'img/email32.png' output='/images/email.png' %}
+                    <img src="{{ asset_url }}"  alt="Email"/>
+                    {% endimage %}
+                </a>
+                <span class="space"></span>
+                <a href="{{ path('terms') }}">Conditions générales</a>
+                <span class="space"></span>
+                <a href="{{ 'privacy' }}">Vie privée/Cookies</a>
+            </div>
+        </section>
+        {% javascripts
+            'vendors/jquery/dist/jquery.min.js'
+            'vendors/jquery.easing/js/jquery.easing.min.js'
+            'vendors/parallax.js/parallax.js'
+            'vendors/iCheck/icheck.js'
+            'vendors/microplugin/src/microplugin.js'
+            'vendors/sifter/sifter.min.js'
+            'js/*.js' %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
         {% block javascripts %}{% endblock %}
     </body>
 </html>

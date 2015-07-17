@@ -1,5 +1,432 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    Homepage.
+    <div class="modal" id="rules-modal">
+        <div class="modal-header">Règlement</div>
+        <a href="#" class="close">&times;</a>
+        <div class="modal-body">
+            <blockquote cite="http://arena.utt.fr">
+                1. L'équipe se réserve le droit de modifier le règlement à tout moment.<br>
+                2. L'équipe se réserve le droit de prendre des décisions non couvertes ou en désaccord.<br>
+                3. Les joueurs doivent être prêts quelques minutes avant le début de chaque match.<br>
+                4. Les retards ne sont pas tolérés. Passées 10 minutes de retard, l'équipe devra jouer en incomplet ou déclarer forfait pour le match.<br>
+                5. L'alcool n'est pas autorisé sur place.<br>
+                6. Les comportements déplacés, nuisant au confort des joueurs ou des organisateurs seront passibles d'une disqualification voire d'une expulsion.<br>
+            </blockquote>
+        </div>
+    </div>
+
+    <main>
+        <section class="module parallax parallax-1"></section>
+        <section class="module content">
+            <div class="panel container">
+                <a href="#" id="menu-opener">
+                    <img src="{{ asset('img/hamburger.png') }}" alt="Menu">
+                </a>
+                <div id="real-menu">
+                    <a href="#event">Évènement</a>
+                    <a href="#infos">Infos pratiques</a>
+                    <a href="#partners">Partenaires</a>
+                    <a href="#register">Inscription</a>
+                    <a href="#" data-modal="login-modal">Connexion</a>
+                </div>
+                <h1>Bienvenue à l'UTT Arena 2015</h1>
+                <p>
+                    Et c'est parti pour la dixième édition de l'UTT Arena, qui se déroulera du 4 au 6 Décembre 2015 ! Nouvelle formule cette fois,
+                    l'UTT Arena aura lieu au <a href="http://www.troyes-expo.com/">Cube</a>. Plus de joueurs, plus d'espaces, plus de fun !<br>
+                    <br>
+                    L'UTT Arena est une « LAN Party » : un rassemblement de passionnés du jeu-vidéo, qui viennent jouer ensemble
+                    durant tout un week-end. Cet évènement est composé non seulement de compétitions de haut-niveau (« Spotlights »)
+                    mais aussi d'animations diverses, de tournois organisés par les joueurs eux-même, un coin détente, de la nourriture ;
+                    Bref, tout pour passer un week-end exceptionnel !
+                    L'UTT Arena est organisée par l'UNG : une association de l'Université de Technologie de Troyes
+                    <br>
+                    Prenez vos places !
+                </p>
+            </div>
+        </section>
+        <section class="module parallax parallax-2"></section>
+        <section class="module content">
+            <div class="panel container event" id="event">
+                <h1>L'événement</h1>
+                <ul class="tabs eventLinks">
+                    <li class="active">DESCRIPTION</li>
+                    <li>ANIMATIONS</li>
+                    <li>JEUX</li>
+                    <li>ÉQUIPES</li>
+                    <li>FAQ</li>
+                </ul>
+                <br/>
+                <div class="content">
+                    <div>
+                        <h2>Spotlights</h2>
+                        Les spotlights sont la base de l'UTT Arena. Ils rassemblent les compétiteurs sur une liste de jeux prédéfinis.<br>
+                        Et cette année ce sont les jeux League Of Legends, Counter-Strike: Global Offensive, Hearthstone et Ultra Street Fighter 4 qui sont à l'honneur !<br>
+                        Les spotlights sont des tournois commentés, streamés, et les équipes finalistes remportent des lots. Tous vos sens devront être
+                        affutés pour pouvoir survivre à une journée entière de compétition !<br>
+                        <br>
+                        <strong>Attention !</strong> Les places des spotlights sont limitées. Premiers inscrits, premiers sélectionnés. L'équipe doit être  <strong>complète</strong> et les places de chaque joueur payées !
+                    </div>
+                    <div>
+                        <h2>Animations</h2>
+                        Les tournois compétitifs ne sont pas les seuls événements de cette UTT Arena. Vous pouvez organiser vos propres tournois en poule ou en arbre sur vos jeux favoris, participer aux concours, jouer aux jeux rétros sur console ou battre les records de speedrunning : pas une seconde de répit sur tout le week-end.
+                    </div>
+                    <div>
+                        <h2>Festival</h2>
+                        Cette année l'UTT Arena se déroule au Cube. Elle fait partie du Festival des Jeux. Libre à vous d'aller visiter les différents stands de jeux de plateau, de société et autres.
+                    </div>
+                    <div>
+                        <h2>Restauration</h2>
+                        Toute la restauration est assurée par une équipe motivée, qui remplira vos ventres entre deux parties. Prix faibles, bonne nourriture et gaming intensif, quoi de mieux ?
+                    </div>
+                </div>
+                <div class="content">
+                    <div>
+                        <h2>Équipe rouge/bleue</h2>
+                        Tous les joueurs sont regroupés parmis deux équipes Rouge/Bleues. Toute participation fait gagner des points à votre équipe. Qui gagnera ? L'équipe bleue ou l'équipe rouge ?
+                    </div>
+                    <div>
+                        <h2>King of the Hill</h2>
+                        Monter la colline est un objectif réaliste, mais rester au sommet demande plus de talent. Participez aux matchs King of the Hill et tentez de garder votre titre de champion de chaque jeu le plus longtemps possible (exemple : Metal Slug, Death Skid Marks, Mario Kart, Beat Hazard)
+                    </div>
+                    <div>
+                        <h2>SpeedRunning</h2>
+                        Qui n'a jamais rêvé de finir Portal en <a href="https://www.youtube.com/watch?v=9cedfdZs128">moins de 10 minutes</a> ? Venez nous montrer votre talent à réduire les durées de jeu des jeux vidéos (exemple : Portal, The Binding of Isaac, Super Meat Boy, Volgaar The Viking, Hotline Miami, Ghoul'n'Ghost, etc.).
+                    </div>
+                    <div>
+                        <h2>Triathlon</h2>
+                        Être le meilleur dans un jeu c'est bien. Dans deux jeux c'est mieux. Mais dans trois jeux ça devient complexe non ? Prouvez votre talent adaptatif en combinant trois jeux sur un tournoi !
+                    </div>
+                    <div>
+                        <h2>Oldies</h2>
+                        Honnêtement, Warcraft III TFT et AoE2 ont-ils quelque chose à se reprocher face aux jeux récents ? Montrez aux autres votre suprématie cultivée depuis votre enfance sur les jeux mythiques.
+                    </div>
+                    <div>
+                        <h2>Arcade</h2>
+                        Une association de jeux rétros en partenariat avec l'UTT Arena proposera plusieurs consoles et canapés pour la détente, ou pas. Affrontez vous sur Street Fighter ou l'un des nombreux jeux disponibles !
+                    </div>
+                </div>
+                <div class="content">
+                    <div>
+                        <h2>Spotlights</h2>
+                        Les jeux en spotlights de cette année sont : League of Legends, Counter-Strike : Global Offensive, Hearthstone et Ultra Street Fighter 4.
+                        <br>
+                        <strong>Attention !</strong> Les places des spotlights sont limitées. Premiers inscrits, premiers sélectionnés. L'équipe doit être  <strong>complète</strong> et les places de chaque joueur payées !
+                    </div>
+                    <div>
+                        <h2>Jeux libres</h2>
+                        Tous les jeux que vous possédez peuvent être joués en tournois libres ou simplement en divertissement. Voici une liste non-exhaustive de propositions, ou vus sur les précédentes UTT Arena :
+                        <br>
+                        <h4>Warcraft III : The Frozen Throne, Garry's Mod, Age of Empires II &amp; The Conquerors, Team Fortress 2, Portal, Quake III, Left 4 Dead II, Teeworlds, TrackMania, Unreal Tournament, Starcraft II, Dota 2, Hearthstone, Age of Mythology et plein d'autres !</h4>
+                    </div>
+                </div>
+                <div class="content">
+                    <br>
+                    <br>
+                    Aucune équipe pour le moment ! C'est peut-être le moment de vous <a href="#register">inscrire</a> !
+                </div>
+                <div class="content">
+                    <h2>Foires Aux Questions</h2>
+                    <h3>Inscription</h3>
+                    <div class="question">
+                        <span>Comment et quand payer ?</span>
+                        <span>Deux solutions s'offrent à vous : payer sur le site en prévente, ou payer sur place, plein tarif (espèces uniquement). Les préventes se terminent 48h avant l'UA. Tarif normal : 15 € ; Tarif réduit étudiant de l'UTT : 10 €.</span>
+                    </div>
+                    <div class="question">
+                        <span>Puis-je payer sur place ?</span>
+                        <span>Oui, mais une majoration de 5 € sera appliquée, les prix passeront à 15 € pour les étudiants de l'UTT, et à 20 € pour les extérieurs.</span>
+                    </div>
+                    <div class="question">
+                        <span>Puis-je me faire rembourser ?</span>
+                        <span>Nous traitons ce genre de demande au cas par cas, avec comme solution de donner votre place à votre remplaçant ou trouver un moyen de vous dédommager. Pensez à contacter le staff UTT Arena par e-mail.</span>
+                    </div>
+                    <div class="question">
+                        <span>Les visiteurs sont-ils admis ?</span>
+                        <span>Non, les visiteurs ne sont pas admis. Vous pouvez néanmoins prendre une place pour le festival des jeux qui vous donnera accès au site.</span>
+                    </div>
+                    <div class="question">
+                        <span>Je suis encore mineur, est-ce que je peux venir ?</span>
+                        <span>Les mineurs de plus de 15 ans sont autorisés à condition de présenter une autorisation parentale à l'accueil de l'événement, sans quoi ils seront refusés.</span>
+                    </div>
+                    <h3>Pendant la LAN</h3>
+                    <div class="question">
+                        <span>À quelle heure commence la LAN ?</span>
+                        <span>L'UTT Arena ouvre ses portes le vendredi 4 Décembre à 18h.</span>
+                    </div>
+                    <div class="question">
+                        <span>Où puis-je dormir ?</span>
+                        <span>Nous mettons à disposition une salle de repos commune de taille limitée, néanmoins nous ne pouvons vous fournir un véritable logement pour la nuit.</span>
+                    </div>
+                    <div class="question">
+                        <span>Où manger au cours de l'événement ?</span>
+                        <span>Un stand de nourriture est tenu durant toute l'UTT Arena (plus de 30 heures par jour) pour vous servir en boissons, barres, sandwichs, crèpes, pizzas, et nourriture diverse.</span>
+                    </div>
+                    <div class="question">
+                        <span>Quel matériel est fourni/loué ?</span>
+                        <span>Vous disposerez d'une prise électrique par personne (pensez à prendre une multiprise si vous avez besoin de plus d'une alimentation) et d'un port réseau sur un switch. Nous vendons des câbles réseaux de 5 mètres pour 7 € (prix public de grande distribution).</span>
+                    </div>
+                    <div class="question">
+                        <span>Que faire lorsque j'arrive sur place ?</span>
+                        <span>Rendez-vous à l'accueil (indiquée par des signalisations) pour obtenir votre badge ainsi qu'un fasicule pour les différents services proposés (nourriture, serveurs, etc.) et vos identifiants pour l'intranet.</span>
+                    </div>
+                    <h3>Tournois Spotlights</h3>
+                    <div class="question">
+                        <span>Qu'est ce qu'un tournoi Spotlight ?</span>
+                        <span>Les Spotlights sont des tournois avec dotation auxquels vous devez vous inscrire en avance. Ils se déroulent sur tout le week-end. Ce sont des compétitions de haut niveau.</span>
+                    </div>
+                    <div class="question">
+                        <span>Quand dois-je m'y inscrire ?</span>
+                        <span>Dès l'ouverture des inscriptions. Vous devez inscrire <strong>toute</strong> votre équipe pour qu'elle soit acceptée.</span>
+                    </div>
+                    <div class="question">
+                        <span>Où se trouve le règlement des tournois Spotlight ?</span>
+                        <span>Dans la catégorie « Spotlights » !</span>
+                    </div>
+                    <div class="question">
+                        <span>Puis-je participer à plusieurs Spotlight en même temps ?</span>
+                        <span>Non : les jeux se superposent. Démontrez-nous votre talent à switcher entre les fenêtres avec Alt-Tab et peut-être que vous aurez une chance</span>
+                    </div>
+                    <div class="question">
+                        <span>Comment s'inscrire à un Spotlight ?</span>
+                        <span>Étape 1 : réserver sa place. Étape 2 : se connecter. Étape 3 : sur la page, rejoindre ou créer l'équipe. Le capitaine doit valider l'inscription.</span>
+                    </div>
+                    <div class="question">
+                        <span>Suis-je obligé(e) de participer à un Spotlight ?</span>
+                        <span>Absolument pas. Vous pouvez toujours participer aux animations, jouer aux jeux de vos choix, etc. sans participer à un Spotlight.</span>
+                    </div>
+                    <h3>Animations</h3>
+                    <div class="question">
+                        <span>Que puis-je faire en dehors des tournois Spotlight ?</span>
+                        <span>Des animations sont organisées durant tout le week-end. Rendez-vous sur « Animations »</span>
+                    </div>
+                    <div class="question">
+                        <span>Quels types d'animations sont organisées ?</span>
+                        <span>Rencontres amicales, tournois libres, défis diverses &amp; variés, énigmes, et pleins d'autres surprises ! On ne va quand même pas tout dévoiler dans la FAQ !</span>
+                    </div>
+                    <div class="question">
+                        <span>Qu'est-ce que vous avez en plus par rapport à une autre LAN ?</span>
+                        <span>La possibilité de créer des tournois directement sur place. Une LAN dont vous choisissez les tournois.</span>
+                    </div>
+                    <div class="question">
+                        <span>Comment sont gérés les affrontements hors tournois ?</span>
+                        <span>À votre arrivée à l'UA il vous sera attribuée une couleur : rouge ou bleu. Nous appelerons de temps en temps des combattants des deux couleurs pour s'affronter sur des jeux hors Spotlight. Vos victoires feront gagner des points et de la gloire à votre couleur.</span>
+                    </div>
+                    <div class="question">
+                        <span>Dois-je forcément jouer pour ma couleur ? Et si je viens avec mes amis...</span>
+                        <span>Non, rien ne vous oblige à participer à ce défi. Si vous êtes à plusieurs, vous pourrez participer aux ARAMs à LOL en équipe, ou au 4v4 sur AoEII, et toute proposition sera la bienvenue.</span>
+                    </div>
+                    <div class="question">
+                        <span>Comment est-ce que je m'inscris aux animations ?</span>
+                        <span>Une fois sur place, un fasicule vous sera distribué avec l'ensemble des liens dont celui vers l'intranet. C'est depuis cette plateforme que vous pourrez tout gérer !</span>
+                    </div>
+                    <h3>Contact</h3>
+                    <div class="question">
+                        <span>Je n'ai pas la réponse à ma question, qui dois-je contacter ?</span>
+                        <span>Contactez-nous sur <a href="mailto:arena@utt.fr">arena@utt.fr</a></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="module parallax parallax-3" data-offset="100"></section>
+        <section class="module content">
+            <div class="panel container spotlights" id="spotlights">
+                <h1>Spotlights</h1>
+                Les jeux en spotlights de cette année sont : League of Legends, Counter-Strike : Global Offensive, Hearthstone et Ultra Street Fighter 4.
+                <br>
+                Règles générales :<br>
+                <blockquote cite="http://arena.utt.fr">
+                    1. L'équipe se réserve le droit de modifier le règlement à tout moment.<br>
+                    2. L'équipe se réserve le droit de prendre des décisions non couvertes ou en désaccord.<br>
+                    3. Les joueurs doivent être prêts quelques minutes avant le début de chaque match.<br>
+                    4. Les retards ne sont pas tolérés. Passées 10 minutes de retard, l'équipe devra jouer en incomplet ou déclarer forfait pour le match.<br>
+                    5. L'alcool n'est pas autorisé sur place.<br>
+                    6. Les comportements déplacés, nuisant au confort des joueurs ou des organisateurs seront passibles d'une disqualification voire d'une expulsion.<br>
+                </blockquote>
+                    <div>
+                        <h2>League of Legends</h2>
+                        16 équipes de 5 joueurs (2 remplaçants possibles) s'affronteront en 5v5 dans 4 poules de 4 équipes ; puis dans un arbre commençant en quart de finale.<br>
+                        Tous les matchs seront en mode draft classiques. Le changement d'un joueur par un remplaçant ne peut pas se faire une fois le pick commencé.<br>
+                        Les poules seront distribuées aléatoirement, organisées en BO1. Les poules commenceront vendredi soir. L'équipe ayant le plus de victoires passe dans l'arbre. En cas d'égalité, comptage au nombre de morts (« death average »).<br>
+                        Tous les matchs de l'arbre sont en BO3, et la finale en BO5.
+                    </div>
+                    <div>
+                        <h2>Counter-Strike : Global Offensive</h2>
+                        8 équipes de 5 joueurs s'affronteront dans un arbre directement. Tous les matchs de quarts de finale seront organisés en BO1 : pression dès le départ ! Les matchs suivants (demi-finales et finales) seront en BO3. Vous aurez le temps de déguster votre victoire, ou les balles.<br>Les maps officielles seront utilisées (dust2, inferno, mirage, <a href="https://twitter.com/csgo_dev/status/579020838202044416"><span style="text-decoration: line-through;">nuke</span> train</a>, cache, cobblestone, overpass).<br>
+                        Échauffement de quelques minutes, tickrate <strong>obligatoirement</strong> à 128.
+                    </div>
+                    <div>
+                        <h2>Ultra Street Fighter 4</h2>
+                        32 joueurs pourront combattre sur ce jeu de combat. Phase de 8 poules de 4 joueurs pour une première élimination de 2 joueurs par poule. Vous jouez en <abbr title="First to 2">FT2</abbr>. À l'entrée dans l'arbre vous jouez en <abbr title="First to 3">FT3</abbr>. Vous déterminez avec un unique Pierre-Feuille-Ciseaux J1 et J2. Vous pouvez vous mettre d'accord pour demander une sélection à l'aveugle qui sera effectuée via un membre de l'équipe d'animation uniquement. Le perdant peut demander à changer de personnage. Le gagnant peut changer d'ultra. En cas d'égalité, le set est rejoué.
+                    </div>
+                    <div>
+                        <h2>Hearthstone</h2>
+                        32 joueurs pourront concourir sur le fameux jeu de cartes de Blizzard (dernières mises à jour). Les matchs seront en BO3. Vous devez sélectionner 4 héros (avec le deck associé). Ces decks sont fixes pour tout le tournoi. Vous indiquez à votre adversaire quel héros vous jouez. Il bannit un héros. Vous avez donc le choix entre trois héros. Vos decks ne changent pas entre les parties. Vous ne pouvez pas utiliser deux fois de suite le même deck. Une égalité (0hp en même temps) est rejouée.
+                    </div>
+            </div>
+        </section>
+        <section class="module parallax parallax-4" data-offset="-100"></section>
+        <section class="module content">
+            <div class="panel container infos" id="infos">
+                <h1>Informations Pratiques</h1>
+                <ul class="tabs infosLinks">
+                    <li class="active">ACCÈS</li>
+                    <li>HORAIRES</li>
+                    <li>TARIF</li>
+                    <li>CONTACT</li>
+                    <li>MATÉRIEL REQUIS</li>
+                    <li>RESTAURATION</li>
+                </ul>
+                <br/>
+                <div class="content">
+                    <p>
+                        <span style="text-decoration: underline;">Adresse</span> : 20 Rue des Gayettes, 10000 Troyes, France.
+                    </p>
+                    <h2>Par la route</h2>
+                    <ul>
+                        <li>
+                            <em>Depuis Paris :</em> autoroute A5 &rarr; sortie numéro 20 Sainte Savine &rarr; direction Troyes sur la N60 &rarr; Rocade de contournement
+                        </li>
+                        <li>
+                            <em>Depuis Reims :</em> autoroute A26 &rarr; sortie numéro 21 Saint Thibault &rarr; direction Troyes sur la N71 &rarr; Rocade de contournement
+                        </li>
+                        <li>
+                            <em>Depuis Dijon :</em> autoroute A5 &rarr; sortie numéro 21 Saint Thibault &rarr; direction Troyes sur la N71 &rarr; Rocade de contournement
+                        </li>
+                    </ul>
+                    <h2>Par le train</h2>
+                    <p>
+                        Depuis Paris : Gare de l'Est vers Troyes (1h30 de trajet).<br>
+                        Nous pouvons venir vous chercher à la gare, il faut nous prévenir à l'avance par mail puis nous appeler une demi-heure avant votre arrivée.
+                    </p>
+                </div>
+                <div class="content">
+                    <h2>Vendredi 4 Décembre</h2>
+                    <ul>
+                        <li>18h : Ouverture de l'UTT Arena</li>
+                        <li>21h : Début des animations et du spotlight LoL</li>
+                    </ul>
+                    <h2>Samedi 5 Décembre</h2>
+                    <ul>
+                        <li>13h : Début des Spotlights</li>
+                        <li>00h : Fin des Spotlights</li>
+                    </ul>
+                    <h2>Dimanche 6 Décembre</h2>
+                    <ul>
+                        <li>18h : Fin de l'UTT Arena</li>
+                    </ul>
+                </div>
+                <div class="content">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Prévente</th>
+                            <th>Plein tarif <small>(majoration: 5€)</small></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Étudiant de l'UTT* : <span>10€</span></td>
+                            <td>Étudiant de l'UTT* : <span>15€</span></td>
+                        </tr>
+                        <tr>
+                            <td>Extérieur : <span>15€</span></td>
+                            <td>Extérieur : <span>20€</span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <p>
+                        <em>* UTT et écoles affiliées : UTC, UTBM</em>
+                    </p>
+                </div>
+                <div class="content">
+                    <h2>Contact</h2>
+                    <ul>
+                        <li>Téléphone : <a href="tel:+33325718550">+33 3 25 71 85 50</a> ;</li>
+                        <li>Mail : <a href="mailto:arena@utt.fr">arena@utt.fr</a>;</li>
+                        <li>Facebook : <a href="https://www.facebook.com/UTTArena">https://facebook.com/UTTArena</a>.</li>
+                    </ul>
+                </div>
+                <div class="content">
+                    <h2>Ce que vous devez apporter</h2>
+                    <ul>
+                        <li><strong>Votre matériel informatique habituel :</strong> ordinateur, souris, écran, bref, tout quoi ! ;</li>
+                        <li><strong>Un PC qui démarre :</strong> système d'exploitation fonctionnel, protégé par antivirus, configuration réseau vierge. Une LAN c'est comme la piscine, on n'y va pas si on est malade ;</li>
+                        <li><strong>Une multiprise :</strong> vous n'avez le droit qu'à une prise par personne. Pensez à prendre votre multiprise si vous avez besoin de plus d'une alimentation ! ;</li>
+                        <li><strong>Un câble RJ45 (réseau) :</strong> votre câble RJ45 doit être de 5 mètres minimum pour se brancher sur le switch de table. Vous pourrez acheter un câble sur place au prix de 7€ (prix de grande distribution) ;</li>
+                        <li><strong>Un casque/Des écouteurs :</strong> non, 300 joueurs ne vont pas jouer sur leurs enceintes. Vous devez venir avec le matériel audio adéquat au calme de tous, ou jouer sans son ;</li>
+                        <li><strong>Une pièce d'identité :</strong> obligatoire (carte d'identité, passeport, permis de conduire, carte étudiant de l'UTT) et exigée à l'accueil. Vous ne serez pas accepté sans une pièce valide. Si vous êtes étudiants, venez avec votre carte étu ;</li>
+                        <li><strong>Une attestation parentale :</strong> si vous êtes mineurs de plus de 15 ans, vous devez présenter une autorisation parentale. Vous ne pouvez pas venir si vous avez moins de 15 ans.</li>
+                    </ul>
+                </div>
+                <div class="content">
+                    <h2>Restauration</h2>
+                    Vous pourrez vous restaurer sur place à prix faible et déguster boissons et mets délicats :
+                    <ul>
+                        <li>Sandwichs ;</li>
+                        <li>Pizzas ;</li>
+                        <li>Crêpes sucrées/salées ;</li>
+                        <li>Croque-monsieurs ;</li>
+                        <li>Sodas ;</li>
+                        <li>Boissons sans alcool : boissons chaudes, canettes, cafés ;</li>
+                        <li>Barres chocolatées.</li>
+                    </ul>
+                    <h2>Hygiène et repos</h2>
+                    <p>
+                        Des salles de repos vous seront proposées pour vous reposer entre deux parties !<br>
+                        Vous pouvez aussi prévoir un hébergement pour la nuit, qui sera plus confortable.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section class="module parallax parallax-5" data-offset="700"></section>
+        <section class="module content">
+            <div class="panel container partners" id="partners">
+                <h1>Partenaires</h1>
+                <br>
+
+                <img src="{{ asset('img/utt.png') }}" alt="UTT" height="100">
+                <img src="{{ asset('img/troyesExpoCube.png') }}" alt="Troyes Expo Cube" height="100">
+                <img src="{{ asset('img/bde.jpg') }}" alt="BDE" height="100">
+            </div>
+        </section>
+        <section class="module parallax parallax-6"></section>
+        <section class="module content">
+            <div class="panel container" id="register">
+                <h1>Inscription</h1>
+                <form action="" method="post" autocomplete="off">
+                    <p>
+                        <em>
+                            L'inscription est fermée pour le moment ! Attendez quelques jours !<br>
+                            Suivez la <a href="https://facebook.com/UTTArena">page Facebook</a> pour les toutes dernières informations !
+                        </em>
+                    </p>
+                    <input type="text" name="login" class="text" placeholder="Nom d'utilisateur" spellcheck="false" disabled>
+                    <input type="password" name="password" class="password" placeholder="Mot de passe" spellcheck="false" disabled>
+                    <input type="password" name="password_confirmation" class="password" placeholder="Mot de passe (confirmation)" spellcheck="false" disabled>
+                    <input type="email" name="email" class="email" placeholder="Email" spellcheck="false" disabled>
+                    <br>
+                    <label>
+                        <input type="checkbox" name="rules" class="checkbox" disabled>
+                        &nbsp;J'accepte sans conditions <a href="#" data-modal="rules-modal">le règlement du tournoi</a>.
+                    </label>
+                    <br>
+                    <label>
+                        <input type="checkbox" name="rules_confirmation" class="checkbox" disabled>
+                        &nbsp;J'ai vraiment lu et j'accepte vraiment <a href="#" data-modal="rules-modal">le règlement du tournoi</a>.
+                    </label>
+                    <br><br>
+                    <label>
+                        <input type="checkbox" name="tos" class="checkbox" disabled>
+                        &nbsp;J'ai lu et j'accepte les <a href="{{ path('terms') }}">conditions générales d'utilisation</a>.
+                    </label>
+                    <input type="submit" class="button" value="Inscription" disabled>
+                </form>
+                <form id="subscribe" action="/subscribe.php" method="post" autocomplete="off">
+                    <h3>Tenez-moi informé de l'ouverture des préventes !</h3>
+                    <input type="email" name="subscription_email" class="email" placeholder="Email" spellcheck="false">
+                    <input type="submit" class="button" value="Tenez moi informé de l'ouverture" disabled>
+                </form>
+            </div>
+        </section>
+    </main>
 {% endblock %}

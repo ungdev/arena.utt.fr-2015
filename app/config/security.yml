@@ -4,8 +4,10 @@ security:
             algorithm: bcrypt
 
     providers:
-        in_memory:
-            memory: ~
+        player:
+            entity:
+                class: AppBundle:Player
+                property: nickname
 
     firewalls:
         dev:
@@ -14,3 +16,8 @@ security:
 
         main:
             anonymous: ~
+            provider: player
+            form_login:
+                login_path: /
+                check_path: /login_check
+                csrf_provider: security.csrf.token_manager

@@ -81,25 +81,7 @@
                 $cookiesScript.parentNode.removeChild($cookiesScript);
             </script>
         </div>
-
-        <div id="background-modal"></div>
-        <div class="modal" id="login-modal">
-            <div class="modal-header">Connexion</div>
-            <a href="#" class="close">&times;</a>
-            <div class="modal-body">
-                <form action="" method="post" autocomplete="off">
-                    <p>
-                        <em>
-                            L'inscription est fermée pour le moment ! Attendez quelques jours !<br>
-                            Suivez la <a href="https://facebook.com/UTTArena">page Facebook</a> pour les toutes dernières informations !
-                        </em>
-                    </p>
-                    <input type="text" name="login" id="login" class="text" placeholder="Nom d'utilisateur ou email" spellcheck="false" disabled>
-                    <input type="password" name="password" id="password" class="password" placeholder="Mot de passe" spellcheck="false" disabled>
-                    <input type="submit" value="Connexion" class="button" disabled>
-                </form>
-            </div>
-        </div>
+        {{ render(controller('AppBundle:Security:loginForm')) }}
         {% block body %}{% endblock %}
         <section class="module parallax parallax-7"></section>
         <section class="module content">

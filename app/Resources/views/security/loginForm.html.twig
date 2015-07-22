@@ -1,0 +1,20 @@
+<div id="background-modal"></div>
+<div class="modal" id="login-modal">
+    <div class="modal-header">Connexion</div>
+    <a href="#" class="close">&times;</a>
+    <div class="modal-body">
+        <form action="{{ path('login_check') }}" method="post" autocomplete="off">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            <input type="text" value="{{ lastUsername }}" name="_username" id="_username" class="text"
+                   placeholder="Nom d'utilisateur" spellcheck="false">
+            <input type="password" name="_password" id="_password" class="password"
+                   placeholder="Mot de passe" spellcheck="false">
+            <button type="submit" value="Connexion" class="button">Connexion</button>
+            {% if error %}
+                <script>
+                    noty({text: '{{ error.message }}', 'type': 'error'});
+                </script>
+            {% endif %}
+        </form>
+    </div>
+</div>

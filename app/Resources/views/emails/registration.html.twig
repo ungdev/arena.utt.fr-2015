@@ -1,0 +1,22 @@
+<p>Bonjour {{ firstname }} {{ lastname }},</p>
+
+<p>Merci de vous être enregistré sur le site de l'UTT Arena !</p>
+
+<p>Avant de continuer, merci de confirmer votre compte en cliquant sur lien ci-dessous :</p>
+<a href="{{ url('confirm', { 'token': token } ) }}">Confirmation du compte</a>
+
+<p>Pour pouvoir participer à la LAN, n'oubliez pas de payer votre ticket.</p>
+<p>Vous pouvez le faire depuis votre espace personnel.</p>
+
+<p>Ci-dessous vos informations de connection :
+<dl>
+    <dt>Login</dt>
+    <dd>{{ login }}</dd>
+    <dt>Mot de passe</dt>
+    <dd>Le mot de passe que vous avez défini lors de l'inscription</dd>
+</dl>
+
+<p>A bientôt lors de l'UTT Arena !</p>
+
+{# Makes an absolute URL to the /images/logo.png file #}
+<img src="{{ absolute_url(asset('img/logo.png')) }}">

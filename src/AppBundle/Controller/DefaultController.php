@@ -2,6 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Player;
+use AppBundle\Form\Model\Registration;
+use AppBundle\Form\RegistrationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
@@ -12,7 +15,15 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('default/index.html.twig');
+        $registration = new Registration();
+        $form = $this->createForm(new RegistrationType(), $registration, array(
+            'action' => $this->generateUrl('register'),
+            'method' => 'POST',
+        ));
+
+        return $this->render('default/index.html.twig', array(
+            'registration' => $form->createView()
+        ));
     }
 
     /**

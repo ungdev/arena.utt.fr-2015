@@ -1,4 +1,7 @@
 security:
+    encoders:
+        AppBundle\Entity\Player:
+            algorithm: bcrypt
 
     providers:
         in_memory:

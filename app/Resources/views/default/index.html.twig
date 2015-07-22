@@ -393,39 +393,24 @@
         <section class="module content">
             <div class="panel container" id="register">
                 <h1>Inscription</h1>
-                <form action="" method="post" autocomplete="off">
-                    <p>
-                        <em>
-                            L'inscription est fermée pour le moment ! Attendez quelques jours !<br>
-                            Suivez la <a href="https://facebook.com/UTTArena">page Facebook</a> pour les toutes dernières informations !
-                        </em>
-                    </p>
-                    <input type="text" name="login" class="text" placeholder="Nom d'utilisateur" spellcheck="false" disabled>
-                    <input type="password" name="password" class="password" placeholder="Mot de passe" spellcheck="false" disabled>
-                    <input type="password" name="password_confirmation" class="password" placeholder="Mot de passe (confirmation)" spellcheck="false" disabled>
-                    <input type="email" name="email" class="email" placeholder="Email" spellcheck="false" disabled>
-                    <br>
+                <p>Le nombre de place est limité n'hésitez pas à vous inscrire.</p>
+                {{ form_start(registration, {'attr': {'novalidate': 'novalidate'}} ) }}
+                {{ form_row(registration.player) }}
+                <div>
+                    {{ form_errors(registration.rules) }}
                     <label>
-                        <input type="checkbox" name="rules" class="checkbox" disabled>
+                        {{ form_widget(registration.rules) }}
                         &nbsp;J'accepte sans conditions <a href="#" data-modal="rules-modal">le règlement du tournoi</a>.
                     </label>
-                    <br>
+                </div>
+                <div>
+                    {{ form_errors(registration.cgu) }}
                     <label>
-                        <input type="checkbox" name="rules_confirmation" class="checkbox" disabled>
-                        &nbsp;J'ai vraiment lu et j'accepte vraiment <a href="#" data-modal="rules-modal">le règlement du tournoi</a>.
-                    </label>
-                    <br><br>
-                    <label>
-                        <input type="checkbox" name="tos" class="checkbox" disabled>
+                        {{ form_widget(registration.cgu) }}
                         &nbsp;J'ai lu et j'accepte les <a href="{{ path('terms') }}">conditions générales d'utilisation</a>.
                     </label>
-                    <input type="submit" class="button" value="Inscription" disabled>
-                </form>
-                <form id="subscribe" action="/subscribe.php" method="post" autocomplete="off">
-                    <h3>Tenez-moi informé de l'ouverture des préventes !</h3>
-                    <input type="email" name="subscription_email" class="email" placeholder="Email" spellcheck="false">
-                    <input type="submit" class="button" value="Tenez moi informé de l'ouverture" disabled>
-                </form>
+                </div>
+                {{ form_end(registration) }}
             </div>
         </section>
     </main>

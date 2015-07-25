@@ -22,11 +22,24 @@
         <title>{% block title %}UTT Arena 2015{% endblock %}</title>
         {% stylesheets
         'vendors/iCheck/skins/flat/aero.css'
+        'vendors/normalize.css/normalize.css'
         'css/*.css'
          filter='cssrewrite' %}
             <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
         {% block stylesheets %}{% endblock %}
+
+        {% javascripts
+        'vendors/jquery/dist/jquery.min.js'
+        'vendors/noty/js/noty/packaged/jquery.noty.packaged.min.js'
+        'vendors/jquery.easing/js/jquery.easing.min.js'
+        'vendors/parallax.js/parallax.js'
+        'vendors/iCheck/icheck.js'
+        'vendors/microplugin/src/microplugin.js'
+        'vendors/sifter/sifter.min.js'
+         %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
@@ -113,15 +126,18 @@
             </div>
         </section>
         {% javascripts
-            'vendors/jquery/dist/jquery.min.js'
-            'vendors/jquery.easing/js/jquery.easing.min.js'
-            'vendors/parallax.js/parallax.js'
-            'vendors/iCheck/icheck.js'
-            'vendors/microplugin/src/microplugin.js'
-            'vendors/sifter/sifter.min.js'
             'js/*.js' %}
             <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
+        {% if app.session.flashbag %}
+            <script>
+                {% for type, messages in app.session.flashbag.all %}
+                    {% for  message in  messages %}
+                    noty({text: '{{ message }}', 'type': '{{ type }}'});
+                    {% endfor %}
+                {% endfor %}
+            </script>
+        {% endif %}
         {% block javascripts %}{% endblock %}
     </body>
 </html>

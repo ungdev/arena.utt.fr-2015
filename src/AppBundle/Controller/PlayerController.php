@@ -32,7 +32,8 @@ class PlayerController extends Controller
         ));
         $editForm->remove('password');
 
-        $passwordForm = $this->createForm('password');
+        $passwordForm = $this->createForm('passwordInput');
+
         return $this->render(':player:profile.html.twig', array(
                 'editForm' => $editForm->createView(),
                 'passwordFrom' => $passwordForm->createView()

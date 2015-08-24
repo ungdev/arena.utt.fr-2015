@@ -117,7 +117,7 @@ class SecurityController extends Controller
      * @return Response
      */
     public function passwordResetAction(Request $request, $token){
-        $form = $this->createForm('password', null, array(
+        $form = $this->createForm('passwordInput', null, array(
                 'label' => false
             )
         );

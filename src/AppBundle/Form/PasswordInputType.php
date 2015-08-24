@@ -11,7 +11,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PasswordType extends BaseType
+class PasswordInputType extends BaseType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -19,7 +19,6 @@ class PasswordType extends BaseType
             ->add('password', 'repeated', array(
                 'first_name' => 'password',
                 'first_options' => array(
-                    'label' => 'Mot de passe',
                     'attr' => array(
                         'placeholder' => 'Mot de passe'
                     )
@@ -37,13 +36,13 @@ class PasswordType extends BaseType
                     ),
                     'label' => false
                 )
-            ))->addEventSubscriber($this->listner);
+            ));
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-                'intention' => 'resetPassword',
+                'intention' => 'password',
             )
         );
     }
@@ -55,6 +54,6 @@ class PasswordType extends BaseType
      */
     public function getName()
     {
-        return 'password';
+        return 'passwordInput';
     }
 }

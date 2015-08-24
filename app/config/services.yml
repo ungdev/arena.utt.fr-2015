@@ -57,10 +57,10 @@ services:
             - { name: form.type, alias: passwordRequest }
         parent: form.type.base
 
-    form.type.password:
-        class: AppBundle\Form\PasswordType
+    form.type.password.input:
+        class: AppBundle\Form\PasswordInputType
         tags:
-            - { name: form.type, alias: password }
+            - { name: form.type, alias: passwordInput }
         parent: form.type.base
 
     pricer:

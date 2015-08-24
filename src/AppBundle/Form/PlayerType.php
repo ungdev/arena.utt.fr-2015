@@ -25,26 +25,8 @@ class PlayerType extends BaseType
                     'class' => 'nickname'
                 )
             ))
-            ->add('password', 'repeated', array(
-                'first_name' => 'password',
-                'first_options' => array(
-                    'attr' => array(
-                        'placeholder' => 'Mot de passe'
-                    )
-                ),
-                'second_name' => 'confirmation',
-                'second_options' => array(
-                    'attr' => array(
-                        'placeholder' => 'Confirmation'
-                    )
-                ),
-                'type' => 'password',
-                'options' => array(
-                    'attr' => array(
-                        'class' => 'password'
-                    ),
-                    'label' => false
-                )
+            ->add('password', 'passwordInput', array(
+                'label' => false
             ))
             ->add('email','email', array(
                 'label' => false,

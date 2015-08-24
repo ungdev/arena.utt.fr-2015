@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main>
+        <section class="module parallax parallax-1"></section>
+        <section class="module content">
+            <div class="panel container">
+                <h2>Renvoi du jeton de confirmation</h2>
+                <p>Vous n'êtes pas obligé d'entrer un nouvel email.
+                    Faites le seulement si vous souhaitez modifier l'addresse email entrée à l'inscription</p>
+            {{ form_start(form) }}
+                {{ form_row(form) }}
+                <button type="submit">Valider</button>
+            {{ form_end(form) }}
+            </div>
+        </section>
+    </main>
+{% endblock %}

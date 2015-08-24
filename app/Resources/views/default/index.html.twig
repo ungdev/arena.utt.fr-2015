@@ -389,12 +389,15 @@
                 <img src="{{ asset('img/bde.jpg') }}" alt="BDE" height="100">
             </div>
         </section>
+
+        {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
         <section class="module parallax parallax-6"></section>
         <section class="module content">
             <div class="panel container" id="register">
                 <h1>Inscription</h1>
                 <p>Le nombre de place est limité n'hésitez pas à vous inscrire.</p>
                 {{ form_start(registration, {'attr': {'novalidate': 'novalidate'}} ) }}
+                {{ form_errors(registration) }}
                 {{ form_row(registration.player) }}
                 <div>
                     {{ form_errors(registration.rules) }}
@@ -410,8 +413,18 @@
                         &nbsp;J'ai lu et j'accepte les <a href="{{ path('terms') }}">conditions générales d'utilisation</a>.
                     </label>
                 </div>
+                <button type="submit" class="button">S'inscrire</button>
                 {{ form_end(registration) }}
             </div>
         </section>
+        {% endif %}
     </main>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    if (window.location.pathname == '{{ path('register') }}') {
+        window.location.hash = 'register';
+    }
+</script>
 {% endblock %}

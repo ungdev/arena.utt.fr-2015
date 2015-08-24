@@ -1,0 +1,30 @@
+/* ACCOUNT TABS */
+.player > div {
+    display: inline-block;
+    width: 45%;
+}
+
+/*** Payment form **/
+#tshirtSize {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#payment_tshirtSize {
+    margin-top: 10px;
+}
+
+#payment_tshirtSize .iradio_flat-aero {
+    display: none;
+}
+
+#payment_tshirtSize label {
+    padding: 5px;
+    margin-right: 10px;
+    border: #3498DB 1px solid;
+    transition: background-color 1s;
+}
+
+#payment_tshirtSize .checked  + label {
+    background-color: #3498DB;
+}

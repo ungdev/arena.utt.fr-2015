@@ -1,0 +1,20 @@
+{% extends ':emails:base.html.twig' %}
+{% block body %}
+<p>Bonjour,</p>
+
+<p>Merci d'avoir confirmer votre venue en payant votre place !</p>
+
+<p>Vous avez une place {{ player.ticket.reduced ? 'UT' : 'Exterieur' }} à {{ ticket.price.formatted }}</p>
+
+{% if  player.ticket.tshirt %}
+<p>Votre place inclu la reservation d'un tshirt de taille {{ player.ticket.tshirt.size }}</p>
+{% endif %}
+
+<p>Nous vous demandons lors de votre venue de bien vouloir vous présenter avec une pièce d'identité.</p>
+
+{% if  player.ticket.reduced %}
+<p>Votre place ayant bénéficiée d'un prix réduit, veuillez aussi vous menir d'une pièce justificative</p>
+{% endif %}
+
+<p>Si vous êtes mineur, merci de venir avec une authorisation parentale.</p>
+{% endblock %}

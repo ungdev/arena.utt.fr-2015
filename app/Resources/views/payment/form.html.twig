@@ -1,0 +1,65 @@
+<p>Votre place coute {{ ticketPrice.formatted }}. Ce prix n'est valable qu'en prévente, alors dépéchez-vous !</p>
+
+<p>
+    Veuillez noter que vous ne pouvez payer votre tshirt sur ce site quand même temps que votre ticket.
+    Sinon, vous pourrez toujours l'acheter le jour de la lan (Dans la limite des stock disponible).
+</p>
+
+<noscript>
+    <p>Vous devez avoir javascript d'activé pour pouvoir payer votre place</p>
+</noscript>
+
+{{ form_start(paymentForm) }}
+    <div>
+        {{ form_errors(paymentForm.tshirt) }}
+        <label class="tshirt_checkbox">
+            {{ form_widget(paymentForm.tshirt) }}
+            Voulez-vous réserver un tshirt ? Il coute {{ tshirtPrice.formatted }}.
+        </label>
+    </div>
+    <div id="tshirtSize" style="display: none">
+        {{ form_row(paymentForm.tshirtSize) }}
+    </div>
+    <button id="pay">Payer</button>
+{{ form_end(paymentForm) }}
+<script src="https://checkout.stripe.com/checkout.js"></script>
+<script>
+    var stripeButton = $('#pay');
+    var tshirtSize = $('#tshirtSize');
+    var checkbox = $("input[type=checkbox]");
+    var amount = {{ ticketPrice }};
+    checkbox.on('ifChecked', function () {
+        tshirtSize.show();
+        amount = {{ tshirtPrice.amount + ticketPrice.amount }};
+    });
+
+    checkbox.on('ifUnchecked', function () {
+        tshirtSize.hide();
+        amount = {{ ticketPrice.amount }};
+    });
+
+    stripeButton.on('click', function(e) {
+        StripeCheckout.open({
+            key: '{{ key }}',
+            image: '{{ asset('img/logo.png') }}',
+            name: 'UTT Arena',
+            description: 'Place pour la LAN',
+            currency: 'EUR',
+            panelLabel: 'Payer {% verbatim %}{{amount}}{% endverbatim %}',
+            allowRememberMe: false,
+            amount: amount,
+            billingAddress: true,
+            zipCode: true,
+            token: function(token) {
+                var $input = $('<input type=hidden name=stripeToken />').val(token.id);
+                $('form').append($input).submit();
+            }
+        });
+        e.preventDefault();
+    });
+
+    // Close Checkout on page navigation
+    $(window).on('popstate', function() {
+        handler.close();
+    });
+</script>

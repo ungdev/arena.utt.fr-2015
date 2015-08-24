@@ -2,106 +2,84 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Player;
 use AppBundle\Form\Model\Registration;
+use AppBundle\Form\PlayerType;
 use AppBundle\Form\RegistrationType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Swift_Mime_Headers_MailboxHeader;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+
+/**
+ * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+ */
 class PlayerController extends Controller
 {
     /**
-     * Registration route
+     * Profile route
      *
-     * @Route ("/register", name="register")
-     * @Method ("POST")
+     * @Route("/profile", name="profile")
+     */
+    public function profileAction() {
+        $editForm = $this->createForm('player', $this->getUser(), array(
+            'action' => $this->generateUrl('edit'),
+            'method' => 'POST'
+        ));
+        $editForm->remove('password');
+
+        $passwordForm = $this->createForm('password');
+        return $this->render(':player:profile.html.twig', array(
+                'editForm' => $editForm->createView(),
+                'passwordFrom' => $passwordForm->createView()
+            )
+        );
+    }
+
+    /**
+     * Edit a profile
      *
      * @param Request $request
+     *
      * @return Response
+     *
+     * @Route("/edit", name="edit")
      */
-    public function registerAction(Request $request)
-    {
+    public function editAction(Request $request) {
+        /** @var Player $user */
+        $user = $this->getUser();
+
+        $formerEmail = $user->getEmail();
+
         $em = $this->getDoctrine()->getManager();
 
-        $form = $this->createForm(new RegistrationType(), new Registration());
+        $form = $this->createForm('player', $user, array(
+
+            )
+        );
+        $form->remove('password');
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            /** @var Registration $registration */
-            $registration = $form->getData();
 
-            $player = $registration->getPlayer();
-
-            $encoder = $this->container->get('security.password_encoder');
-            $encoded = $encoder->encodePassword($player, $player->getPassword());
-
-            $player->setPassword($encoded);
-
-            $player->setToken(uniqid());
-
-            $em->persist($player);
+            $em->persist($user);
             $em->flush();
 
-            /** @var \Swift_Mime_SimpleMessage $message */
-            $message = \Swift_Message::newInstance()
-                ->setSubject('Inscription à l\'UTT Arena')
-                ->setFrom('send@example.com')
-                ->setTo($player->getEmail())
-                ->setBody($this->renderView(':emails:registration.html.twig', array(
-                    'login' => $player->getNickname(),
-                    'firstname' => $player->getFirstName(),
-                    'lastname' => $player->getLastName(),
-                    'token' => $player->getToken()
-                    )
-                )
-            , 'text/html');
+            if ($formerEmail != $form->get('email')->getData()) {
 
-            $this->get('mailer')->send($message);
+            } else {
+                $this->addFlash('success', 'Vos changements ont été enregistrés.');
+            }
 
-            $this->addFlash('success', 'Votre inscription s\'est bien passée. Veuillez verifier votre boite de courriel pour vérifié votre compte.');
-            return $this->redirectToRoute('homepage');
+            $em->refresh($user);
         }
 
-        $this->addFlash('error', 'Il y a des erreurs dans le formulaire');
-
-        return $this->render('default/index.html.twig', array(
-            'registration' => $form->createView()
-        ));
+        return $this->redirect('profile');
     }
 
-    /**
-     * Confirm email
-     *
-     * @param string $token confirmation token
-     *
-     * @return Response
-     *
-     * @Route("/confirm/{token}", name="confirm")
-     */
-    public function confirmAction($token) {
-
-        $player =$this->getDoctrine()
-            ->getRepository('AppBundle:Player')
-            ->findOneBy(array('token' => $token));
-
-        if ($player) {
-            $player->setEnabled(true);
-            $player->setToken(null);
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($player);
-            $em->flush();
-
-            $this->addFlash('success', 'Votre compte est maintenant activé.
-            Vous pouvez maintenant vous connecter.');
-        } else {
-            $this->addFlash('error', 'Le token n\'est pas correct');
-        }
-
-        return $this->redirectToRoute('homepage');
-    }
 }

@@ -34,15 +34,34 @@ monolog:
             channels: ["doctrine"]
         # uncomment to get logging in your browser
         # you may have to allow bigger header sizes in your Web server configuration
-        #firephp:
-        #    type:   firephp
-        #    level:  info
-        #chromephp:
-        #    type:   chromephp
-        #    level:  info
+
 
 assetic:
     use_controller: true
 
-#swiftmailer:
-#    delivery_address: me@example.com
+swiftmailer:
+    spool:     { type: memory }
+    transport: smtp
+    host:      mailtrap.io
+    username:  249292aabd72c6e7a
+    password:  4f93dc4a1cdeb1
+    auth_mode: cram-md5
+    port: 2525
+
+parameters:
+    mailer_expeditor:  ua@ua.fr
+
+    price.ticket.full: 1500
+    price.ticket.reduced: 1000
+    price.tshirt: 1000
+
+    payment.stripe.secret: sk_test_ESrxq50Bw3NLh3atqmCfjdOI
+    payment.stripe.publishable: pk_test_fftlf9QPXZcnn5DD9bE8Gg9f
+
+    hashids.secret: 1-lE*bAWeXYS7Bz0BEEi-f87w
+    hashids.minSize: 4
+
+    reducedPriceDomains:
+        - "utt.fr"
+        - "utc.fr"
+        - "utbm.fr"

@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main>
+        <section class="module parallax parallax-1"></section>
+        <section class="module content">
+            <div class="panel container account" id="account">
+                <h1>Profil</h1>
+                <ul class="tabs infosLinks">
+                    <li class="active">Informations personnelles</li>
+                    <li>Paiement</li>
+                    <li>Spotlight</li>
+                </ul>
+                <div class="content player">
+                    <div class="information">
+                        <dl>
+                            <dt>Pseudonyme</dt>
+                            <dd>{{ app.user.nickname }}</dd>
+                            <dt>Email</dt>
+                            <dd>{{ app.user.email }}</dd>
+                            <dt>Nom</dt>
+                            <dd>{{ app.user.firstName }} {{ app.user.lastName }}</dd>
+                            <dt>Téléphone</dt>
+                            <dd>{{ app.user.phone }}</dd>
+                        </dl>
+
+                        <a class="button" href="">Éditer son profil</a>
+                    </div>
+                    <div class="password">
+                        {{ form_start(passwordFrom) }}
+                        {{ form_row(passwordFrom) }}
+                        <button class="button" type="submit">Modifier son mot de passe</button>
+                        {{ form_end(passwordFrom) }}
+                    </div>
+                </div>
+                <div class="content">
+                    {% set ticket = app.user.ticket %}
+                    {% if not ticket %}
+                        {{  render(controller('AppBundle:Payment:paymentForm')) }}
+                    {% else %}
+                        <p>Votre ticket est payé.</p>
+
+                        <p>Vous avez payé {{ ticket.price.formatted }}.</p>
+                        <p>
+                            {% if ticket.tshirt %}
+                                Vous avez payer un tshirt en taille {{ ticket.tshirt }}.
+                            {% else %}
+                                    Vous n'avez pas souhaitez réservé un tshirt.
+                                    Vous pourrez toujours en aqcuérir un lors de l'évenement (Dans la limite des stocks disponible).
+
+                            {% endif %}
+                        </p>
+                    {% endif %}
+                </div>
+                <div class="content">
+                    <button value="csgo">Counter-Strike : Global Offensive</button>
+                    <button value="lol">League of Legends</button>
+                    <button value="hearthstone">Hearthstone</button>
+                    <button value="usf4">Ultimate Street-Figther 4</button>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

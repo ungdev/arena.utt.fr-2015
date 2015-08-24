@@ -1,4 +1,6 @@
-<p>Bonjour {{ firstname }} {{ lastname }},</p>
+{% extends ':emails:base.html.twig' %}
+{% block body %}
+<p>Bonjour {{ login }},</p>
 
 <p>Merci de vous être enregistré sur le site de l'UTT Arena !</p>
 
@@ -15,8 +17,4 @@
     <dt>Mot de passe</dt>
     <dd>Le mot de passe que vous avez défini lors de l'inscription</dd>
 </dl>
-
-<p>A bientôt lors de l'UTT Arena !</p>
-
-{# Makes an absolute URL to the /images/logo.png file #}
-<img src="{{ absolute_url(asset('img/logo.png')) }}">
+{% endblock %}

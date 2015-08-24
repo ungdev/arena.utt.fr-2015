@@ -59,8 +59,14 @@
                     </li>
                     <li><a href="{{ path('homepage') }}#infos">Infos pratiques</a><div class="separator"></div></li>
                     <li><a href="{{ path('homepage') }}#partners">Partenaires</a><div class="separator"></div></li>
-                    <li><a href="{{ path('homepage') }}#register">Inscription</a><div class="separator"></div></li>
-                    <li><a href="{{ path('homepage') }}#" data-modal="login-modal">Connexion</a></li>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li><a href="{{ path('profile') }}#">Profil</a><div class="separator"></div></li>
+                        <li><a href="{{ path('logout') }}#">Déconnexion</a></li>
+                    {% else %}
+                        <li><a href="{{ path('homepage') }}#register">Inscription</a><div class="separator"></div></li>
+                        <li><a href="{{ path('homepage') }}#" data-modal="login-modal">Connexion</a></li>
+                    {% endif %}
+
                 </ul>
             </nav>
 
@@ -75,8 +81,13 @@
                     <li><a href="{{ path('homepage') }}#event">Évènement</a><div class="separator"></div></li>
                     <li><a href="{{ path('homepage') }}#infos">Infos pratiques</a><div class="separator"></div></li>
                     <li><a href="{{ path('homepage') }}#partners">Partenaires</a><div class="separator"></div></li>
-                    <li><a href="{{ path('homepage') }}#register">Inscription</a><div class="separator"></div></li>
-                    <li><a href="#" data-modal="login-modal">Connexion</a></li>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li><a href="{{ path('profile') }}#">Profil</a><div class="separator"></div></li>
+                        <li><a href="{{ path('logout') }}#">Déconnexion</a></li>
+                    {% else %}
+                        <li><a href="{{ path('homepage') }}#register">Inscription</a><div class="separator"></div></li>
+                        <li><a href="{{ path('homepage') }}#" data-modal="login-modal">Connexion</a></li>
+                    {% endif %}
                 </ul>
             </nav>
         </header>
@@ -94,7 +105,9 @@
                 $cookiesScript.parentNode.removeChild($cookiesScript);
             </script>
         </div>
-        {{ render(controller('AppBundle:Security:loginForm')) }}
+        {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+            {{ render(controller('AppBundle:Security:loginForm')) }}
+        {% endif %}
         {% block body %}{% endblock %}
         <section class="module parallax parallax-7"></section>
         <section class="module content">
@@ -122,7 +135,7 @@
                 <span class="space"></span>
                 <a href="{{ path('terms') }}">Conditions générales</a>
                 <span class="space"></span>
-                <a href="{{ 'privacy' }}">Vie privée/Cookies</a>
+                <a href="{{ path('privacy') }}">Vie privée/Cookies</a>
             </div>
         </section>
         {% javascripts
@@ -133,7 +146,7 @@
             <script>
                 {% for type, messages in app.session.flashbag.all %}
                     {% for  message in  messages %}
-                    noty({text: '{{ message }}', 'type': '{{ type }}'});
+                    noty({timeout: 10000, layout: 'topRight', text: '{{ message|e('js') }}', 'type': '{{ type }}'});
                     {% endfor %}
                 {% endfor %}
             </script>

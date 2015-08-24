@@ -16,7 +16,7 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $registration = new Registration();
-        $form = $this->createForm(new RegistrationType(), $registration, array(
+        $form = $this->createForm('registration', $registration, array(
             'action' => $this->generateUrl('register'),
             'method' => 'POST',
         ));

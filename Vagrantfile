@@ -23,6 +23,7 @@ Vagrant.configure(2) do |config|
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
   config.vm.network "forwarded_port", guest: 8000, host: 8080
+  config.vm.network "forwarded_port", guest: 9234, host: 9234
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -64,7 +65,7 @@ Vagrant.configure(2) do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.provision "shell", inline: <<-SHELL
+  config.vm.provision "shell", privileged: false, inline: <<-SHELL
       sudo apt-get update;
       sudo DEBIAN_FRONTEND=noninteractive aptitude install -y acl php5 php5-curl php5-mcrypt php5-mysql mariadb-server mariadb-server-5.5 mariadb-client;
 
@@ -72,21 +73,16 @@ Vagrant.configure(2) do |config|
 
       sudo service mysql start;
 
+      sudo echo "cd /vagrant; php app/console server:start 0.0.0.0:8000; exit 0;" > /etc/rc.local
+
       cd /vagrant;
 
-      rm -rf app/cache/*;
-      rm -rf app/log/*;
-
-      sudo sed -i "s|www-data|vagrant|g" /etc/apache2/envvars;
-
-      service apache2 reload;
+      sudo chmod -R 0777 /tmp
 
       php app/console server:start 0.0.0.0:8000;
 
       php app/console doctrine:database:create;
 
-      php app/console doctrine:schema:update --complete --dump-sql;
-
-      php app/console doctrine:schema:update --complete --force;
+      php app/console doctrine:migration:migrate;
   SHELL
 end

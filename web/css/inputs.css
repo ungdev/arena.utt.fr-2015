@@ -1,0 +1,118 @@
+input {
+    display: block;
+    height: 35px;
+    margin: 15px 0;
+    width: 100%;
+    background-size: 24px;
+    background: #263638 no-repeat 5px 50%;
+    border: 1px solid #555;
+    color: #888;
+    padding-left: 40px;
+
+    -webkit-border-radius: 3px;
+       -moz-border-radius: 3px;
+            border-radius: 3px;
+
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+input[type=text] {
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0.2) 10px,
+        rgba(0, 0, 0, 0.3) 10px,
+        rgba(0, 0, 0, 0.3) 20px
+    ), url('../img/user.png') 5px 50% no-repeat;
+}
+
+
+input[type=email] {
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0.2) 10px,
+        rgba(0, 0, 0, 0.3) 10px,
+        rgba(0, 0, 0, 0.3) 20px
+    ), url('../img/email.png') 5px 50% no-repeat;
+}
+
+input.phone {
+    background: repeating-linear-gradient(
+            45deg,
+            rgba(0, 0, 0, 0.2),
+            rgba(0, 0, 0, 0.2) 10px,
+            rgba(0, 0, 0, 0.3) 10px,
+            rgba(0, 0, 0, 0.3) 20px
+    ),  url('../img/phone.png') 5px 50% no-repeat;
+}
+
+input.password {
+    background: repeating-linear-gradient(
+            45deg,
+            rgba(0, 0, 0, 0.2),
+            rgba(0, 0, 0, 0.2) 10px,
+            rgba(0, 0, 0, 0.3) 10px,
+            rgba(0, 0, 0, 0.3) 20px
+    );
+}
+input.team {
+    background-image: url('../img/team.png');
+}
+
+input.team[disabled] {
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0.2) 10px,
+        rgba(0, 0, 0, 0.3) 10px,
+        rgba(0, 0, 0, 0.3) 20px
+    ), url('../img/team.png') 5px 50% no-repeat;
+}
+
+button, .button {
+    background: rgb(52, 152, 219);
+    background: -moz-linear-gradient(top, rgb(52, 152, 219) 0%, rgb(74, 163, 223) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(52, 152, 219)), color-stop(100%, rgb(74, 163, 223)));
+    background: -webkit-linear-gradient(top, rgb(52, 152, 219) 0%, rgb(74, 163, 223) 100%);
+    background: -o-linear-gradient(top, rgb(52, 152, 219) 0%, rgb(74, 163, 223) 100%);
+    background: -ms-linear-gradient(top, rgb(52, 152, 219) 0%, rgb(74, 163, 223) 100%);
+    background: linear-gradient(to bottom, rgb(52, 152, 219) 0%, rgb(74, 163, 223) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#3498db', endColorstr = '#4aa3df', GradientType = 0);
+
+    border: 0;
+    color: #fff;
+    padding-bottom: 3px;
+
+    -webkit-border-radius: 3px;
+       -moz-border-radius: 3px;
+            border-radius: 3px;
+
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+       -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+
+    -webkit-transition: all .2s ease;
+       -moz-transition: all .2s ease;
+         -o-transition: all .2s ease;
+            transition: all .2s ease;
+
+    outline: 0;
+    width: 100%;
+    margin-top: 15px;
+
+    display: block;
+    text-align: center;
+}
+
+form div ul {
+    margin: 15px 0;
+    padding-top: .25em;
+    padding-left: 40px;
+    padding-bottom: .5em;
+    background: #e74c3c;
+    border: solid 1px #c0392b;
+    list-style: square;
+}

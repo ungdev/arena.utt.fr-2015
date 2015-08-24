@@ -1,0 +1,77 @@
+.modal {
+    background: rgba(28, 36, 41, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    color: #fff;
+    left: 50%;
+    top: -600px;
+    margin-left: -200px;
+    min-height: 200px;
+    padding: 20px;
+    position: fixed;
+    width: 400px;
+    z-index: 10000;
+
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+       -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+
+    -webkit-transition: top .8s ease;
+       -moz-transition: top .8s ease;
+         -o-transition: top .8s ease;
+            transition: top .8s ease;
+}
+
+#rules-modal {
+    width: 700px;
+    margin-left: -300px;
+}
+
+#teeshirt-modal {
+    top: -800px;
+}
+
+#teeshirt-modal .center {
+    text-align: center;
+}
+
+.modal .modal-header {
+    font-size: 22px;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 400;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+#background-modal {
+    background: #000;
+    display: none;
+    height: 100%;
+    left: 0;
+    opacity: 0.4;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 50;
+}
+
+.modal .close {
+    color: #ddd;
+    display: inline-block;
+    font-size: 30px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 0 0 rgba(255, 255, 255, 0.6);
+    top: 0;
+    width: 42px;
+
+    -webkit-transition: text-shadow .2s ease;
+       -moz-transition: text-shadow .2s ease;
+         -o-transition: text-shadow .2s ease;
+            transition: text-shadow .2s ease;
+}
+
+.modal .close:hover {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
+}

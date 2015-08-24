@@ -14,6 +14,20 @@ parameters:
     mailer_host:       127.0.0.1
     mailer_user:       ~
     mailer_password:   ~
+    mailer_expeditor:  ~
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    #Les prix en centimes svp
+    price.ticket.full: ~
+    price.ticket.reduced: ~
+    price.tshirt: ~
+
+    payment.stripe.secret: ~
+    payment.stripe.publishable: ~
+
+    hashids.secret: ~
+    hashids.minSize: ~
+
+    reducedPriceDomains: ~

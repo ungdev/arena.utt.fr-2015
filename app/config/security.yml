@@ -6,7 +6,7 @@ security:
     providers:
         player:
             entity:
-                class: AppBundle:Player
+                class: AppBundle\Entity\Player
                 property: nickname
 
     firewalls:
@@ -16,8 +16,14 @@ security:
 
         main:
             anonymous: ~
-            provider: player
+
             form_login:
+                provider: player
                 login_path: /
+                always_use_default_target_path: true
+                default_target_path:            /profile
                 check_path: /login_check
                 csrf_provider: security.csrf.token_manager
+            logout:
+                path:   /logout
+                target: /

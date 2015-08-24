@@ -8,11 +8,10 @@
 
 namespace AppBundle\Form;
 
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PlayerType extends AbstractType
+class PlayerType extends BaseType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -80,14 +79,14 @@ class PlayerType extends AbstractType
                     'placeholder' => 'Téléphone',
                     'class' => 'phone'
                 )
-            ))
-            ->add('submit', 'submit');
+            ))->addEventSubscriber($this->listner);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Player',
+            'intention'       => 'player',
         ));
     }
 

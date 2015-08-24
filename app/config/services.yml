@@ -1,13 +1,5 @@
 # Learn more about services, parameters and containers at
 # http://symfony.com/doc/current/book/service_container.html
-parameters:
-#    parameter_name: value
-
-services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
-
 services:
     gedmo.listener.timestampable:
         class: Gedmo\Timestampable\TimestampableListener
@@ -15,3 +7,62 @@ services:
             - { name: doctrine.event_subscriber, connection: default }
         calls:
             - [ setAnnotationReader, [ @annotations.reader ] ]
+
+    hashids:
+        class: Hashids\Hashids
+        arguments: ["%hashids.secret%", "%hashids.minsize%"]
+
+    sender:
+        class: AppBundle\Service\Mailer
+        arguments: [ @mailer, "%mailer_expeditor%" ]
+
+    form.listener:
+        class: AppBundle\EventListner\FormListener
+        arguments: [@session]
+
+    form.type.base:
+        abstract: true
+        class: AppBundle\Form\BaseType
+        tags:
+            - { name: form.type, alias: base }
+        arguments: [@form.listener]
+
+    form.type.payment:
+        class: AppBundle\Form\PaymentType
+        tags:
+            - { name: form.type, alias: payment }
+        parent: form.type.base
+
+    form.type.player:
+        class: AppBundle\Form\PlayerType
+        tags:
+            - { name: form.type, alias: player }
+        parent: form.type.base
+
+    form.type.registration:
+        class: AppBundle\Form\RegistrationType
+        tags:
+            - { name: form.type, alias: registration }
+        parent: form.type.base
+
+    form.type.token:
+        class: AppBundle\Form\TokenType
+        tags:
+            - { name: form.type, alias: token }
+        parent: form.type.base
+
+    form.type.password.request:
+        class: AppBundle\Form\PasswordRequestType
+        tags:
+            - { name: form.type, alias: passwordRequest }
+        parent: form.type.base
+
+    form.type.password:
+        class: AppBundle\Form\PasswordType
+        tags:
+            - { name: form.type, alias: password }
+        parent: form.type.base
+
+    pricer:
+        class: AppBundle\Service\Pricer
+        arguments: [%price.ticket.full%, %price.ticket.reduced%, %reducedPriceDomains%]

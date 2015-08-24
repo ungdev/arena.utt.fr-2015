@@ -45,6 +45,7 @@ class Player implements Serializable, AdvancedUserInterface
      * updates createdAt, updatedAt fields
      */
     use TimestampableEntity;
+
     /**
      * Identifier
      *
@@ -80,15 +81,6 @@ class Player implements Serializable, AdvancedUserInterface
      * @Assert\Length(max = "255")
      */
     protected $email;
-
-    /**
-     * @param boolean $enabled
-     */
-    public function setEnabled($enabled)
-    {
-        $this->enabled = $enabled;
-    }
-
     /**
      * Nickname
      *
@@ -100,7 +92,6 @@ class Player implements Serializable, AdvancedUserInterface
      * @Assert\Length(max = 4096)
      */
     protected $password;
-
     /**
      * @var string
      *
@@ -110,7 +101,6 @@ class Player implements Serializable, AdvancedUserInterface
      * @Assert\NotBlank()
      */
     protected $firstName;
-
     /**
      * @var string
      *
@@ -120,8 +110,6 @@ class Player implements Serializable, AdvancedUserInterface
      * @Assert\Length(max = "255")
      */
     protected $lastName;
-
-
     /**
      * @var string
      *
@@ -132,7 +120,6 @@ class Player implements Serializable, AdvancedUserInterface
      * @Assert\Regex(pattern="$\+?[0-9]{10,15}$")
      */
     protected $phone;
-
     /**
      * @var boolean
      *
@@ -141,6 +128,18 @@ class Player implements Serializable, AdvancedUserInterface
      * @Assert\Type(type="boolean")
      */
     protected $enabled = false;
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", unique=true, nullable=true)
+     */
+    protected $token;
+    /**
+     * @var Ticket
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Ticket", cascade={"persist"})
+     */
+    protected $ticket;
 
     /**
      * @return string
@@ -157,15 +156,6 @@ class Player implements Serializable, AdvancedUserInterface
     {
         $this->token = $token;
     }
-
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", unique=true, nullable=true)
-     */
-    protected $token;
-
 
     /**
      * Returns the roles granted to the user.
@@ -199,6 +189,19 @@ class Player implements Serializable, AdvancedUserInterface
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     * @return Player
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
     }
 
     /**
@@ -239,7 +242,7 @@ class Player implements Serializable, AdvancedUserInterface
      */
     public function serialize()
     {
-        serialize(
+        return serialize(
             array(
                 $this->id,
                 $this->nickname,
@@ -279,6 +282,16 @@ class Player implements Serializable, AdvancedUserInterface
     }
 
     /**
+     * Get nickname
+     *
+     * @return string
+     */
+    public function getNickname()
+    {
+        return $this->nickname;
+    }
+
+    /**
      * Set nickname
      *
      * @param string $nickname
@@ -292,13 +305,13 @@ class Player implements Serializable, AdvancedUserInterface
     }
 
     /**
-     * Get nickname
+     * Get email
      *
      * @return string
      */
-    public function getNickname()
+    public function getEmail()
     {
-        return $this->nickname;
+        return $this->email;
     }
 
     /**
@@ -315,26 +328,13 @@ class Player implements Serializable, AdvancedUserInterface
     }
 
     /**
-     * Get email
+     * Get firstName
      *
      * @return string
      */
-    public function getEmail()
+    public function getFirstName()
     {
-        return $this->email;
-    }
-
-    /**
-     * Set password
-     *
-     * @param string $password
-     * @return Player
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
+        return $this->firstName;
     }
 
     /**
@@ -351,13 +351,13 @@ class Player implements Serializable, AdvancedUserInterface
     }
 
     /**
-     * Get firstName
+     * Get lastName
      *
-     * @return string 
+     * @return string
      */
-    public function getFirstName()
+    public function getLastName()
     {
-        return $this->firstName;
+        return $this->lastName;
     }
 
     /**
@@ -374,13 +374,13 @@ class Player implements Serializable, AdvancedUserInterface
     }
 
     /**
-     * Get lastName
+     * Get phone
      *
-     * @return string 
+     * @return string
      */
-    public function getLastName()
+    public function getPhone()
     {
-        return $this->lastName;
+        return $this->phone;
     }
 
     /**
@@ -394,16 +394,6 @@ class Player implements Serializable, AdvancedUserInterface
         $this->phone = $phone;
 
         return $this;
-    }
-
-    /**
-     * Get phone
-     *
-     * @return string 
-     */
-    public function getPhone()
-    {
-        return $this->phone;
     }
 
     /**
@@ -467,12 +457,26 @@ class Player implements Serializable, AdvancedUserInterface
     }
 
     /**
-     * Get enabled
-     *
-     * @return boolean 
+     * @param boolean $enabled
      */
-    public function getEnabled()
+    public function setEnabled($enabled)
     {
-        return $this->enabled;
+        $this->enabled = $enabled;
+    }
+
+    /**
+     * @return Ticket
+     */
+    public function getTicket()
+    {
+        return $this->ticket;
+    }
+
+    /**
+     * @param Ticket $ticket
+     */
+    public function setTicket($ticket)
+    {
+        $this->ticket = $ticket;
     }
 }

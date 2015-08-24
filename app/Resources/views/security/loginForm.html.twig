@@ -5,16 +5,22 @@
     <div class="modal-body">
         <form action="{{ path('login_check') }}" method="post" autocomplete="off">
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-            <input type="text" value="{{ lastUsername }}" name="_username" id="_username" class="text"
+            <input type="text" value="{{ lastUsername }}" name="_username" id="username" class="text"
                    placeholder="Nom d'utilisateur" spellcheck="false">
-            <input type="password" name="_password" id="_password" class="password"
+            <input type="password" name="_password" id="password" class="password"
                    placeholder="Mot de passe" spellcheck="false">
-            <button type="submit" value="Connexion" class="button">Connexion</button>
-            {% if error %}
-                <script>
-                    noty({text: '{{ error.message }}', 'type': 'error'});
-                </script>
-            {% endif %}
+            <button type="submit" value="Connexion" class="button">Se connecter</button>
         </form>
     </div>
+    <p>ou</p>
+    <div>
+        <a href="{{ path('resendToken') }}" class="button">Renvoyer le token de confirmation</a>
+        <a href="{{ path('requestPassword') }}" class="button">Mot de passe perdu ?</a>
+    </div>
 </div>
+
+{% if error %}
+    <script>
+        noty({timeout: 10000, layout: 'topRight', text: '{{ error.messageKey|trans({}, 'security') }}', 'type': 'error'});
+    </script>
+{% endif %}

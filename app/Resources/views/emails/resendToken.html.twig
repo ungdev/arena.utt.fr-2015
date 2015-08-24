@@ -1,0 +1,13 @@
+{% extends ':emails:base.html.twig' %}
+{% block body %}
+<p>Bonjour {{ firstName }} {{ lastName }},</p>
+
+<p>Merci de vous être enregistré sur le site de l'UTT Arena !</p>
+
+<p>Vous avez demandé la génération d'un nouveau jeton de confirmation pour votre addresse email.</p>
+
+<p>Pour terminer votre enregistrement sur le site Web merci de cliquer sur le lien ci-dessous :</p>
+<a href="{{ url('confirm', { 'token': token } ) }}">Confirmation du compte</a>
+
+<p>A bientôt, l'UTT Arena.</p>
+{% endblock %}

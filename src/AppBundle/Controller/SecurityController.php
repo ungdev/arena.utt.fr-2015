@@ -122,8 +122,6 @@ class SecurityController extends Controller
             )
         );
 
-
-
         $player = $this->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:Player')
@@ -149,7 +147,7 @@ class SecurityController extends Controller
             $em->persist($player);
             $em->flush();
 
-            $this->addFlash('success', 'Votre mot de passe est maintenant opérationnel.
+            $this->addFlash('success', 'Votre nouveau mot de passe est maintenant opérationnel.
             Vous pouvez vous connecter.');
             return $this->redirectToRoute('homepage');
         }

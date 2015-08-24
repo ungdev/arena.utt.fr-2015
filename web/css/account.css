@@ -1,10 +1,51 @@
 /* ACCOUNT TABS */
+.account > div {
+    width: 100%;
+    position: relative;
+}
+
+/** Player tab **/
 .player > div {
-    display: inline-block;
     width: 45%;
 }
 
-/*** Payment form **/
+.player .information {
+    float: left;
+    margin-right: 5%;
+}
+
+.player .information dd > div,
+.player .information .editButtons,
+.player .information.edit span,
+.player .information.edit #edit {
+    display: none;
+}
+
+.player .information.edit dd > div {
+    display: block;
+}
+
+.player .information.edit dd {
+    margin-left: 0;
+}
+
+.player .information.edit .editButtons, .player .information.edit .name {
+    display: flex;
+    justify-content: space-between;
+}
+.player .information .editButtons button,  .player .information.edit .name > div{
+    width: 45%;
+}
+
+.player .password {
+    float: right;
+    margin-left: 5%;
+}
+
+.player .password > form > div {
+    margin-top: 19px;
+}
+/*** Payment tab **/
 #tshirtSize {
     margin-top: 10px;
     margin-bottom: 10px;

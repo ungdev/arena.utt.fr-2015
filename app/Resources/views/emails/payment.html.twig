@@ -4,7 +4,7 @@
 
 <p>Merci d'avoir confirmer votre venue en payant votre place !</p>
 
-<p>Vous avez une place {{ player.ticket.reduced ? 'UT' : 'Exterieur' }} à {{ ticket.price.formatted }}</p>
+<p>Vous avez une place {{ player.ticket.reduced ? 'UT' : 'Exterieur' }} à {{ player.ticket.price.formatted }}</p>
 
 {% if  player.ticket.tshirt %}
 <p>Votre place inclu la reservation d'un tshirt de taille {{ player.ticket.tshirt.size }}</p>

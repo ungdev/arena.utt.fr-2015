@@ -27,7 +27,7 @@
     var stripeButton = $('#pay');
     var tshirtSize = $('#tshirtSize');
     var checkbox = $("input[type=checkbox]");
-    var amount = {{ ticketPrice }};
+    var amount = {{ ticketPrice.amount }};
     checkbox.on('ifChecked', function () {
         tshirtSize.show();
         amount = {{ tshirtPrice.amount + ticketPrice.amount }};

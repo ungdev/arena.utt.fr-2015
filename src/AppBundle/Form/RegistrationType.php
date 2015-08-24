@@ -16,7 +16,7 @@ class RegistrationType extends BaseType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('player', 'player',array(
+            ->add('player', 'player', array(
                 'label' => false
             ))
             ->add('cgu', 'checkbox')

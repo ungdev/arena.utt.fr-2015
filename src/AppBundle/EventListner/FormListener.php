@@ -51,7 +51,7 @@ class FormListener implements EventSubscriberInterface
 
     public function onPostSubmit(FormEvent $event) {
         $form = $event->getForm();
-        if (!$form->isValid()) {
+        if (!$form->isValid() && count($this->session->getFlashBag()->peek('error')) == 0) {
             $this->session->getFlashBag()->add('error', 'Le formulaire est incorrect');
         }
     }

@@ -6,26 +6,52 @@
         <section class="module content">
             <div class="panel container account" id="account">
                 <h1>Profil</h1>
-                <ul class="tabs infosLinks">
+                <ul class="tabs accountLinks">
                     <li class="active">Informations personnelles</li>
                     <li>Paiement</li>
                     <li>Spotlight</li>
                 </ul>
                 <div class="content player">
-                    <div class="information">
+                    <div class="information {{ editMode ? 'edit' }}" id="information">
+                        {{ form_start(editForm) }}
                         <dl>
                             <dt>Pseudonyme</dt>
-                            <dd>{{ app.user.nickname }}</dd>
+                            <dd>
+                                <span>{{ app.user.nickname }}</span>
+                                {{ form_row(editForm.nickname) }}
+                            </dd>
                             <dt>Email</dt>
-                            <dd>{{ app.user.email }}</dd>
+                            <dd>
+                                <span>{{ app.user.email }}</span>
+                                {{ form_row(editForm.email) }}
+                            </dd>
                             <dt>Nom</dt>
-                            <dd>{{ app.user.firstName }} {{ app.user.lastName }}</dd>
+                            <dd class="name">
+                                <span>{{ app.user.firstName }} {{ app.user.lastName }}</span>
+                                {{ form_row(editForm.firstName) }} {{ form_row(editForm.lastName) }}
+                            </dd>
                             <dt>Téléphone</dt>
-                            <dd>{{ app.user.phone }}</dd>
+                            <dd>
+                                <span>{{ app.user.phone }}</span>
+                                {{ form_row(editForm.phone) }}
+                            </dd>
                         </dl>
 
-                        <a class="button" href="">Éditer son profil</a>
+                        <button class="button" id="edit" type="button">Éditer son profil</button>
+                        <div class="editButtons">
+                            <button class="button" type="submit">Sauvegarder</button>
+                            <button class="button" type="button" id="cancel">Annuler</button>
+                        </div>
+                        {{ form_end(editForm) }}
                     </div>
+                    <script>
+                        document.getElementById('edit').onclick = function () {
+                            document.getElementById('information').classList.add('edit');
+                        };
+                        document.getElementById('cancel').onclick = function () {
+                            document.getElementById('information').classList.remove('edit');
+                        };
+                    </script>
                     <div class="password">
                         {{ form_start(passwordFrom) }}
                         {{ form_row(passwordFrom) }}
@@ -33,7 +59,7 @@
                         {{ form_end(passwordFrom) }}
                     </div>
                 </div>
-                <div class="content">
+                <div class="content payment">
                     {% set ticket = app.user.ticket %}
                     {% if not ticket %}
                         {{  render(controller('AppBundle:Payment:paymentForm')) }}
@@ -43,7 +69,7 @@
                         <p>Vous avez payé {{ ticket.price.formatted }}.</p>
                         <p>
                             {% if ticket.tshirt %}
-                                Vous avez payer un tshirt en taille {{ ticket.tshirt }}.
+                                Vous avez payer un tshirt en taille {{ ticket.tshirt.size }}.
                             {% else %}
                                     Vous n'avez pas souhaitez réservé un tshirt.
                                     Vous pourrez toujours en aqcuérir un lors de l'évenement (Dans la limite des stocks disponible).
@@ -52,7 +78,7 @@
                         </p>
                     {% endif %}
                 </div>
-                <div class="content">
+                <div class="content spotlight">
                     <button value="csgo">Counter-Strike : Global Offensive</button>
                     <button value="lol">League of Legends</button>
                     <button value="hearthstone">Hearthstone</button>

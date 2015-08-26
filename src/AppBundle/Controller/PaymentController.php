@@ -8,6 +8,7 @@ use AppBundle\Form\Model\Payment;
 use AppBundle\Model\Price;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Stripe\Charge;
 use Stripe\Error\Card;
@@ -16,7 +17,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-
+/**
+ * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+ */
 class PaymentController extends Controller {
 
     /**

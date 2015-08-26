@@ -10,7 +10,7 @@ var $scrollMenu      = $('#scrollMenu');
 var $subscribe       = $('#subscribe');
 var $mail            = $('input[name=subscription_email]');
 var $subscribeButton = $('#subscribe > input[type=submit]');
-
+var select           = $('.selectize');
 // Heartbug
 var k = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],
 n = 0;
@@ -105,4 +105,12 @@ $subscribe.on('submit', function (e) {
             $subscribeButton.css('background', 'red');
         }
     });
+});
+
+//selects
+
+select.selectize({
+    plugins: ['remove_button'],
+    maxItems: select.attr('data-maximum'),
+    hideSelected: true
 });

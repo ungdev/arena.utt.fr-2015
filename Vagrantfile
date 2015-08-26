@@ -12,7 +12,7 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "ubuntu/vivid64"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -23,6 +23,7 @@ Vagrant.configure(2) do |config|
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
   config.vm.network "forwarded_port", guest: 8000, host: 8000
+  config.vm.network "forwarded_port", guest: 3306, host: 3306
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -64,9 +65,9 @@ Vagrant.configure(2) do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.provision "shell", privileged: false, inline: <<-SHELL
+  config.vm.provision "shell", inline: <<-SHELL
       sudo apt-get update;
-      sudo DEBIAN_FRONTEND=noninteractive aptitude install -y acl php5 php5-curl php5-mcrypt php5-mysql mariadb-server mariadb-server-5.5 mariadb-client;
+      sudo DEBIAN_FRONTEND=noninteractive aptitude install -y acl php5 php5-curl php5-mcrypt php5-mysql mariadb-server mariadb-client;
 
       sudo sed -i "s|;date.timezone =|date.timezone = Europe\/Paris|g" /etc/php5/cli/php.ini;
 
@@ -83,6 +84,8 @@ Vagrant.configure(2) do |config|
       php app/console server:start 0.0.0.0:8000;
 
       php app/console doctrine:database:create;
+
+      mysql -uroot -e "GRANT ALL ON *.* TO 'root'@'%'";
 
       php app/console doctrine:migration:migrate;
   SHELL

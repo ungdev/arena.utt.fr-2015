@@ -8,6 +8,13 @@ services:
         calls:
             - [ setAnnotationReader, [ @annotations.reader ] ]
 
+    gedmo.listener.sluggable:
+        class: Gedmo\Sluggable\SluggableListener
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [ setAnnotationReader, [ @annotation_reader ] ]
+
     hashids:
         class: Hashids\Hashids
         arguments: ["%hashids.secret%", "%hashids.minsize%"]
@@ -58,11 +65,26 @@ services:
         parent: form.type.base
 
     form.type.password.input:
-        class: AppBundle\Form\PasswordInputType
+        class: AppBundle\Form\Field\PasswordInputType
         tags:
             - { name: form.type, alias: passwordInput }
+
+    form.type.teammate:
+        class: AppBundle\Form\Field\TeammateType
+        tags:
+            - { name: form.type, alias: teammate }
+
+    form.type.team:
+        class: AppBundle\Form\TeamType
+        tags:
+            - { name: form.type, alias: team }
         parent: form.type.base
 
     pricer:
         class: AppBundle\Service\Pricer
         arguments: [%price.ticket.full%, %price.ticket.reduced%, %reducedPriceDomains%]
+
+    twig.extension:
+        class: AppBundle\Twig\TwigExtension
+        tags:
+            - { name: twig.extension }

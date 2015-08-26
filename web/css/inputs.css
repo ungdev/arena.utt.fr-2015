@@ -1,3 +1,6 @@
+label {
+    display: block;
+}
 input {
     display: block;
     height: 35px;
@@ -115,4 +118,9 @@ form div ul {
     background: #e74c3c;
     border: solid 1px #c0392b;
     list-style: square;
+}
+
+select {
+    color: black;
+    width: 100%;
 }

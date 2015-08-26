@@ -9,6 +9,7 @@
 namespace AppBundle\Entity;
 
 use AppBundle\Model\Price;
+use Gedmo\Timestampable\Timestampable;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
@@ -28,7 +29,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @UniqueEntity("code")
  */
-class Ticket
+class Ticket  implements Timestampable
 {
     /**
      * Hook timestampable behavior
@@ -186,5 +187,15 @@ class Ticket
     public function setMethod($method)
     {
         $this->method = $method;
+    }
+
+    /**
+     * Get reduced
+     *
+     * @return boolean 
+     */
+    public function getReduced()
+    {
+        return $this->reduced;
     }
 }

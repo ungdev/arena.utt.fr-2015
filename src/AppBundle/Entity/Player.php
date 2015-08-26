@@ -8,6 +8,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Timestampable;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Serializable;
 use Symfony\Component\Security\Core\Role\Role;
@@ -15,6 +16,8 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
+use AppBundle\Entity\Membership;
+
 /**
  * @ORM\Entity
  * @ORM\Table(
@@ -37,7 +40,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @UniqueEntity("email")
  * @UniqueEntity("nickname")
  */
-class Player implements Serializable, AdvancedUserInterface
+class Player implements Serializable, AdvancedUserInterface, Timestampable
 {
 
     /**
@@ -140,6 +143,20 @@ class Player implements Serializable, AdvancedUserInterface
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Ticket", cascade={"persist"})
      */
     protected $ticket;
+
+    /**
+     * @var SpotlightGame
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\SpotlightGame", inversedBy="players")
+     */
+    protected $spotlightGame;
+
+    /**
+     * @var Membership
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Membership", mappedBy="player")
+     */
+    protected $membership;
 
     /**
      * @return string
@@ -478,5 +495,66 @@ class Player implements Serializable, AdvancedUserInterface
     public function setTicket($ticket)
     {
         $this->ticket = $ticket;
+    }
+
+    /**
+     * Get enabled
+     *
+     * @return boolean 
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
+    }
+
+
+    /**
+     * Set spotlightGame
+     *
+     * @param SpotlightGame $spotlightGame
+     * @return Player
+     */
+    public function setSpotlightGame(SpotlightGame $spotlightGame = null)
+    {
+        $this->spotlightGame = $spotlightGame;
+
+        return $this;
+    }
+
+    /**
+     * Get spotlightGame
+     *
+     * @return SpotlightGame
+     */
+    public function getSpotlightGame()
+    {
+        return $this->spotlightGame;
+    }
+
+    /**
+     * Set membership
+     *
+     * @param Membership $membership
+     * @return Player
+     */
+    public function setMembership(Membership $membership = null)
+    {
+        $this->membership = $membership;
+
+        return $this;
+    }
+
+    /**
+     * Get membership
+     *
+     * @return Membership
+     */
+    public function getMembership()
+    {
+        return $this->membership;
+    }
+
+    public function __toString() {
+        return $this->getNickname();
     }
 }

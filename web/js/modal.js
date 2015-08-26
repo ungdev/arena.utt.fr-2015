@@ -1,6 +1,5 @@
 'use strict';
 
-var $modal      = $('#modal');
 var $background = $('#background-modal');
 var $close      = $('.modal .close');
 var $lastModal;

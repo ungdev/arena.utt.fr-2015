@@ -1,0 +1,30 @@
+<div class="modal" id="{{ game.slug }}-modal">
+    <div class="modal-header">Liste</div>
+    <a href="#" class="close">&times;</a>
+    <div class="modal-body">
+        {% set count = game.selectors|length %}
+        {% if game.selectors|length > 0 %}
+        <table>
+            <thead>
+                <th>{{ game is teamSpotlightGame ? 'Nom de l\'équipe' : 'Pseudonyme du joueur' }}</th>
+            </thead>
+            <tbody>
+            {% for selector in game.selectors %}
+                <td>{{ selector }}</td>
+            {% endfor %}
+            </tbody>
+        </table>
+            <footer>
+                Il y a {{ count }} {{ game is teamSpotlightGame ? 'équipe' : 'joueur' }}{{ count > 1 ? 's' : '' }}
+                inscrite{{ count > 1 ? 's' : '' }} pour {{ game.maximum }} places disponibles.
+            </footer>
+            {% else %}
+            <p> {% if game is teamSpotlightGame %}
+                Aucune équipe n'est consituée pour {{ game.name }}.
+                {% else %}
+                    Aucun joueur n'a choisi {{ game.name }}.
+                {% endif %}
+                N'hésitez pas !</p>
+        {% endif %}
+    </div>
+</div>

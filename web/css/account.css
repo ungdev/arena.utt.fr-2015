@@ -69,3 +69,62 @@
 #payment_tshirtSize .checked  + label {
     background-color: #3498DB;
 }
+
+/** Spotlight tab **/
+.gameSelector .games{
+    display: flex;
+    justify-content: space-between;
+    align-content: space-between;
+    flex-wrap: wrap;
+}
+.gameSelector .games a {
+    width : 45%;
+    padding: 5px;
+    background-color: #202426;
+    color: white;
+    text-align: center;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.games figure {
+    overflow: hidden;
+    margin: 0;
+    position: relative;
+}
+
+.gameSelector .games figcaption {
+    text-align: center;
+    vertical-align: middle;
+    height: 100px;
+    width: 100%;
+    top: auto;
+    bottom: 0;
+    opacity: 0;
+    transform: translateY(100%);
+    backface-visibility: hidden;
+    transition: transform 0.4s ease 0s, opacity 0.1s ease 0.3s;
+    position: absolute;
+    left: 0;
+    background: #2C3F52 none repeat scroll 0 0;
+    color: white;
+}
+
+.games a:hover figcaption{
+    opacity: 1;
+    transform: translateY(0px);
+    transition: transform 0.4s ease 0s, opacity 0.1s ease 0s;
+}
+
+.gameSelector .games img {
+    width : 100%;
+    height: 250px;
+    transition: transform 0.4s ease 0s;
+    display: block;
+    position: relative;
+}
+
+.gameSelector .games a:hover img{
+    transform: translateY(-50px);
+}
+

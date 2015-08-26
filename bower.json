@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "homepage": "https://github.com/ungdev/arena.utt.fr-2105",
   "authors": [
-    "Gabriel Juchault <gabriel.juchault@gmail.com>"
+    "Gabriel Juchault <gabriel.juchault@gmail.com>",
+    "Ivanis Kouamé <ivanis.kouame@gmail.com>"
   ],
   "description": "UTT Arena 2015",
   "main": "index.html",

@@ -1,0 +1,21 @@
+<div>
+    <h2>Liste de joueurs</h2>
+    <ul>
+    {% for game in games %}
+       <li>
+           <button data-modal="{{ game.slug }}-modal" class="button">{{ game.name }}</button>
+           {% include ':spotlight:list.html.twig' %}
+       </li>
+
+    {% endfor %}
+    </ul>
+</div>
+
+<div>
+     <p>Vous avez choisi le jeu {{ app.user.spotLightGame.name }}.</p>
+    {% if app.user.spotLightGame is teamSpotlightGame %}
+        {% include ':team:state.html.twig' %}
+    {% else %}
+        Votre inscription est maintant terminée. Merci et à bientot le 4 et 5 décembre.
+    {% endif %}
+</div>

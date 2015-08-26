@@ -6,13 +6,13 @@
  * Time: 22:31
  */
 
-namespace AppBundle\Form;
+namespace AppBundle\Form\Field;
 
-use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class PasswordInputType extends BaseType
+class PasswordInputType extends AbstractType
 {
     public function configureOptions(OptionsResolver $resolver)
     {

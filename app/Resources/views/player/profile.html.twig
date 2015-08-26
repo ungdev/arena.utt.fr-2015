@@ -79,10 +79,15 @@
                     {% endif %}
                 </div>
                 <div class="content spotlight">
-                    <button value="csgo">Counter-Strike : Global Offensive</button>
-                    <button value="lol">League of Legends</button>
-                    <button value="hearthstone">Hearthstone</button>
-                    <button value="usf4">Ultimate Street-Figther 4</button>
+                    {% if app.user.ticket %}
+                        {% if app.user.spotlightGame is null %}
+                                {{ render(controller('AppBundle:Spotlight:gameSelector')) }}
+                            {% else %}
+                                {{ render(controller('AppBundle:Spotlight:state')) }}
+                            {% endif %}
+                    {% else %}
+                        <p>Vous ne pouvez pas encore choisir votre jeu spotlight. Votre place n'est pas encore payée.</p>
+                    {% endif %}
                 </div>
             </div>
         </section>

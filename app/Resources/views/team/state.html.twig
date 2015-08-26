@@ -1,0 +1,34 @@
+{% if app.user.membership %}
+    {% set team = user.membership.team %}
+    <dl>
+        <dd>Nom de l'équipe</dd>
+        <dt>{{ team.name }}</dt>
+        <dd>Description</dd>
+        <dt>{{ team.description }}</dt>
+        <dd>Membre de l'équipe</dd>
+        {% for member in team.memberships %}
+            <dt>{{ member.player }}</dt>
+        {% endfor %}
+    </dl>
+
+    {% if team.complete %}
+        <p class="success">Votre équipe est complète</p>
+    {% else %}
+        <p class="danger">Votre équipe est incomplète. </p>
+        <p>Veuillez trouvez le plus rapidement possible des coéquipiers pour la compléter.</p>
+    {% if team.createdBy == app.user %}
+        <button class="button" data-modal="modal">Modifier</button>
+        {{ render(controller('AppBundle:Team:editForm', {'team' : team})) }}
+
+        {% if not team.complete %}
+            <h3>Ajouter un coéquipier</h3>
+            {{ form(controller('AppBundle:Team:addForm')) }}
+        {% endif %}
+    {% endif %}
+    {% endif %}
+{% else %}
+    <p>Vous n'est pas encore dans une équipe. Vous pouvez soit attendre qu'une autre équipe vous recrute ou en
+    crée une.</p>
+   <button data-modal="form-modal">Créer une équipe</button>
+    {{ render(controller('AppBundle:Team:createForm')) }}
+{% endif %}

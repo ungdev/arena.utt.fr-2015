@@ -1,0 +1,21 @@
+<div class="gameSelector">
+
+<p class="info">Vous n'avez pas l'obligation de choisir un jeu pour participer à la UA mais il est nécessaire de l'avoir fait pour participer au tournois Spotlight.</p>
+<p class="important">Ce choix est défiinitif.</p>
+
+    <div class="games">
+{% for game in games %}
+    <a href="{{ path('select', {'game' : game.slug}) }}" class="game" title="{{ game.name }}">
+        <figure>
+            <img src="{{ asset("/img/" ~ game.slug ~ '.jpg') }}"/>
+            <figcaption class="caption">
+                <em>{{ game }}</em>
+                <p> {{ game.selectors|length }} / {{ game.maximum }} {{ game is teamSpotlightGame ? 'équipes' : 'joueurs' }}</p>
+                <button data-modal="{{ game.slug }}-modal" class="button">{{ game.name }}</button>
+                {% include ':spotlight:list.html.twig' %}
+            </figcaption>
+        </figure>
+    </a>
+{% endfor %}
+</div>
+</div>

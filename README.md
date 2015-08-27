@@ -3,9 +3,20 @@
 A Symfony project created on July 13, 2015, 2:40 am.
 
 ## Requirements
+- PHP 5.6
+- Mysql 5.6.30
+
+## Developement requirements
+- Vagrant (plugin vbguest might be uselful) 
+- Bower
+- Composer
+
+## Developement installation
 
 ```sh
-sudo apt-get install php5 php5-curl
+
+cd into the project folder
+bower install
 composer install
 vagrant up
 ```

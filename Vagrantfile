@@ -72,7 +72,6 @@ Vagrant.configure(2) do |config|
 
       sudo sed -i "s|;date.timezone =|date.timezone = Europe\/Paris|g" /etc/php5/cli/php.ini;
 
-
       sudo echo "cd /vagrant; php app/console server:start 0.0.0.0:8000; exit 0;" > /etc/rc.local
 
       sudo service apache2 stop;
@@ -85,8 +84,6 @@ Vagrant.configure(2) do |config|
 
       php app/console doctrine:database:create;
 
-
-
-      php app/console doctrine:migration:migrate;
+      php app/console doctrine:migrations:migrate;
   SHELL
 end

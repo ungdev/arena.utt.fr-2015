@@ -57,7 +57,7 @@ class PlayerType extends BaseType
                 'label' => false,
                 'attr' => array(
                     'minlength' => 10,
-                    'maxlength' => 10,
+                    'maxlength' => 15,
                     'placeholder' => 'Téléphone',
                     'class' => 'phone'
                 )

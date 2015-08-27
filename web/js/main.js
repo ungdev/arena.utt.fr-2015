@@ -11,6 +11,8 @@ var $subscribe       = $('#subscribe');
 var $mail            = $('input[name=subscription_email]');
 var $subscribeButton = $('#subscribe > input[type=submit]');
 var select           = $('.selectize');
+var tipso            = $('.tipso');
+var drop             = $('.drop');
 // Heartbug
 var k = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],
 n = 0;

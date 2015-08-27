@@ -50,6 +50,7 @@ class SpotlightGame
     /**
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Player", mappedBy="spotlightGame")
+     * @ORM\JoinColumn(onDelete="SET NULL")
      */
     protected $players;
 

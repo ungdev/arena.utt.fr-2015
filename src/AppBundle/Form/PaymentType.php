@@ -16,12 +16,17 @@ class PaymentType extends BaseType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('tshirt', 'checkbox')
+            ->add('tshirt', 'checkbox', array(
+                'required' => false
+            ))
             ->add('tshirtSize', 'entity', array(
                 'class' => 'AppBundle\Entity\TShirt',
                 'label' => 'Taille du T-shirt',
                 'choice_label' => 'size',
-                    'expanded' => true
+                    'expanded' => true,
+
+                    'required' => false,
+                    'empty_value' => false,
                 )
             )
             ->addEventSubscriber($this->listner);

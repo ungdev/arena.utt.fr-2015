@@ -15,13 +15,17 @@ services:
         calls:
             - [ setAnnotationReader, [ @annotation_reader ] ]
 
+    gedmo.listener.blameable:
+        class: Gedmo\Blameable\BlameableListener
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [ setAnnotationReader, [ @annotations.reader ] ]
     hashids:
         class: Hashids\Hashids
         arguments: ["%hashids.secret%", "%hashids.minsize%"]
 
-    sender:
-        class: AppBundle\Service\Mailer
-        arguments: [ @mailer, "%mailer_expeditor%" ]
+
 
     form.listener:
         class: AppBundle\EventListner\FormListener
@@ -71,6 +75,7 @@ services:
 
     form.type.teammate:
         class: AppBundle\Form\Field\TeammateType
+        arguments: ["@doctrine.orm.entity_manager"]
         tags:
             - { name: form.type, alias: teammate }
 
@@ -80,11 +85,35 @@ services:
             - { name: form.type, alias: team }
         parent: form.type.base
 
-    pricer:
-        class: AppBundle\Service\Pricer
-        arguments: [%price.ticket.full%, %price.ticket.reduced%, %reducedPriceDomains%]
+
+    repository.game:
+        class: Doctrine\ORM\EntityRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - "AppBundle\Entity\SpotlightGame"
 
     twig.extension:
         class: AppBundle\Twig\TwigExtension
         tags:
             - { name: twig.extension }
+        arguments: ["@repository.game"]
+
+    repository.ticket:
+        class: Doctrine\ORM\EntityRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - "AppBundle\Entity\Ticket"
+
+    manager.place:
+        class: AppBundle\Service\PlaceManager
+        arguments: ["@repository.ticket", %maximumplayernumber%]
+
+    manager.price:
+        class: AppBundle\Service\PriceManager
+        arguments: [%price.ticket.full%, %price.ticket.reduced%, %reducedPriceDomains%]
+
+    manager.mail:
+        class: AppBundle\Service\MailManager
+        arguments: [ @mailer, "%mailer_expeditor%" ]

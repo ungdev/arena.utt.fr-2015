@@ -53,7 +53,6 @@
                     <li class="active">DESCRIPTION</li>
                     <li>ANIMATIONS</li>
                     <li>JEUX</li>
-                    <li>ÉQUIPES</li>
                     <li>FAQ</li>
                 </ul>
                 <br/>
@@ -120,11 +119,7 @@
                         <h4>Warcraft III : The Frozen Throne, Garry's Mod, Age of Empires II &amp; The Conquerors, Team Fortress 2, Portal, Quake III, Left 4 Dead II, Teeworlds, TrackMania, Unreal Tournament, Starcraft II, Dota 2, Hearthstone, Age of Mythology et plein d'autres !</h4>
                     </div>
                 </div>
-                <div class="content">
-                    <br>
-                    <br>
-                    Aucune équipe pour le moment ! C'est peut-être le moment de vous <a href="#register">inscrire</a> !
-                </div>
+
                 <div class="content">
                     <h2>Foires Aux Questions</h2>
                     <h3>Inscription</h3>
@@ -390,7 +385,7 @@
             </div>
         </section>
 
-        {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+        {% if not is_granted('IS_AUTHENTICATED_FULLY') and registrable %}
         <section class="module parallax parallax-6"></section>
         <section class="module content">
             <div class="panel container" id="register">
@@ -417,6 +412,16 @@
                 {{ form_end(registration) }}
             </div>
         </section>
+        {% endif %}
+
+        {% if not registrable %}
+            <section class="module parallax parallax-6"></section>
+            <section class="module content">
+                <div class="panel container" id="register">
+                    <h1>Inscription</h1>
+                    <p>Nous sommes désolés mais les inscription sont terminées. Merci de votre interêt pour l'évenement.</p>
+                </div>
+            </section>
         {% endif %}
     </main>
 {% endblock %}

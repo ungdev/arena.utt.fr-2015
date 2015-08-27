@@ -45,7 +45,7 @@ class SpotlightController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         if ($player->getSpotlightGame()) {
-            $this->addFlash('success', 'Vous ne pouvez pas change de jeu spotlight');
+            $this->addFlash('success', 'Vous ne pouvez pas changer de jeu spotlight');
             return $this->redirectToRoute('profile');
         }
 
@@ -63,39 +63,5 @@ class SpotlightController extends Controller
         $this->addFlash('success', 'Votre jeu spotlight a été choisi.');
 
         return $this->redirectToRoute('profile');
-    }
-
-    /**
-     * @return array
-     *
-     * @Template(":spotlight:gameSelector.html.twig")
-     */
-    public function gameSelectorAction() {
-        $games = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:SpotlightGame')
-            ->findAll();
-
-        return array(
-            'games' => $games
-        );
-    }
-
-    /**
-     * @param Request $request
-     *
-     * @Template(":spotlight:state.html.twig")
-     *
-     * @return array
-     */
-    public function stateAction(Request $request){
-        $games = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:SpotlightGame')
-            ->findAll();
-
-        return array(
-          'games' => $games
-        );
     }
 }

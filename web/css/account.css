@@ -45,6 +45,14 @@
 .player .password > form > div {
     margin-top: 19px;
 }
+
+
+@media (max-width: 768px) {
+    .player > div {
+        width: 100%;
+    }
+}
+
 /*** Payment tab **/
 #tshirtSize {
     margin-top: 10px;
@@ -77,14 +85,15 @@
     align-content: space-between;
     flex-wrap: wrap;
 }
-.gameSelector .games a {
+.gameSelector .games .game {
     width : 45%;
     padding: 5px;
     background-color: #202426;
     color: white;
     text-align: center;
     position: relative;
-    margin-bottom: 20px;
+    flex-grow: 1;
+    margin: 0 15px 15px;
 }
 
 .games figure {
@@ -96,7 +105,6 @@
 .gameSelector .games figcaption {
     text-align: center;
     vertical-align: middle;
-    height: 100px;
     width: 100%;
     top: auto;
     bottom: 0;
@@ -110,7 +118,13 @@
     color: white;
 }
 
-.games a:hover figcaption{
+.game em {
+    margin: 10px 0;
+    font-family: 'Roboto Slab', serif;
+    display: block;
+}
+
+.games .game:hover figcaption{
     opacity: 1;
     transform: translateY(0px);
     transition: transform 0.4s ease 0s, opacity 0.1s ease 0s;
@@ -124,7 +138,53 @@
     position: relative;
 }
 
-.gameSelector .games a:hover img{
+.gameSelector .games .game:hover img{
     transform: translateY(-50px);
 }
 
+.game footer .button {
+    display: inline-block;
+}
+
+
+
+ul.gameList {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.gameList {
+    flex-grow: 1;
+}
+
+.selectorsList {
+    margin-bottom: 10px;
+    text-align: center;
+}
+.selectorsList dt {
+    padding: 5px;
+    margin: 10px 0;
+    border-bottom: 1px solid white;
+}
+
+.selectorsList dd {
+    padding: 10px;
+    border-bottom: 1px dotted #FFF;
+    margin-left: 0;
+}
+
+.selectorsList dd:nth-child(2n) {
+    background-color: #111518;
+}
+
+.selectorsList dd:nth-child(2n+1) {
+    background-color: #212B31;
+}
+
+@media (max-width: 768px) {
+    .game {
+        width: 100%;
+    }
+}

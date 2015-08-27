@@ -6,6 +6,7 @@ use AppBundle\Entity\Player;
 use AppBundle\Entity\Ticket;
 use AppBundle\Form\Model\Payment;
 use AppBundle\Model\Price;
+use Monolog\Logger;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -31,6 +32,12 @@ class PaymentController extends Controller {
      * @return Response
      */
     public function payAction(Request $request){
+
+        if (!$this->get('manager.place')->canPay()) {
+            $this->addFlash('error', 'Désolé mais les inscription sont closes');
+            $this->redirectToRoute('profile');
+        }
+
         $payment = new Payment();
         $form = $this->createForm('payment', $payment);
 
@@ -44,11 +51,10 @@ class PaymentController extends Controller {
 
             $stripeToken = $request->get('stripeToken');
 
-            $price = $this->get('pricer')->getPrice($this->getUser())->getAmount();
+            $price = $this->get('manager.price')->getPrice($this->getUser())->getAmount();
             $price += $payment->hasTshirt() ? $this->getParameter('price.tshirt') : 0;
 
             try {
-
                 Stripe::setApiKey($this->getParameter('payment.stripe.secret'));
                 Charge::create(array(
                     'source' =>  $stripeToken,
@@ -57,7 +63,7 @@ class PaymentController extends Controller {
                 ));
 
             } catch (Card $exception) {
-                $this->get('logger')->log($exception);
+                $this->get('logger')->log(Logger::ERROR, $exception->getMessage());
                 $this->addFlash('error', 'Une erreur de paiement est survenue.
                 Nous vous invitons à contacter l\' équipe organisatrice de l\'évenement');
                 return $this->redirectToRoute('profile');
@@ -73,7 +79,7 @@ class PaymentController extends Controller {
                 $ticket->setTshirt($tshirt);
             }
             $ticket->setPrice($price);
-            $ticket->setReduced($this->get('pricer')->hasReducedPrice($player));
+            $ticket->setReduced($this->get('manager.price')->hasReducedPrice($player));
             $player->setTicket($ticket);
 
             $ticket->setCode($this->get('hashids')->encode($player->getId()));
@@ -81,7 +87,7 @@ class PaymentController extends Controller {
             $em->persist($player);
             $em->flush();
 
-            $this->get('sender')->send(
+            $this->get('manager.mail')->send(
                 $player->getEmail(),
                 'Paiement de la place pour la LAN',
                 $this->render(
@@ -92,7 +98,7 @@ class PaymentController extends Controller {
                 )
             );
         }
-        return $this->redirectToRoute('profile');
+        return $this->forward('AppBundle:Player:profile');
     }
 
     /**
@@ -100,17 +106,20 @@ class PaymentController extends Controller {
      *
      * @Template(":payment:form.html.twig")
      */
-    public function paymentFormAction(){
+    public function paymentFormAction(Request $originalRequest){
         $form = $this->createForm('payment', new Payment(), array(
                 'action' => $this->generateUrl('pay'),
                 'method' => "POST"
             )
         );
+
+        $form->handleRequest($originalRequest);
         return array(
-                'ticketPrice' => $this->get('pricer')->getPrice($this->getUser()),
+                'ticketPrice' => $this->get('manager.price')->getPrice($this->getUser()),
                 'tshirtPrice' => new Price($this->getParameter('price.tshirt')),
                 'paymentForm' => $form->createView(),
-                'key' => $this->getParameter('payment.stripe.publishable')
+                'key' => $this->getParameter('payment.stripe.publishable'),
+                'payable' => $this->get('manager.place')->canPay()
         );
     }
 

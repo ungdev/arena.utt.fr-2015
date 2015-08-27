@@ -124,3 +124,11 @@ select {
     color: black;
     width: 100%;
 }
+
+.button.green {
+    background: forestgreen;
+}
+
+.button.red {
+    background: darkred;
+}

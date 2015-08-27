@@ -7,22 +7,27 @@ use AppBundle\Form\Model\Registration;
 use AppBundle\Form\RegistrationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
     /**
      * @Route("/", name="homepage")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+
         $registration = new Registration();
         $form = $this->createForm('registration', $registration, array(
             'action' => $this->generateUrl('register'),
             'method' => 'POST',
         ));
 
+        $form->handleRequest($request);
+
         return $this->render('default/index.html.twig', array(
-            'registration' => $form->createView()
+            'registration' => $form->createView(),
+            'registrable' => $this->get('manager.place')->canRegister()
         ));
     }
 

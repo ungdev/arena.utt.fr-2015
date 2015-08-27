@@ -34,9 +34,6 @@ class PasswordInputType extends AbstractType
                 ),
                 'type' => 'password',
                 'options' => array(
-                    'constraints' => array(
-                        new NotBlank(),
-                    ),
                     'attr' => array(
                         'class' => 'password'
                     ),

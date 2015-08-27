@@ -31,3 +31,5 @@ parameters:
     hashids.minSize: ~
 
     reducedPriceDomains: ~
+
+    maximumPlayerNumber: ~

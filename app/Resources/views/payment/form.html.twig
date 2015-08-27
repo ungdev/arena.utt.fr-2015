@@ -27,6 +27,7 @@
     var stripeButton = $('#pay');
     var tshirtSize = $('#tshirtSize');
     var checkbox = $("input[type=checkbox]");
+    var radio = $('input[type=radio]');
     var amount = {{ ticketPrice.amount }};
     checkbox.on('ifChecked', function () {
         tshirtSize.show();
@@ -39,6 +40,12 @@
     });
 
     stripeButton.on('click', function(e) {
+        if (checkbox.is(':checked') && !radio.is(':checked')) {
+            noty({timeout: 10000,
+                layout: 'topRight',
+                text: 'Vous devez choisir une taille', 'type': 'error'});
+            return;
+        }
         StripeCheckout.open({
             key: '{{ key }}',
             image: '{{ asset('img/logo.png') }}',

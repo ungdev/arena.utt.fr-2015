@@ -84,7 +84,7 @@ class SecurityController extends Controller
                 $em->persist($player);
                 $em->flush();
 
-                $this->get('sender')->send($data['email'], 'Reinitialisation du mot de passe',
+                $this->get('manager.mail')->send($data['email'], 'Reinitialisation du mot de passe',
                     $this->render(':emails:requestPasswordReset.html.twig', array(
                             'token' => $token,
                             'player' => $player
@@ -122,6 +122,7 @@ class SecurityController extends Controller
             )
         );
 
+        /** @var Player $player */
         $player = $this->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:Player')
@@ -129,6 +130,11 @@ class SecurityController extends Controller
 
         if (!$player) {
             $this->addFlash('error', "Ce jeton est invalide");
+            return $this->redirectToRoute("homepage");
+        }
+
+        if ($player->getUpdatedAt()->diff(new \DateTime(), true)->days > 1) {
+            $this->addFlash('error', "Ce jeton a expiré");
             return $this->redirectToRoute("homepage");
         }
 

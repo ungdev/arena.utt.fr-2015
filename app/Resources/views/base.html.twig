@@ -23,6 +23,9 @@
         {% stylesheets
         'vendors/iCheck/skins/flat/aero.css'
         'vendors/normalize.css/normalize.css'
+        'vendors/selectize/dist/css/selectize.css'
+        'vendors/tether/dist/css/tether.min.css'
+        'vendors/tether-drop/dist/css/drop-theme-arrows.min.css'
         'css/*.css'
          filter='cssrewrite' %}
             <link rel="stylesheet" href="{{ asset_url }}" />
@@ -38,7 +41,10 @@
         'vendors/microplugin/src/microplugin.js'
         'vendors/sifter/sifter.min.js'
         'vendors/selectize/dist/js/selectize.min.js'
-         %}
+        'vendors/tether/dist/js/tether.min.js'
+        'vendors/tether-drop/dist/js/drop.min.js'
+        'vendors/tether-tooltip/dist/js/tooltip.min.js'
+        %}
         <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />

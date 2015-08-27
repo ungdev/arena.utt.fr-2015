@@ -1,34 +1,36 @@
 {% if app.user.membership %}
-    {% set team = user.membership.team %}
+    {% set team = app.user.membership.team %}
     <dl>
         <dd>Nom de l'équipe</dd>
         <dt>{{ team.name }}</dt>
-        <dd>Description</dd>
-        <dt>{{ team.description }}</dt>
         <dd>Membre de l'équipe</dd>
         {% for member in team.memberships %}
-            <dt>{{ member.player }}</dt>
+            <dt>{{ member.player }} {{ member.player == team.createdBy ? 'cap' }}</dt>
         {% endfor %}
     </dl>
-
+    {% if team.createdBy == app.user %}
+        <button class="button" data-modal="editForm">Modifier</button>
+        {{ render(controller('AppBundle:Team:editForm', {'team' : team,  'originalRequest': app.request})) }}
+    {% endif %}
     {% if team.complete %}
         <p class="success">Votre équipe est complète</p>
     {% else %}
         <p class="danger">Votre équipe est incomplète. </p>
         <p>Veuillez trouvez le plus rapidement possible des coéquipiers pour la compléter.</p>
-    {% if team.createdBy == app.user %}
-        <button class="button" data-modal="modal">Modifier</button>
-        {{ render(controller('AppBundle:Team:editForm', {'team' : team})) }}
 
-        {% if not team.complete %}
-            <h3>Ajouter un coéquipier</h3>
-            {{ form(controller('AppBundle:Team:addForm')) }}
-        {% endif %}
+                <button data-modal="addForm">Ajouter un coéquipier</button>
+                {{ render(controller('AppBundle:Team:addForm', {'team' : team, 'originalRequest': app.request})) }}
+
     {% endif %}
+
+    <a class="button red" href="{{ path('team_quit') }}">Quitter</a>
+    {% if team.createdBy == app.user %}
+        <a class="button red" href="{{ path('team_delete',  {'team' : team}) }}">Supprimer l'équipe</a>
     {% endif %}
+
 {% else %}
     <p>Vous n'est pas encore dans une équipe. Vous pouvez soit attendre qu'une autre équipe vous recrute ou en
     crée une.</p>
-   <button data-modal="form-modal">Créer une équipe</button>
-    {{ render(controller('AppBundle:Team:createForm')) }}
+   <button data-modal="createForm">Créer une équipe</button>
+    {{ render(controller('AppBundle:Team:createForm', {'originalRequest': app.request})) }}
 {% endif %}

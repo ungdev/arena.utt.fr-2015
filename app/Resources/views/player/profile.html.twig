@@ -62,7 +62,11 @@
                 <div class="content payment">
                     {% set ticket = app.user.ticket %}
                     {% if not ticket %}
-                        {{  render(controller('AppBundle:Payment:paymentForm')) }}
+                        {% if payable %}
+                        {{  render(controller('AppBundle:Payment:paymentForm', {'originalRequest': app.request})) }}
+                            {% else %}
+                            <p>Vous ne pouvez plus acheter votre ticket.</p>
+                            {% endif %}
                     {% else %}
                         <p>Votre ticket est payé.</p>
 
@@ -81,9 +85,9 @@
                 <div class="content spotlight">
                     {% if app.user.ticket %}
                         {% if app.user.spotlightGame is null %}
-                                {{ render(controller('AppBundle:Spotlight:gameSelector')) }}
+                                {%  include ':spotlight:gameSelector.html.twig' %}
                             {% else %}
-                                {{ render(controller('AppBundle:Spotlight:state')) }}
+                                {%  include ':spotlight:state.html.twig' %}
                             {% endif %}
                     {% else %}
                         <p>Vous ne pouvez pas encore choisir votre jeu spotlight. Votre place n'est pas encore payée.</p>

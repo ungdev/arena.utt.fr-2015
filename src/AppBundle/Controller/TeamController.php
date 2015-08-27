@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Membership;
+use AppBundle\Entity\Player;
 use AppBundle\Entity\Team;
 use AppBundle\Entity\TeamSpotlightGame;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -22,23 +23,27 @@ use Symfony\Component\HttpFoundation\Response;
 class TeamController extends Controller
 {
     /**
-     * @param Request $request
+     * @param Request $originalRequest
+     * @return array
+     * @internal param Request $request
      *
      * @Template(":team:form.html.twig")
      *
-     * @return array
      */
-    public function createFormAction (Request $request) {
-        $form = $this->createForm('team', new Team(), array(
+    public function createFormAction(Request $originalRequest)
+    {
+        $form = $this->createForm('team', new Team($this->getUser()->getSpotlightGame()), array(
             'action' => $this->generateUrl('team_create'),
             'method' => "POST",
             'game' => $this->getUser()->getSpotlightGame(),
-            'excludedPlayers' => array($this->getUser()->getId())
+            'connectedPlayer' => $this->getUser()->getId(),
+            'label' => false
         ));
-        $form->handleRequest($request);
+        $form->handleRequest($originalRequest);
         return array(
             'form' => $form->createView(),
-            'title' => 'Création de l\'équipe'
+            'title' => 'Création de l\'équipe',
+            'formId' => 'createForm'
         );
     }
 
@@ -49,34 +54,29 @@ class TeamController extends Controller
      * @Method("POST")
      * @return Response
      */
-    public function createAction(Request $request) {
+    public function createAction(Request $request)
+    {
         $player = $this->getUser();
         /** @var TeamSpotlightGame $game */
         $game = $player->getSpotlightGame();
-        $team = new Team();
+        $team = new Team($game);
 
         $em = $this->getDoctrine()->getManager();
 
         $form = $this->createForm('team', $team, array(
             'game' => $game,
-            'excludedPlayers' => array($player->getId()),
+            'connectedPlayer' => array($player->getId()),
         ));
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $teammates = $form->get('teammate')->getData();
-
-            if (count($teammates) != $game->getTeammateNumber() - 1) {
-                die;
-            }
-
-            array_unshift($teammates, $player);
-            foreach ($teammates as $p) {
-                $em->persist(new Membership($team, $p));
-            }
-
+            $team->addMembership(new Membership($team, $player));
+            $team->setCreatedBy($player);
+            $em->persist($team);
             $em->flush();
+
+            $this->sendTeamEmail($team,'Création de l\' équipe', ':emails:teamCreation.html.twig');
 
             $this->addFlash('success', 'Votre équipe est créee');
             $this->redirectToRoute('profile');
@@ -87,42 +87,48 @@ class TeamController extends Controller
 
 
     /**
-     * @param Request $request
+     * @param Request $originalRequest
+     * @param Team $team
+     * @return array
+     * @internal param Request $request
      *
      * @Template(":team:form.html.twig")
-     * @Security("user == team.createdBy")
-     * @return array
+     * @Security("user === team.getCreatedBy()")
      */
-    public function editFormAction (Request $request, Team $team) {
+    public function editFormAction(Request $originalRequest, Team $team)
+    {
         $form = $this->createForm('team', $team, array(
             'action' => $this->generateUrl('team_edit', array('team' => $team)),
             'method' => "POST",
-            'game' => $this->getUser()->getSpotlightGame()
+            'game' => $this->getUser()->getSpotlightGame(),
         ));
 
-        $form->remove('teammate');
+        $form->remove('memberships');
 
-        $form->handleRequest($request);
+        $form->handleRequest($originalRequest);
 
         return array(
             'form' => $form->createView(),
-            'title' => 'Edition de l\'équipe'
+            'title' => 'Edition de l\'équipe',
+            'formId' => 'editForm'
         );
     }
 
     /**
      * @param Request $request
      *
+     * @param Team $team
+     * @return Response
      * @Route("/edit/{team}", name="team_edit")
      * @Method("POST")
      * @Security("user == team.createdBy")
      *
-     * @return Response
      */
-    public function editAction(Request $request, Team $team) {
+    public function editAction(Request $request, Team $team)
+    {
         $form = $this->createForm('team', $team);
 
-        $form->remove('teammate');
+        $form->remove('memberships');
 
         $form->handleRequest($request);
 
@@ -141,33 +147,37 @@ class TeamController extends Controller
     }
 
     /**
-     * @param Request $request
-     *
+     * @param Team $team
+     * @return Response
      * @Route("/delete/{team}", name="team_delete")
      *
-     * @Security("user == team.createdBy")
+     * @Security("user == team.createdBy()")
      *
-     * @return Response
      */
-    public function deleteAction(Request $request, Team $team) {
+    public function deleteAction(Team $team)
+    {
         $em = $this->getDoctrine()->getManager();
         $em->remove($team);
         $em->flush();
 
-        $this->addFlash('success', 'Votre équipe est bien supprimée');
+        $this->sendTeamEmail($team, 'Dissolution de l\'équipe', ':emails:teamDeletion.html.twig');
+
+        $this->addFlash('success', 'Votre équipe est bien supprimée. Un email a été envoyé au membre restant de votre ancienne équipe.');
 
         $this->redirectToRoute('profile');
     }
 
     /**
-     * @param Request $request
      * @return Response
      *
      * @Route("/quit", name="team_quit")
      */
-    public function quitAction(Request $request) {
+    public function quitAction()
+    {
+        /** @var Player $player */
         $player = $this->getUser();
 
+        /** @var Membership $membership */
         $membership = $player->getMembership();
 
         /** @var Team $team */
@@ -175,32 +185,47 @@ class TeamController extends Controller
 
         $team->removeMembership($membership);
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($team);
-        $em->flush();
-
         if ($team->getMemberships()->count() == 0) {
             return $this->forward('AppBundle:Team:delete', array('team' => $team));
         }
 
         if ($team->getCreatedBy() == $player) {
-            $team->setCreatedBy($team->getMemberships()->first());
+            $team->setCreatedBy($team->getMemberships()->first()->getPlayer());
         }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($membership);
+        $em->persist($team);
+        $em->flush();
+
+        $this->sendTeamEmail($team, "Départ d'un des membre de votre équipe", ':emails:memberLeave.html.twig');
 
         $this->addFlash('success', 'Vous avez quitter votre équipe');
         return $this->redirectToRoute('profile');
     }
 
-    public function addFormAction(Request $request) {
+    /**
+     * @Security("user == team.getCreatedBy()")
+     *
+     * @Template(":team:form.html.twig")
+     *
+     * @param Request $originalRequest
+     * @param Team $team
+     * @return array
+     */
+    public function addFormAction(Request $originalRequest, Team $team)
+    {
         $form = $this->createFormBuilder(
-            null,array(
+            null, array(
                 'action' => $this->generateUrl('team_add'),
-                "medthod" => "POST"
+                "method" => "POST",
+                'label' => false
             )
         )->add('teammate', 'teammate', array(
             'game' => $this->getUser()->getSpotlightGame(),
-            'excludedPlayers' => false,
             'multiple' => false,
+            "team" => $team,
+            'label' => 'Coéquipier',
         ))
             ->add('submit', 'submit', array(
                 'label' => 'Ajouter',
@@ -209,23 +234,34 @@ class TeamController extends Controller
                 )
             ))->getForm();
 
-        $form->handleRequest($request);
+        $form->handleRequest($originalRequest);
 
-        return $form->createView();
+        return array(
+            'form' => $form->createView(),
+            'title' => 'Ajout d\'un coéquipier',
+            'formId' => 'addForm'
+        );
     }
+
     /**
      * @param Request $request
      *
      * @Route("/add", name="team_add")
      *
-     * @Security("user == team.createdBy")
+     * @Security("user == team.getCreatedBy()")
+     *
      *
      * @return Response
      */
-    public function addAction (Request $request){
+    public function addAction(Request $request)
+    {
         $player = $this->getUser();
+
+        /** @var Team $team */
         $team = $player->getMembership()->getTeam();
-        $game =  $player->getSpotlightGame();
+
+        /** @var TeamSpotlightGame $game */
+        $game = $player->getSpotlightGame();
 
         if ($team->getMemberships()->count() >= $game->getTeammateNumber()) {
             $this->addFlash('error', 'Impossible d\'ajouter un nouveau coéquipier.
@@ -235,7 +271,7 @@ class TeamController extends Controller
 
         $form = $this->createFormBuilder()->add('teammate', 'teammate', array(
             'game' => $game,
-            'excludedPlayers' => false,
+            'connectedPlayer' => false,
             'multiple' => false
         ))->getForm();
 
@@ -245,8 +281,8 @@ class TeamController extends Controller
             $newMember = $form->get('teammate')->getData();
 
             if ($newMember->getMembership()) {
-                $this->addFlash('error', 'Impossible d\'ajouter le nouveau coéquipier. ' . $newMember->getNickname().
-            ' est déjà dans une équipe');
+                $this->addFlash('error', 'Impossible d\'ajouter le nouveau coéquipier. ' . $newMember->getNickname() .
+                    ' est déjà dans une équipe');
                 return $this->redirectToRoute('profile');
             }
             $em = $this->getDoctrine()->getManager();
@@ -258,5 +294,18 @@ class TeamController extends Controller
         }
 
         return $this->forward('AppBundle:Player:profile');
+    }
+
+    protected function sendTeamEmail(Team $team, $subject, $template) {
+        foreach ($team->getMemberships() as $member){
+            /** @var Player $player */
+            $player = $member->getPlayer();
+            $this->get('manager.mail')->send($player->getEmail(), $subject, $this->render(
+                $template,
+                array(
+                'team' => $team,
+                'player' => $player
+            )));
+        }
     }
 }

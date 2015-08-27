@@ -53,7 +53,7 @@ class Team implements Blameable, Timestampable
      *
      * @Gedmo\Blameable(on="create")
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Player")
-     * @ORM\JoinColumn(referencedColumnName="id", unique=true)
+     * @ORM\JoinColumn(name="created_by_id", referencedColumnName="id", unique=true, nullable=false)
      */
     private $createdBy;
 
@@ -61,8 +61,7 @@ class Team implements Blameable, Timestampable
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Membership", mappedBy="team", cascade={"persist","remove"})
-     *
-     * @Assert\Count(min="1", max="$this->game->getTeammateNumber()")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $memberships;
 
@@ -86,9 +85,10 @@ class Team implements Blameable, Timestampable
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(TeamSpotlightGame $game)
     {
         $this->memberships = new ArrayCollection();
+        $this->game = $game;
     }
 
     /**
@@ -202,6 +202,7 @@ class Team implements Blameable, Timestampable
     {
         return $this->memberships;
     }
+
 
     /**
      * Set game

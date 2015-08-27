@@ -1,12 +1,11 @@
 <div>
     <h2>Liste de joueurs</h2>
-    <ul>
+    <ul class="gameList">
     {% for game in games %}
        <li>
            <button data-modal="{{ game.slug }}-modal" class="button">{{ game.name }}</button>
            {% include ':spotlight:list.html.twig' %}
        </li>
-
     {% endfor %}
     </ul>
 </div>

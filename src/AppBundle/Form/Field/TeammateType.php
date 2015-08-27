@@ -9,8 +9,11 @@
 namespace AppBundle\Form\Field;
 
 
+use AppBundle\Entity\PlayerRepository;
 use AppBundle\Entity\SpotlightGame;
 use AppBundle\Entity\TeamSpotlightGame;
+use AppBundle\Form\DataTransformer\PlayersToMembershipsTransformer;
+use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
@@ -22,49 +25,49 @@ use Symfony\Component\Validator\Constraints\Count;
 class TeammateType extends AbstractType
 {
 
+    protected $om;
+
+    /**
+     * TeammateType constructor.
+     * @param ObjectManager $om
+     */
+    public function __construct(ObjectManager $om)
+    {
+        $this->om = $om;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->setMapped(false);
+        $transformer = new PlayersToMembershipsTransformer($this->om, $options['team']);
+        $builder->addModelTransformer($transformer, true);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired('game');
-
         $resolver->setAllowedTypes('game', '\\AppBundle\\Entity\\TeamSpotlightGame');
-        $resolver->setRequired('excludedPlayers');
-        $resolver->setAllowedTypes('excludedPlayers', 'array');
+
+        $resolver->setRequired('team');
+        $resolver->setAllowedTypes('team', '\\AppBundle\\Entity\\Team');
+
+        $resolver->setRequired('connectedPlayer');
+        $resolver->addAllowedTypes('connectedPlayer', 'int');
+        $resolver->addAllowedTypes('connectedPlayer', 'boolean');
+
         $resolver->setDefaults(array(
             'class' => 'AppBundle:Player',
             'multiple' => false,
+                'required' => false,
+                'empty_value' => false,
             'query_builder'=>
                 function (Options $options) {
-                    return function (EntityRepository $er) use ($options) {
-                        return $er->createQueryBuilder('p')
-                            ->where('p.spotlightGame = ' . $options['game']->getId())
-                            ->andWhere('p.id NOT IN (' . join(',', $options['excludedPlayers']) . ')')
-                            ->andWhere('p.id NOT IN (SELECT m.id FROM AppBundle:Membership m WHERE m.player = p.id) ')
-                            ->orderBy('p.nickname', 'ASC');
+                    return function (PlayerRepository $er) use ($options) {
+                        return $er->getPossibleTeammates($options['game'], $options['connectedPlayer']);
                     };
-                },
-            'attr' => function (Options $options) {
-                    return array(
-                        'class' => 'selectize',
-                        'data-maximum' => $options['game']->getTeammateNumber() - 1
-                    );
-                    },
-            'constraints' => function (Options $options) {
-                $constraints = array();
-                if ($options['multiple']) {
-                    $constraints[] = new Count(array(
-
-                            'min'        => $options['game']->getTeammateNumber() - 1,
-                            'max'        => $options['game']->getTeammateNumber() - 1,
-                            'exactMessage' => 'Il doit y avoir exactement ' . $options['game']->getTeammateNumber() - 1 . 'coéquipiers.',
-                    ));
-                }
-                return $constraints;
-            }
+                },'connectedPlayer' => false,
+            'attr' =>  array(
+                        'class' => 'selectize'
+                    ),
                 )
         );
     }

@@ -1,0 +1,11 @@
+{% extends ':emails:base.html.twig' %}
+{% block body %}
+    <p>Bonjour {{ player.nickname }},</p>
+
+    {% if player == leavingMember %}
+    <p>Vous avez quitté  {{ team.name }}  </p>
+        {% else %}
+    <p>{{ leavingMember.nickname }} a quitté votre équipe.</p>
+  <p>N'hésitez pas à recrute un autre coéquipier car votre équipe dois être complète pour participer au tournois.</p>
+            {% endif %}
+{% endblock %}

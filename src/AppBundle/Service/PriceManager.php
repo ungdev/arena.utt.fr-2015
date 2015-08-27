@@ -12,7 +12,7 @@ namespace AppBundle\Service;
 use AppBundle\Entity\Player;
 use AppBundle\Model\Price;
 
-class Pricer
+class PriceManager
 {
     protected $basePrice;
 
@@ -21,7 +21,7 @@ class Pricer
     protected $reducedEmailDomains;
 
     /**
-     * Pricer constructor.
+     * PriceManager constructor.
      *
      * @param $basePrice
      * @param $reducedPrice

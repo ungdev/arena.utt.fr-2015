@@ -19,7 +19,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use AppBundle\Entity\Membership;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\PlayerRepository")
  * @ORM\Table(
  *  name="players",
  *  uniqueConstraints={
@@ -140,7 +140,7 @@ class Player implements Serializable, AdvancedUserInterface, Timestampable
     /**
      * @var Ticket
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Ticket", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Ticket", cascade={"persist","remove"})
      */
     protected $ticket;
 
@@ -154,7 +154,7 @@ class Player implements Serializable, AdvancedUserInterface, Timestampable
     /**
      * @var Membership
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Membership", mappedBy="player")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Membership", mappedBy="player", cascade={"persist","remove"})
      */
     protected $membership;
 

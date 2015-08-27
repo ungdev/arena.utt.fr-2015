@@ -11,7 +11,7 @@ namespace AppBundle\Service;
 use \Swift_Mailer;
 use \Swift_Message;
 
-class Mailer
+class MailManager
 {
     private $transport;
 

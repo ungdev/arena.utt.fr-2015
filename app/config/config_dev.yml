@@ -65,3 +65,5 @@ parameters:
         - "utt.fr"
         - "utc.fr"
         - "utbm.fr"
+
+    maximumPlayerNumber: 300

@@ -1,0 +1,9 @@
+{% extends ':emails:base.html.twig' %}
+{% block body %}
+    <p>Bonjour {{ player.nickname }},</p>
+
+    <p>Une équipe   {{ team.name }} a été supprimée. </p>
+    {% if team.createdBy == player %}
+        <p>Un email a été envoyé aux autre membres de l'équipe pour les informer de la situation.</p>
+        {% endif %}
+{% endblock %}

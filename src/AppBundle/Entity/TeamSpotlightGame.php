@@ -17,6 +17,7 @@ class TeamSpotlightGame extends SpotlightGame
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Team", mappedBy="game")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      **/
     protected $teams;
 

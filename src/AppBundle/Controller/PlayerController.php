@@ -48,10 +48,12 @@ class PlayerController extends Controller
 
         $passwordForm->handleRequest($request);
         $this->getDoctrine()->getManager()->refresh($this->getUser());
+
         return $this->render(':player:profile.html.twig', array(
                 'editForm' => $editForm->createView(),
                 'passwordFrom' => $passwordForm->createView(),
-                'editMode' => boolval($edit)
+                'editMode' => boolval($edit),
+                "payable" => $this->get('manager.place')->canPay()
             )
         );
     }

@@ -1,0 +1,12 @@
+{% extends ':emails:base.html.twig' %}
+{% block body %}
+<p>Bonjour {{ player.nickname }},</p>
+
+<p>Une équipe a été crée. Elle s'appelle {{ team.name }}.</p>
+<p>Vous faîtes parti de cette équipe dont les membres sont : </p>
+<ul>
+    {% for member in team.memberships %}
+    <li>{{ member.player.nickname }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

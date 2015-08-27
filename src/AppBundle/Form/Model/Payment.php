@@ -16,7 +16,8 @@ class Payment
      * @var boolean
      *
      * @Assert\Expression(
-     *     "(this.hasTshirt() and this.getTshirtSize()) or !this.hasTshirt()"
+     *     "(this.hasTshirt() and this.getTshirtSize()) or !this.hasTshirt()",
+     *      message="Veuillez choisir une taille"
      * )
      */
     protected $tshirt;

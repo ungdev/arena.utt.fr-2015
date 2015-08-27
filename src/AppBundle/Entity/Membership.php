@@ -13,9 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Membership
  *
  * @ORM\Entity()
- * @ORM\Table(name="memberships",uniqueConstraints={
- *     @ORM\UniqueConstraint(name="UNIQ_membership", columns={"player_id"})
- * })
+ * @ORM\Table(name="memberships")
  * @UniqueEntity(fields={"player"})
  */
 class Membership
@@ -32,7 +30,7 @@ class Membership
     /**
      * @var Player
      * @ORM\OneToOne(targetEntity="Player", inversedBy="membership")
-     * @ORM\JoinColumn(onDelete="CASCADE")
+     * @ORM\JoinColumn(onDelete="CASCADE", unique=true)
      */
     protected $player;
 
@@ -80,7 +78,7 @@ class Membership
     function __construct(Team $team, Player $user)
     {
         $this->team = $team;
-        $this->user = $user;
+        $this->player = $user;
     }
 
     /**
@@ -137,5 +135,9 @@ class Membership
     public function getTeam()
     {
         return $this->team;
+    }
+
+    public function __toString(){
+        return $this->getPlayer()->__toString();
     }
 }

@@ -283,6 +283,21 @@ main table span {
     top: -100px;
 }
 
+p.danger {
+    padding: 10px;
+    background-color: tomato;
+}
+
+p.success {
+    padding: 10px;
+    background-color: forestgreen;
+}
+
+p.warning {
+    padding: 10px;
+    background-color: goldenrod;
+}
+
 @media (max-width: 1100px) {
     section > div {
         padding: 50px;

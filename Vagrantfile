@@ -67,11 +67,11 @@ Vagrant.configure(2) do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
       sudo apt-get update;
-      sudo DEBIAN_FRONTEND=noninteractive aptitude install -y acl php5 php5-curl php5-mcrypt php5-mysql mariadb-server mariadb-client;
+
+      sudo DEBIAN_FRONTEND=noninteractive aptitude install -y acl php5 php5-curl php5-mcrypt php5-mysql mysql-client-5.6 mysql-server-5.6;
 
       sudo sed -i "s|;date.timezone =|date.timezone = Europe\/Paris|g" /etc/php5/cli/php.ini;
 
-      sudo service mysql start;
 
       sudo echo "cd /vagrant; php app/console server:start 0.0.0.0:8000; exit 0;" > /etc/rc.local
 
@@ -85,7 +85,7 @@ Vagrant.configure(2) do |config|
 
       php app/console doctrine:database:create;
 
-      mysql -uroot -e "GRANT ALL ON *.* TO 'root'@'%'";
+
 
       php app/console doctrine:migration:migrate;
   SHELL

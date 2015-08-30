@@ -7,7 +7,13 @@ input {
     margin: 15px 0;
     width: 100%;
     background-size: 24px;
-    background: #263638 no-repeat 5px 50%;
+    background: repeating-linear-gradient(
+            45deg,
+            rgba(0, 0, 0, 0.2),
+            rgba(0, 0, 0, 0.2) 10px,
+            rgba(0, 0, 0, 0.3) 10px,
+            rgba(0, 0, 0, 0.3) 20px
+    );
     border: 1px solid #555;
     color: #888;
     padding-left: 40px;
@@ -19,41 +25,27 @@ input {
     -webkit-box-sizing: border-box;
        -moz-box-sizing: border-box;
             box-sizing: border-box;
-}
 
-input[type=text] {
-    background: repeating-linear-gradient(
-        45deg,
-        rgba(0, 0, 0, 0.2),
-        rgba(0, 0, 0, 0.2) 10px,
-        rgba(0, 0, 0, 0.3) 10px,
-        rgba(0, 0, 0, 0.3) 20px
-    ), url('../img/user.png') 5px 50% no-repeat;
+    position: relative;
+
+
 }
 
 
-input[type=email] {
-    background: repeating-linear-gradient(
-        45deg,
-        rgba(0, 0, 0, 0.2),
-        rgba(0, 0, 0, 0.2) 10px,
-        rgba(0, 0, 0, 0.3) 10px,
-        rgba(0, 0, 0, 0.3) 20px
-    ), url('../img/email.png') 5px 50% no-repeat;
+input[class*="name"] {
+    background: url('../img/user.png') no-repeat 5px 50%,
+    repeating-linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.2) 10px,
+    rgba(0, 0, 0, 0.3) 10px,
+    rgba(0, 0, 0, 0.3) 20px
+    );
 }
 
-input.phone {
-    background: repeating-linear-gradient(
-            45deg,
-            rgba(0, 0, 0, 0.2),
-            rgba(0, 0, 0, 0.2) 10px,
-            rgba(0, 0, 0, 0.3) 10px,
-            rgba(0, 0, 0, 0.3) 20px
-    ),  url('../img/phone.png') 5px 50% no-repeat;
-}
-
-input.password {
-    background: repeating-linear-gradient(
+input[type=email]{
+    background: url('../img/email.png') no-repeat 5px 50%,
+    repeating-linear-gradient(
             45deg,
             rgba(0, 0, 0, 0.2),
             rgba(0, 0, 0, 0.2) 10px,
@@ -61,18 +53,25 @@ input.password {
             rgba(0, 0, 0, 0.3) 20px
     );
 }
-input.team {
-    background-image: url('../img/team.png');
+input.phone {
+    background: url('../img/phone.png') no-repeat 5px 50%,
+    repeating-linear-gradient(
+            45deg,
+            rgba(0, 0, 0, 0.2),
+            rgba(0, 0, 0, 0.2) 10px,
+            rgba(0, 0, 0, 0.3) 10px,
+            rgba(0, 0, 0, 0.3) 20px
+    ) ;
 }
-
-input.team[disabled] {
-    background: repeating-linear-gradient(
-        45deg,
-        rgba(0, 0, 0, 0.2),
-        rgba(0, 0, 0, 0.2) 10px,
-        rgba(0, 0, 0, 0.3) 10px,
-        rgba(0, 0, 0, 0.3) 20px
-    ), url('../img/team.png') 5px 50% no-repeat;
+input[type="password"] {
+    background: url('../img/password.png') no-repeat 5px 50%,
+    repeating-linear-gradient(
+            45deg,
+            rgba(0, 0, 0, 0.2),
+            rgba(0, 0, 0, 0.2) 10px,
+            rgba(0, 0, 0, 0.3) 10px,
+            rgba(0, 0, 0, 0.3) 20px
+    );
 }
 
 button, .button {

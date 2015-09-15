@@ -300,7 +300,7 @@ class TeamController extends Controller
         foreach ($team->getMemberships() as $member){
             /** @var Player $player */
             $player = $member->getPlayer();
-            $this->get('manager.mail')->send($player->getEmail(), $subject, $this->render(
+            $this->get('app.mail')->send($player->getEmail(), $subject, $this->render(
                 $template,
                 array(
                 'team' => $team,

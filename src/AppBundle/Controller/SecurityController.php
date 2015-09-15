@@ -84,7 +84,7 @@ class SecurityController extends Controller
                 $em->persist($player);
                 $em->flush();
 
-                $this->get('manager.mail')->send($data['email'], 'Reinitialisation du mot de passe',
+                $this->get('app.mail')->send($data['email'], 'Reinitialisation du mot de passe',
                     $this->render(':emails:requestPasswordReset.html.twig', array(
                             'token' => $token,
                             'player' => $player

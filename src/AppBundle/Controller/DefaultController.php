@@ -27,7 +27,7 @@ class DefaultController extends Controller
 
         return $this->render('default/index.html.twig', array(
             'registration' => $form->createView(),
-            'registrable' => $this->get('manager.place')->canRegister()
+            'registrable' => $this->get('app.place')->canRegister()
         ));
     }
 

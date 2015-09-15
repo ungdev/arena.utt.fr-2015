@@ -53,7 +53,7 @@ class PlayerController extends Controller
                 'editForm' => $editForm->createView(),
                 'passwordFrom' => $passwordForm->createView(),
                 'editMode' => boolval($edit),
-                "payable" => $this->get('manager.place')->canPay()
+                "payable" => $this->get('app.place')->canPay()
             )
         );
     }

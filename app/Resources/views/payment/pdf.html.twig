@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+    <body>
+        <h1>Ticket pour l'UTT Arena</h1>
+        <p>Ce ticket est nominatif. Il ne peut être cédé à des tiers.</p>
+        <p>
+            <strong>Nom</strong> : {{ player.fullName }} <br>
+            <strong>Pseudo </strong> : {{ player.nickname }} <br>
+            {% if player.ticket.reduced %}
+                <em>Ce ticket bénificie d'un prix réduit dû à la réduction des UTs</em>
+            {% endif %}
+        </p>
+        {% if player.ticket.tshirt %}
+            <p>Le ticket inclus un tshirt de taille {{ player.ticket.tshirt.size }}.</p>
+        {% endif %}
+        <p>
+            <img src="{{ player.ticket.code|barcode }}" alt="{{ player.ticket.code }}"/>
+        </p>
+
+        <p>
+            <img src="img/logo.png" alt="Logo UTT Arena" width="200"/>
+        </p>
+    </body>
+</html>

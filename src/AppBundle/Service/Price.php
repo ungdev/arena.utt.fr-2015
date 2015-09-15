@@ -10,9 +10,9 @@ namespace AppBundle\Service;
 
 
 use AppBundle\Entity\Player;
-use AppBundle\Model\Price;
+use AppBundle\Model\Price as Model;
 
-class PriceManager
+class Price
 {
     protected $basePrice;
 
@@ -29,8 +29,8 @@ class PriceManager
      */
     public function __construct($basePrice, $reducedPrice, array $reducedEmailDomains)
     {
-        $this->basePrice = new Price($basePrice);
-        $this->reducedPrice =  new Price($reducedPrice);
+        $this->basePrice = new Model($basePrice);
+        $this->reducedPrice =  new Model($reducedPrice);
         $this->reducedEmailDomains =  $reducedEmailDomains;
     }
 

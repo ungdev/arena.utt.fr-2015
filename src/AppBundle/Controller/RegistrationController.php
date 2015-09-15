@@ -24,7 +24,7 @@ class RegistrationController extends Controller
      */
     public function registerAction(Request $request)
     {
-        if (!$this->get('manager.place')->canRegister()) {
+        if (!$this->get('app.place')->canRegister()) {
             $this->addFlash('error', 'Désolé mais les inscription sont closes');
             $this->redirectToRoute('homepage');
         }
@@ -51,7 +51,7 @@ class RegistrationController extends Controller
             $em->flush();
 
 
-            $this->get('manager.mail')->send(
+            $this->get('app.mail')->send(
                 $player->getEmail(),
                 'Inscription à l\'UTT Arena',
                 $this->renderView(
@@ -143,7 +143,7 @@ class RegistrationController extends Controller
                 $em->persist($player);
                 $em->flush();
 
-                $this->get('manager.mail')->send(
+                $this->get('app.mail')->send(
                     $player->getEmail(),
                     'Renvoi du jeton de confirmation',
                     $this->renderView(':emails:resendToken.html.twig', array(

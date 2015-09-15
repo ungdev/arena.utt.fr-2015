@@ -68,7 +68,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", inline: <<-SHELL
       sudo apt-get update;
 
-      sudo DEBIAN_FRONTEND=noninteractive aptitude install -y acl php5 php5-curl php5-mcrypt php5-mysql mysql-client-5.6 mysql-server-5.6;
+      sudo DEBIAN_FRONTEND=noninteractive aptitude install -y acl imagemagick php5 php5-curl php5-mcrypt php5-mysql php5-gd mysql-client-5.6 mysql-server-5.6;
 
       sudo sed -i "s|;date.timezone =|date.timezone = Europe\/Paris|g" /etc/php5/cli/php.ini;
 

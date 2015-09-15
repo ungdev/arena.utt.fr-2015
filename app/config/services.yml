@@ -21,11 +21,6 @@ services:
             - { name: doctrine.event_subscriber, connection: default }
         calls:
             - [ setAnnotationReader, [ @annotations.reader ] ]
-    hashids:
-        class: Hashids\Hashids
-        arguments: ["%hashids.secret%", "%hashids.minsize%"]
-
-
 
     form.listener:
         class: AppBundle\EventListner\FormListener
@@ -93,11 +88,13 @@ services:
         arguments:
             - "AppBundle\Entity\SpotlightGame"
 
-    twig.extension:
+    twig.app.extension:
         class: AppBundle\Twig\TwigExtension
+        public: false
         tags:
             - { name: twig.extension }
-        arguments: ["@repository.game"]
+        arguments: ["@repository.game", "@app.barcode"]
+
 
     repository.ticket:
         class: Doctrine\ORM\EntityRepository
@@ -106,14 +103,25 @@ services:
         arguments:
             - "AppBundle\Entity\Ticket"
 
-    manager.place:
-        class: AppBundle\Service\PlaceManager
+    app.place:
+        class: AppBundle\Service\Place
         arguments: ["@repository.ticket", %maximumplayernumber%]
 
-    manager.price:
-        class: AppBundle\Service\PriceManager
+    app.price:
+        class: AppBundle\Service\Price
         arguments: [%price.ticket.full%, %price.ticket.reduced%, %reducedPriceDomains%]
 
-    manager.mail:
-        class: AppBundle\Service\MailManager
+    app.mail:
+        class: AppBundle\Service\Mail
         arguments: [ @mailer, "%mailer_expeditor%" ]
+
+    app.barcode:
+        class: AppBundle\Service\Barcode
+
+    app.pdf:
+        class: AppBundle\Service\PDF
+        arguments: ["@dompdf"]
+
+    dompdf:
+        class: Dompdf\Dompdf
+        public: false

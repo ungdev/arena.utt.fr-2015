@@ -10,21 +10,24 @@ namespace AppBundle\Twig;
 
 use AppBundle\Entity\SpotlightGame;
 use AppBundle\Entity\TeamSpotlightGame;
+use AppBundle\Service\Barcode;
 use Doctrine\ORM\EntityRepository;
+use Twig_Environment;
 use Twig_Extension;
 
 class TwigExtension extends Twig_Extension
 {
 
     protected $gameRepository;
-
+    protected $barcode;
     /**
      * TwigExtension constructor.
      * @param EntityRepository $gameRepository
      */
-    public function __construct(EntityRepository $gameRepository)
+    public function __construct(EntityRepository $gameRepository, Barcode $barcode)
     {
         $this->gameRepository = $gameRepository;
+        $this->barcode = $barcode;
     }
 
 
@@ -47,6 +50,13 @@ class TwigExtension extends Twig_Extension
         );
     }
 
+    public function getFilters() {
+        return array(
+            new \Twig_SimpleFilter('barcode', function ($string, $barcodeType = 'code128'){
+                return $this->barcode->dataURI($string, $barcodeType);
+            })
+        );
+    }
     /**
      * {@inheritdoc}
      */

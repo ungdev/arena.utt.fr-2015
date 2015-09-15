@@ -58,9 +58,6 @@ parameters:
     payment.stripe.secret: sk_test_ESrxq50Bw3NLh3atqmCfjdOI
     payment.stripe.publishable: pk_test_fftlf9QPXZcnn5DD9bE8Gg9f
 
-    hashids.secret: 1-lE*bAWeXYS7Bz0BEEi-f87w
-    hashids.minSize: 4
-
     reducedPriceDomains:
         - "utt.fr"
         - "utc.fr"

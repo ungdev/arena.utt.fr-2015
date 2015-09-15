@@ -557,4 +557,8 @@ class Player implements Serializable, AdvancedUserInterface, Timestampable
     public function __toString() {
         return $this->getNickname();
     }
+
+    public function getFullName(){
+        return $this->getFirstName() . ' ' . $this->getLastName();
+    }
 }

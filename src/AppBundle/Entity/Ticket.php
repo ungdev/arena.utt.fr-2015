@@ -54,6 +54,8 @@ class Ticket  implements Timestampable
      * @var string
      *
      * @ORM\Column(type="string", unique=true)
+     *
+     * @Assert\Length(min=13, max=13, exactMessage="Le code doit faire 13 caratères")
      */
     private $code;
 

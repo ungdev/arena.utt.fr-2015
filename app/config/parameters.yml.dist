@@ -27,9 +27,6 @@ parameters:
     payment.stripe.secret: ~
     payment.stripe.publishable: ~
 
-    hashids.secret: ~
-    hashids.minSize: ~
-
     reducedPriceDomains: ~
 
     maximumPlayerNumber: ~

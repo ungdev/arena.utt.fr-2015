@@ -11,9 +11,12 @@ namespace AppBundle\Service;
 
 use Doctrine\ORM\EntityRepository;
 
-class PlaceManager
+class Place
 {
-    /** @var  EntityRepository */
+    /**
+     * Should be the ticket repository but can be any repository you'd like
+     * @var  EntityRepository $repository
+     */
     protected $repository;
 
     protected $maximumPlayerNumber;
@@ -21,6 +24,7 @@ class PlaceManager
     /**
      * Ticketter constructor.
      * @param EntityRepository $repository
+     * @param int $maximumPlayerNumber
      */
     public function __construct(EntityRepository $repository, $maximumPlayerNumber = 300)
     {
@@ -34,5 +38,17 @@ class PlaceManager
 
     public function canPay() {
         return count($this->repository->findAll()) < $this->maximumPlayerNumber;
+    }
+
+    function getEAN13(){
+        mt_srand(microtime(true));
+        $barcode = mt_rand(0, pow(10,12) - 1);
+        $barcode = str_pad($barcode, 12, "0", STR_PAD_LEFT);
+        $sum = 0;
+        for($i=(strlen($barcode)-1);$i>=0;$i--){
+            $sum += (($i % 2) * 2 + 1 ) * intval($barcode[$i]);
+        }
+        $checksum = 10 - ($sum % 10);
+        return $barcode . $checksum;
     }
 }

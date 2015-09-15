@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
+ * @Route("/pay", name="payment")
  * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
  */
 class PaymentController extends Controller {
@@ -26,14 +27,14 @@ class PaymentController extends Controller {
     /**
      * @param Request $request
      *
-     * @Route("/pay", name="pay")
+     * @Route("/", name="pay")
      * @Method("POST")
      *
      * @return Response
      */
     public function payAction(Request $request){
 
-        if (!$this->get('manager.place')->canPay()) {
+        if (!$this->get('app.place')->canPay()) {
             $this->addFlash('error', 'Désolé mais les inscription sont closes');
             $this->redirectToRoute('profile');
         }
@@ -44,6 +45,7 @@ class PaymentController extends Controller {
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            mt_srand(microtime(true));
             /** @var Player $player */
             $player = $this->getUser();
 
@@ -51,7 +53,7 @@ class PaymentController extends Controller {
 
             $stripeToken = $request->get('stripeToken');
 
-            $price = $this->get('manager.price')->getPrice($this->getUser())->getAmount();
+            $price = $this->get('app.price')->getPrice($this->getUser())->getAmount();
             $price += $payment->hasTshirt() ? $this->getParameter('price.tshirt') : 0;
 
             try {
@@ -79,24 +81,14 @@ class PaymentController extends Controller {
                 $ticket->setTshirt($tshirt);
             }
             $ticket->setPrice($price);
-            $ticket->setReduced($this->get('manager.price')->hasReducedPrice($player));
+            $ticket->setReduced($this->get('app.price')->hasReducedPrice($player));
             $player->setTicket($ticket);
 
-            $ticket->setCode($this->get('hashids')->encode($player->getId()));
-
+            $ticket->setCode($this->get('app.place')->getEAN13());
             $em->persist($player);
             $em->flush();
 
-            $this->get('manager.mail')->send(
-                $player->getEmail(),
-                'Paiement de la place pour la LAN',
-                $this->render(
-                    ':emails:payment.html.twig',
-                    array(
-                        'player' => $player
-                    )
-                )
-            );
+            return $this->redirectToRoute('sendPaymentEmail');
         }
         return $this->forward('AppBundle:Player:profile');
     }
@@ -114,14 +106,43 @@ class PaymentController extends Controller {
         );
 
         $form->handleRequest($originalRequest);
+
         return array(
-                'ticketPrice' => $this->get('manager.price')->getPrice($this->getUser()),
+                'ticketPrice' => $this->get('app.price')->getPrice($this->getUser()),
                 'tshirtPrice' => new Price($this->getParameter('price.tshirt')),
                 'paymentForm' => $form->createView(),
                 'key' => $this->getParameter('payment.stripe.publishable'),
-                'payable' => $this->get('manager.place')->canPay()
+                'payable' => $this->get('app.place')->canPay()
         );
     }
 
+    /**
+     * @Route("/email", name="sendPaymentEmail")
+     * @return Response
+     */
+    public function sendPaymentEmailAction() {
+        $player = $this->getUser();
+        $this->get('app.mail')->send(
+            $player->getEmail(),
+            'Paiement de la place pour la LAN',
+            $this->renderView(
+                ':emails:payment.html.twig',
+                array(
+                    'player' => $player
+                )
+            ),
+            array(
+                'ticket.pdf' => $this->get('app.pdf')->create(
+                    $this->renderView(
+                        'payment/pdf.html.twig',
+                        array(
+                            'player' => $player
+                        )
+                    )
+                )
+            )
+        );
 
+        return $this->redirectToRoute('profile');
+    }
 }

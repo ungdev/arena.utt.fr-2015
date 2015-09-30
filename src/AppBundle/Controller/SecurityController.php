@@ -141,8 +141,7 @@ class SecurityController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $data = $form->getData();
-            $plainPassword = $data["password"];
+            $plainPassword = $form->getData();
             $encoder = $this->container->get('security.password_encoder');
             $encoded = $encoder->encodePassword($player, $plainPassword);
 

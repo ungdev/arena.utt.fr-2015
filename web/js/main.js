@@ -49,6 +49,12 @@ $menu.click(function (e) {
     return false;
 });
 
+// iCheck
+$('input').iCheck({
+    checkboxClass: 'icheckbox_flat-aero',
+    radioClass: 'iradio_flat-aero'
+});
+
 // Cookies
 $cookies.children('a').click(function (e) {
     e.preventDefault();

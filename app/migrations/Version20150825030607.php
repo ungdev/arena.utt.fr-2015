@@ -18,7 +18,7 @@ class Version20150825030607 extends AbstractMigration
         ),
         'csgo' => array(
             'name' => 'Counter-Strike : Global Offensive',
-            'maximum' => 8,
+            'maximum' => 16,
             'discr' => 'team'
         ),
         'hearthstone' => array(

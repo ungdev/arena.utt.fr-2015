@@ -65,7 +65,7 @@ class TeamController extends Controller
 
         $form = $this->createForm('team', $team, array(
             'game' => $game,
-            'connectedPlayer' => array($player->getId()),
+            'connectedPlayer' => $player->getId(),
         ));
 
         $form->handleRequest($request);

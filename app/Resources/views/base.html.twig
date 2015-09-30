@@ -148,7 +148,12 @@
             </div>
         </section>
         {% javascripts
-            'js/*.js' %}
+            'js/links.js'
+            'js/main.js'
+            'js/modal.js'
+            'js/tabs.js'
+            'js/raf.js'
+            'js/faq.js' %}
             <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
         {% if app.session.flashbag %}

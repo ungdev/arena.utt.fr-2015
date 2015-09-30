@@ -65,7 +65,7 @@ class RegistrationController extends Controller
                 )
             );
 
-            $this->addFlash('success', 'Votre inscription s\'est bien passée. Veuillez verifier votre boite de courriel pour vérifié votre compte.');
+            $this->addFlash('success', 'Votre inscription a été correctement prise en compte! Veuillez vérifier votre boite mail afin de la valider.');
             return $this->redirectToRoute('homepage');
         }
 

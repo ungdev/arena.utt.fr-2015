@@ -15,12 +15,12 @@
                     <div class="information {{ editMode ? 'edit' }}" id="information">
                         {{ form_start(editForm) }}
                         <dl>
-                            <dt>Pseudonyme</dt>
+                            <dt>Pseudo</dt>
                             <dd>
                                 <span>{{ app.user.nickname }}</span>
                                 {{ form_row(editForm.nickname) }}
                             </dd>
-                            <dt>Email</dt>
+                            <dt>Mail</dt>
                             <dd>
                                 <span>{{ app.user.email }}</span>
                                 {{ form_row(editForm.email) }}

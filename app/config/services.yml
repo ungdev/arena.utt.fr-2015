@@ -37,7 +37,7 @@ services:
         class: AppBundle\Form\PaymentType
         tags:
             - { name: form.type, alias: payment }
-        parent: form.type.base
+        arguments: ["@form.listener", "@repository.tshirt"]
 
     form.type.player:
         class: AppBundle\Form\PlayerType
@@ -80,6 +80,12 @@ services:
             - { name: form.type, alias: team }
         parent: form.type.base
 
+    repository.tshirt:
+        class: Doctrine\ORM\EntityRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - "AppBundle\Entity\TShirt"
 
     repository.game:
         class: Doctrine\ORM\EntityRepository
@@ -88,20 +94,19 @@ services:
         arguments:
             - "AppBundle\Entity\SpotlightGame"
 
-    twig.app.extension:
-        class: AppBundle\Twig\TwigExtension
-        public: false
-        tags:
-            - { name: twig.extension }
-        arguments: ["@repository.game", "@app.barcode"]
-
-
     repository.ticket:
         class: Doctrine\ORM\EntityRepository
         factory_service: doctrine.orm.default_entity_manager
         factory_method: getRepository
         arguments:
             - "AppBundle\Entity\Ticket"
+
+    twig.app.extension:
+        class: AppBundle\Twig\TwigExtension
+        public: false
+        tags:
+            - { name: twig.extension }
+        arguments: ["@repository.game", "@app.barcode"]
 
     app.place:
         class: AppBundle\Service\Place

@@ -37,7 +37,7 @@ class Price
 
     /**
      * @param Player $player
-     * @return Price
+     * @return Model
      */
     public function getPrice(Player $player){
         if ($this->hasReducedPrice($player)){

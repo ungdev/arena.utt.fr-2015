@@ -17,33 +17,36 @@
             Voulez-vous réserver un tshirt ? Il coute {{ tshirtPrice.formatted }}.
         </label>
     </div>
-    <div id="tshirtSize" style="display: none">
+    <div id="tshirtData" style="display: none">
         {{ form_row(paymentForm.tshirtSize) }}
+        {{ form_row(paymentForm.tshirtGender) }}
     </div>
     <button id="pay">Payer</button>
 {{ form_end(paymentForm) }}
 <script src="https://checkout.stripe.com/checkout.js"></script>
 <script>
     var stripeButton = $('#pay');
-    var tshirtSize = $('#tshirtSize');
+    var tshirtData = $('#tshirtData');
     var checkbox = $("input[type=checkbox]");
-    var radio = $('input[type=radio]');
+    var gender = $('input[name="payment[tshirtGender]"]');
+    var size = $('input[name="payment[tshirtSize]"]');
     var amount = {{ ticketPrice.amount }};
     checkbox.on('ifChecked', function () {
-        tshirtSize.show();
+        tshirtData.show();
         amount = {{ tshirtPrice.amount + ticketPrice.amount }};
     });
 
     checkbox.on('ifUnchecked', function () {
-        tshirtSize.hide();
+        tshirtData.hide();
         amount = {{ ticketPrice.amount }};
     });
 
     stripeButton.on('click', function(e) {
-        if (checkbox.is(':checked') && !radio.is(':checked')) {
+        if (checkbox.is(':checked') && (!gender.is(':checked') || !size.is(':checked'))) {
+            e.preventDefault();
             noty({timeout: 10000,
                 layout: 'topRight',
-                text: 'Vous devez choisir une taille', 'type': 'error'});
+                text: 'Vous devez choisir une taille et une coupe', 'type': 'error'});
             return;
         }
         StripeCheckout.open({

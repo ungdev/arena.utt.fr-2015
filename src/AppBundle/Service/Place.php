@@ -40,6 +40,10 @@ class Place
         return count($this->repository->findAll()) < $this->maximumPlayerNumber;
     }
 
+    public function isTooLate() {
+        return time() < mktime(0,0,0,11,30,2015);
+    }
+
     function getEAN13(){
         mt_srand(microtime(true));
         $barcode = mt_rand(0, pow(10,12) - 1);

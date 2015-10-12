@@ -73,7 +73,7 @@
                         <p>Vous avez payé {{ ticket.price.formatted }}.</p>
                         <p>
                             {% if ticket.tshirt %}
-                                Vous avez payé un t-shirt en taille {{ ticket.tshirt.size }}.
+                                Vous avez payé un t-shirt {{ ticket.tshirt.genderLabel }} en taille {{ ticket.tshirt.size }}.
                             {% else %}
                                     Vous n'avez pas souhaité réserver un t-shirt.
                                     Vous pourrez toujours en acquérir un lors de l'évenement (dans la limite des stocks disponibles).

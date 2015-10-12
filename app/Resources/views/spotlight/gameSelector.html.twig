@@ -5,7 +5,7 @@
 
     <div class="games">
 {% for game in games %}
-    <article class="game {{   game.selectable ?: 'tipso' }}" {% if not game.selectable %} title="Il n'y a plus de place disponible" {% endif %}>
+    <article class="game {{ game.selectable ?: 'tipso' }}" {% if not game.selectable %} title="Il n'y a plus de place disponible" {% endif %}>
     <div>
         <figure>
             <img src="{{ asset("/img/" ~ game.slug ~ '.jpg') }}"/>

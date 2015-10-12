@@ -11,7 +11,7 @@
             {% endif %}
         </p>
         {% if player.ticket.tshirt %}
-            <p>Le ticket inclus un tshirt de taille {{ player.ticket.tshirt.size }}.</p>
+            <p>Le ticket inclus un tshirt {{ player.ticket.tshirt.genderLabel }} de taille {{ player.ticket.tshirt.size }}.</p>
         {% endif %}
         <p>
             <img src="{{ player.ticket.code|barcode }}" alt="{{ player.ticket.code }}"/>

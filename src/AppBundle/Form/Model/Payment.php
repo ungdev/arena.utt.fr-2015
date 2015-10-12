@@ -16,17 +16,41 @@ class Payment
      * @var boolean
      *
      * @Assert\Expression(
-     *     "(this.hasTshirt() and this.getTshirtSize()) or !this.hasTshirt()",
-     *      message="Veuillez choisir une taille"
+     *     "(this.hasTshirt() and this.getTshirtSize() and this.getTshirtGender()) or !this.hasTshirt()",
+     *      message="Veuillez choisir une taille et une coupe"
      * )
      */
     protected $tshirt;
 
 
     /**
-     * @var int
+     * @var string
      */
     protected $tshirtSize;
+
+
+    /**
+     * @var string
+     */
+    protected $tshirtGender;
+
+    /**
+     * @return mixed
+     */
+    public function getTshirtGender()
+    {
+        return $this->tshirtGender;
+    }
+
+    /**
+     * @param mixed $tshirtGender
+     */
+    public function setTshirtGender($tshirtGender)
+    {
+        $this->tshirtGender = $tshirtGender;
+    }
+
+
     /**
      * @return boolean
      */

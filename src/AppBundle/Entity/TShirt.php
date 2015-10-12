@@ -8,24 +8,16 @@
 
 namespace AppBundle\Entity;
 
-use Gedmo\Timestampable\Traits\TimestampableEntity;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Entity
- * @ORM\Table(
- *  name="tshirts",
- *  uniqueConstraints={
- *    @ORM\UniqueConstraint(
- *      name="UNIQ_shirt_size",
- *      columns={"size"}
- *    )
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\TShirtRepository")
+ * @ORM\Table(name="tshirts", uniqueConstraints={
+ *  @ORM\UniqueConstraint(name="UNIQ_tshirts", columns={"size", "gender"})
  * })
  *
- * @UniqueEntity("size")
  */
 class TShirt
 {
@@ -45,9 +37,48 @@ class TShirt
      *
      * @var string
      *
-     * @ORM\Column(type="string", unique=true)
+     * @ORM\Column(type="string")
      */
     protected $size;
+
+    /**
+     * Gender of tshirt
+     *
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $gender;
+
+    /**
+     * @return string
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    /**
+     * @param string $gender
+     */
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGenderLabel()
+    {
+        switch ($this->gender) {
+            case 'M':
+                return 'Homme';
+            case 'F':
+                return 'Femme';
+        }
+        return 'Unisex';
+    }
 
 
     /**

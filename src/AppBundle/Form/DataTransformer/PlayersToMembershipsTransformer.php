@@ -12,7 +12,6 @@ namespace AppBundle\Form\DataTransformer;
 use AppBundle\Entity\Membership;
 use AppBundle\Entity\Team;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\Util\Debug;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
@@ -27,6 +26,7 @@ class PlayersToMembershipsTransformer implements DataTransformerInterface
 
     /**
      * @param ObjectManager $om
+     * @param Team $team
      */
     public function __construct(ObjectManager $om, Team $team)
     {

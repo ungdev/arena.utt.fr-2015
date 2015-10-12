@@ -51,18 +51,42 @@ class PaymentController extends Controller {
 
             $em = $this->getDoctrine()->getManager();
 
+
+            /** @var Ticket $ticket */
+            $ticket = new Ticket();
+
+            $ticket->setMethod('stripe');
+
+            $ticket->setReduced($this->get('app.price')->hasReducedPrice($player));
+            $ticket->setCode($this->get('app.place')->getEAN13());
+
+            if ($payment->hasTshirt()) {
+                $tshirtRepository = $em->getRepository('AppBundle:TShirt');
+                $tshirt = $tshirtRepository->findBySizeAndGender(
+                    $payment->getTshirtSize(),
+                    $payment->getTshirtGender()
+                );
+                if ($tshirt) {
+                    $ticket->setTshirt($tshirt);
+                }
+            }
+
             $stripeToken = $request->get('stripeToken');
 
             $price = $this->get('app.price')->getPrice($this->getUser())->getAmount();
-            $price += $payment->hasTshirt() ? $this->getParameter('price.tshirt') : 0;
+            $price += $ticket->getTshirt() ? $this->getParameter('price.tshirt') : 0;
+
+            $ticket->setPrice($price);
 
             try {
                 Stripe::setApiKey($this->getParameter('payment.stripe.secret'));
-                Charge::create(array(
-                    'source' =>  $stripeToken,
-                    'amount'   => $price,
-                    'currency' => 'eur'
-                ));
+                Charge::create(
+                    array(
+                        'source' =>  $stripeToken,
+                        'amount'   => $price,
+                        'currency' => 'eur'
+                    )
+                );
 
             } catch (Card $exception) {
                 $this->get('logger')->log(Logger::ERROR, $exception->getMessage());
@@ -71,20 +95,8 @@ class PaymentController extends Controller {
                 return $this->redirectToRoute('profile');
             }
 
-            /** @var Ticket $ticket */
-            $ticket = new Ticket();
-
-            $ticket->setMethod('stripe');
-
-            if ($payment->hasTshirt()) {
-                $tshirt = $em->find('AppBundle:TShirt', $payment->getTshirtSize());
-                $ticket->setTshirt($tshirt);
-            }
-            $ticket->setPrice($price);
-            $ticket->setReduced($this->get('app.price')->hasReducedPrice($player));
             $player->setTicket($ticket);
 
-            $ticket->setCode($this->get('app.place')->getEAN13());
             $em->persist($player);
             $em->flush();
 
@@ -108,11 +120,11 @@ class PaymentController extends Controller {
         $form->handleRequest($originalRequest);
 
         return array(
-                'ticketPrice' => $this->get('app.price')->getPrice($this->getUser()),
-                'tshirtPrice' => new Price($this->getParameter('price.tshirt')),
-                'paymentForm' => $form->createView(),
-                'key' => $this->getParameter('payment.stripe.publishable'),
-                'payable' => $this->get('app.place')->canPay()
+            'ticketPrice' => $this->get('app.price')->getPrice($this->getUser()),
+            'tshirtPrice' => new Price($this->getParameter('price.tshirt')),
+            'paymentForm' => $form->createView(),
+            'key' => $this->getParameter('payment.stripe.publishable'),
+            'payable' => $this->get('app.place')->canPay()
         );
     }
 

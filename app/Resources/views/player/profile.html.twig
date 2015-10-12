@@ -15,12 +15,12 @@
                     <div class="information {{ editMode ? 'edit' }}" id="information">
                         {{ form_start(editForm) }}
                         <dl>
-                            <dt>Pseudonyme</dt>
+                            <dt>Pseudo</dt>
                             <dd>
                                 <span>{{ app.user.nickname }}</span>
                                 {{ form_row(editForm.nickname) }}
                             </dd>
-                            <dt>Email</dt>
+                            <dt>Mail</dt>
                             <dd>
                                 <span>{{ app.user.email }}</span>
                                 {{ form_row(editForm.email) }}
@@ -73,10 +73,11 @@
                         <p>Vous avez payé {{ ticket.price.formatted }}.</p>
                         <p>
                             {% if ticket.tshirt %}
+                                Vous avez payé un tee-shirt en taille {{ ticket.tshirt.size }}.
                                 Vous avez payé un t-shirt {{ ticket.tshirt.genderLabel }} en taille {{ ticket.tshirt.size }}.
                             {% else %}
-                                    Vous n'avez pas souhaité réserver un t-shirt.
-                                    Vous pourrez toujours en acquérir un lors de l'évenement (dans la limite des stocks disponibles).
+                                    Vous n'avez pas souhaité réserver de tee-shirt.
+                                    Vous pourrez toujours en acquérir un lors de l'évenement (dans la limite des stocks disponibles), au prix de 10€.
 
                             {% endif %}
                         </p>
@@ -94,7 +95,7 @@
                                 {%  include ':spotlight:state.html.twig' %}
                             {% endif %}
                     {% else %}
-                        <p>Vous ne pouvez pas encore choisir votre jeu spotlight : votre place n'est pas encore payée.</p>
+                        <p>Vous ne pouvez pas encore choisir de jeu spotlight : votre place n'est pas encore payée.</p>
                     {% endif %}
                 </div>
             </div>

@@ -3,7 +3,7 @@
     <dl>
         <dd>Nom de l'équipe</dd>
         <dt>{{ team.name }}</dt>
-        <dd>Membre de l'équipe</dd>
+        <dd>Membres de l'équipe</dd>
         {% for member in team.memberships %}
             <dt>{{ member.player }} {{ member.player == team.createdBy ? 'cap' }}</dt>
         {% endfor %}
@@ -16,7 +16,7 @@
         <p class="success">Votre équipe est complète</p>
     {% else %}
         <p class="danger">Votre équipe est incomplète. </p>
-        <p>Veuillez trouvez le plus rapidement possible des coéquipiers pour la compléter.</p>
+        <p>Trouvez le plus rapidement possible des coéquipiers pour la compléter.</p>
 
                 <button data-modal="addForm">Ajouter un coéquipier</button>
                 {{ render(controller('AppBundle:Team:addForm', {'team' : team, 'originalRequest': app.request})) }}
@@ -30,7 +30,7 @@
 
 {% else %}
     <p>Vous n'est pas encore dans une équipe. Vous pouvez soit attendre qu'une autre équipe vous recrute ou en
-    crée une.</p>
+    créer une.</p>
    <button data-modal="createForm">Créer une équipe</button>
     {{ render(controller('AppBundle:Team:createForm', {'originalRequest': app.request})) }}
 {% endif %}

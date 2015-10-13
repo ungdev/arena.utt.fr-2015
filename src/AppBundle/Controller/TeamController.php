@@ -13,6 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 
 /**
@@ -260,6 +261,10 @@ class TeamController extends Controller
         /** @var Team $team */
         $team = $player->getMembership()->getTeam();
 
+        if($player != $team.getCreatedBy()){
+            throw new AccessDeniedException();
+        }
+
         /** @var TeamSpotlightGame $game */
         $game = $player->getSpotlightGame();
 
@@ -272,7 +277,8 @@ class TeamController extends Controller
         $form = $this->createFormBuilder()->add('teammate', 'teammate', array(
             'game' => $game,
             'connectedPlayer' => false,
-            'multiple' => false
+            'multiple' => false,
+            'team' => $team
         ))->getForm();
 
         $form->handleRequest($request);

@@ -17,7 +17,7 @@ function initTabs (links, contents) {
         tab = 0;
     else {
         $tabs.filter('.active').removeClass('active');
-        $tabs.get(tab).addClass('active');
+        $($tabs.get(tab)).addClass('active');
     }
     selectTab(tab, $tabsContents);
 }

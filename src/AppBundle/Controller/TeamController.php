@@ -79,7 +79,7 @@ class TeamController extends Controller
             $this->sendTeamEmail($team,'Création de l\' équipe', ':emails:teamCreation.html.twig');
 
             $this->addFlash('success', 'Votre équipe est créee');
-            $this->redirectToRoute('profile');
+            return $this->redirectToRoute('profile');
         }
 
         return $this->forward('AppBundle:Player:profile');
@@ -140,7 +140,7 @@ class TeamController extends Controller
 
             $this->addFlash('success', 'Les changement ont été sauvegardés.');
 
-            $this->redirectToRoute('profile');
+            return $this->redirectToRoute('profile');
         }
 
         return $this->forward('AppBundle:Player:profile');
@@ -164,7 +164,7 @@ class TeamController extends Controller
 
         $this->addFlash('success', 'Votre équipe est bien supprimée. Un email a été envoyé au membre restant de votre ancienne équipe.');
 
-        $this->redirectToRoute('profile');
+        return $this->redirectToRoute('profile');
     }
 
     /**

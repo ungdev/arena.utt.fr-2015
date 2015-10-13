@@ -13,9 +13,12 @@ function initTabs (links, contents) {
     });
 
     var tab = localStorage.getItem("lastTab" + links);
-    if(tab == null)
+    if(tab == null || tab == 0)
         tab = 0;
-
+    else {
+        $tabs.filter('.active').removeClass('active');
+        $tabs.get(tab).addClass('active');
+    }
     selectTab(tab, $tabsContents);
 }
 

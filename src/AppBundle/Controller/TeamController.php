@@ -250,8 +250,6 @@ class TeamController extends Controller
      *
      * @Route("/add", name="team_add")
      *
-     * @Security("user == team.getCreatedBy()")
-     *
      *
      * @return Response
      */

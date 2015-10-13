@@ -33,7 +33,7 @@ class PaymentType extends BaseType
             )
             ->add('tshirtSize', 'choice', array(
                     'choices' => $this->tshirtRepository->getSizes(),
-                    'label' => 'Taille du T-shirt',
+                    'label' => 'Taille du tee-shirt',
                     'expanded' => true,
                     'required' => false,
                     'empty_value' => false,
@@ -42,7 +42,7 @@ class PaymentType extends BaseType
             )
             ->add('tshirtGender', 'choice', array(
                     'choices' => $this->tshirtRepository->getGenders(),
-                    'label' => 'Coupe du tshirt',
+                    'label' => 'Coupe du tee-shirt',
                     'expanded' => true,
                     'required' => false,
                     'empty_value' => false,

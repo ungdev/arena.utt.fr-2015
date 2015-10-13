@@ -25,7 +25,7 @@
 
     <a class="button red" href="{{ path('team_quit') }}">Quitter</a>
     {% if team.createdBy == app.user %}
-        <a class="button red" href="{{ path('team_delete',  {'team' : team}) }}">Supprimer l'équipe</a>
+        <a class="button red" href="{{ path('team_delete',  {'name' : team.getName}) }}">Supprimer l'équipe</a>
     {% endif %}
 
 {% else %}

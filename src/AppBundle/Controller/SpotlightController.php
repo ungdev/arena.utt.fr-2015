@@ -45,12 +45,12 @@ class SpotlightController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         if ($player->getSpotlightGame()) {
-            $this->addFlash('success', 'Vous ne pouvez pas changer de jeu spotlight');
+            $this->addFlash('success', 'Vous ne pouvez pas changer de jeu Spotlight.');
             return $this->redirectToRoute('profile');
         }
 
         if (!$game->isSelectable()) {
-            $this->addFlash('success', "Il n'y a plus de place disponible pour ce jeu");
+            $this->addFlash('success', "Il n'y a plus de place disponible pour ce jeu.");
             return $this->redirectToRoute('profile');
         }
 
@@ -60,7 +60,7 @@ class SpotlightController extends Controller
         $em->flush();
         $em->refresh($player);
 
-        $this->addFlash('success', 'Votre jeu spotlight a été choisi.');
+        $this->addFlash('success', 'Votre jeu Spotlight a bien été choisi.');
 
         return $this->redirectToRoute('profile');
     }

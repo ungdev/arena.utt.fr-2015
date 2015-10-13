@@ -91,7 +91,7 @@ class PaymentController extends Controller {
             } catch (Card $exception) {
                 $this->get('logger')->log(Logger::ERROR, $exception->getMessage());
                 $this->addFlash('error', 'Une erreur de paiement est survenue.
-                Nous vous invitons à contacter l\' équipe organisatrice.');
+                Nous vous invitons à contacter l\'équipe organisatrice.');
                 return $this->redirectToRoute('profile');
             }
 

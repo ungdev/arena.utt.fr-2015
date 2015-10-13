@@ -9,9 +9,14 @@ function initTabs (links, contents) {
         $tabs.filter('.active').removeClass('active');
         $self.addClass('active');
         selectTab($self.index(), $tabsContents);
+        localStorage.setItem("lastTab" + links, $self.index());
     });
 
-    selectTab(0, $tabsContents);
+    var tab = localStorage.getItem("lastTab" + links);
+    if(tab == null)
+        tab = 0;
+
+    selectTab(tab, $tabsContents);
 }
 
 function selectTab (index, $tabsContents) {

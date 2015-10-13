@@ -88,7 +88,7 @@ class PlayerController extends Controller
 
             if ($formerEmail != $form->get('email')->getData()) {
                 $this->addFlash('success', 'Vos changements ont été enregistrés.
-                Puisque vous avez modifié votre email, veuillez vous reconnecter.');
+                Puisque vous avez modifié votre adresse mail, veuillez vous reconnecter.');
                 return $this->redirectToRoute('logout');
             } else {
                 $em->refresh($user);

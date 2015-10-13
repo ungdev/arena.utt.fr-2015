@@ -22,7 +22,7 @@ class TokenType extends BaseType
             ->add('nickname', 'text', [
                 'label' => false,
                 'attr' => array(
-                    'placeholder' => 'Pseudonyme'
+                    'placeholder' => 'Pseudo'
                 ),
                 'constraints' => array(
                 new NotBlank(),
@@ -31,7 +31,7 @@ class TokenType extends BaseType
             ->add('oldEmail', 'email', array(
                 'label' => false,
                 'attr' => array(
-                    'placeholder' => 'Email entré à l\'inscription'
+                    'placeholder' => 'Mail entré à l\'inscription'
                 ),
                 'constraints' => array(
                     new Email(),
@@ -44,7 +44,7 @@ class TokenType extends BaseType
                 'label' => false,
                 'required' => false,
                 'attr' => array(
-                    'placeholder' => 'Nouvel email'
+                    'placeholder' => 'Nouveau mail'
                 ),
                 'constraints' => array(
                     new Email()

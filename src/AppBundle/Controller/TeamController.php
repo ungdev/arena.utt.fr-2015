@@ -126,7 +126,9 @@ class TeamController extends Controller
      */
     public function editAction(Request $request, Team $team)
     {
-        $form = $this->createForm('team', $team);
+        $form = $this->createForm('team', $team, [
+            'game' => $this->getUser()->getSpotlightGame()
+            ]);
 
         $form->remove('memberships');
 

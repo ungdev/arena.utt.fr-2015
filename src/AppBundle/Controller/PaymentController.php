@@ -35,7 +35,7 @@ class PaymentController extends Controller {
     public function payAction(Request $request){
 
         if (!$this->get('app.place')->canPay()) {
-            $this->addFlash('error', 'Désolé mais les inscription sont closes');
+            $this->addFlash('error', 'Désolé, mais les inscriptions sont fermées.');
             $this->redirectToRoute('profile');
         }
 
@@ -91,7 +91,7 @@ class PaymentController extends Controller {
             } catch (Card $exception) {
                 $this->get('logger')->log(Logger::ERROR, $exception->getMessage());
                 $this->addFlash('error', 'Une erreur de paiement est survenue.
-                Nous vous invitons à contacter l\' équipe organisatrice de l\'évenement');
+                Nous vous invitons à contacter l\' équipe organisatrice.');
                 return $this->redirectToRoute('profile');
             }
 

@@ -25,7 +25,7 @@ class RegistrationController extends Controller
     public function registerAction(Request $request)
     {
         if (!$this->get('app.place')->canRegister()) {
-            $this->addFlash('error', 'Désolé mais les inscription sont closes');
+            $this->addFlash('error', 'Désolé mais les inscriptions sont fermées.');
             $this->redirectToRoute('homepage');
         }
         $em = $this->getDoctrine()->getManager();
@@ -65,7 +65,7 @@ class RegistrationController extends Controller
                 )
             );
 
-            $this->addFlash('success', 'Votre inscription a été correctement prise en compte! Veuillez vérifier votre boite mail afin de la valider.');
+            $this->addFlash('success', 'Votre inscription a été correctement prise en compte ! Veuillez vérifier votre boite mail afin de la valider.');
             return $this->redirectToRoute('homepage');
         }
 
@@ -95,10 +95,10 @@ class RegistrationController extends Controller
             $em->persist($player);
             $em->flush();
 
-            $this->addFlash('success', 'Votre compte est maintenant activé.
+            $this->addFlash('success', 'Votre compte est activé.
             Vous pouvez maintenant vous connecter.');
         } else {
-            $this->addFlash('error', 'Le jeton de confirmation n\'est pas correct');
+            $this->addFlash('error', 'Le jeton de confirmation n\'est pas correct.');
         }
 
         return $this->redirectToRoute('homepage');

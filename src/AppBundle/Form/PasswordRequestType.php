@@ -17,11 +17,11 @@ class PasswordRequestType extends BaseType
     {
         $builder
             ->add('email', 'email', array(
-                    'label' => 'Courriel'
+                    'label' => 'Adresse mail'
                 )
             )
             ->add('nickname', 'text', array(
-                    'label' => 'Pseudonyme'
+                    'label' => 'Pseudo'
                 )
             )
             ->addEventSubscriber($this->listner);

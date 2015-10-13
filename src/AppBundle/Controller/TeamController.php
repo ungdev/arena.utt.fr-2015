@@ -78,7 +78,7 @@ class TeamController extends Controller
 
             $this->sendTeamEmail($team,'Création de l\' équipe', ':emails:teamCreation.html.twig');
 
-            $this->addFlash('success', 'Votre équipe est créee');
+            $this->addFlash('success', 'Votre équipe est créée.');
             return $this->redirectToRoute('profile');
         }
 
@@ -138,7 +138,7 @@ class TeamController extends Controller
             $em->flush();
 
 
-            $this->addFlash('success', 'Les changement ont été sauvegardés.');
+            $this->addFlash('success', 'Les changements ont été sauvegardés.');
 
             return $this->redirectToRoute('profile');
         }
@@ -162,7 +162,7 @@ class TeamController extends Controller
 
         $this->sendTeamEmail($team, 'Dissolution de l\'équipe', ':emails:teamDeletion.html.twig');
 
-        $this->addFlash('success', 'Votre équipe est bien supprimée. Un email a été envoyé au membre restant de votre ancienne équipe.');
+        $this->addFlash('success', 'Votre équipe est bien supprimée. Un mail a été envoyé aux membres restants de votre ancienne équipe.');
 
         return $this->redirectToRoute('profile');
     }
@@ -200,7 +200,7 @@ class TeamController extends Controller
 
         $this->sendTeamEmail($team, "Départ d'un des membre de votre équipe", ':emails:memberLeave.html.twig');
 
-        $this->addFlash('success', 'Vous avez quitter votre équipe');
+        $this->addFlash('success', 'Vous avez quitté votre équipe.');
         return $this->redirectToRoute('profile');
     }
 
@@ -265,7 +265,7 @@ class TeamController extends Controller
 
         if ($team->getMemberships()->count() >= $game->getTeammateNumber()) {
             $this->addFlash('error', 'Impossible d\'ajouter un nouveau coéquipier.
-            Il n\'y a plus de place dans l\'équipe');
+            Il n\'y a plus de place dans l\'équipe.');
             return $this->redirectToRoute('profile');
         }
 
@@ -282,14 +282,14 @@ class TeamController extends Controller
 
             if ($newMember->getMembership()) {
                 $this->addFlash('error', 'Impossible d\'ajouter le nouveau coéquipier. ' . $newMember->getNickname() .
-                    ' est déjà dans une équipe');
+                    ' est déjà dans une équipe.');
                 return $this->redirectToRoute('profile');
             }
             $em = $this->getDoctrine()->getManager();
             $em->persist(new Membership($team, $player));
             $em->flush();
 
-            $this->addFlash('success', $newMember->getNickname() . ' est maintenant dans votre équipe');
+            $this->addFlash('success', $newMember->getNickname() . ' est maintenant dans votre équipe.');
             return $this->redirectToRoute('profile');
         }
 

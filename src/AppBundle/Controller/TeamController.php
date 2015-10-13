@@ -121,7 +121,7 @@ class TeamController extends Controller
      * @return Response
      * @Route("/edit/{name}", name="team_edit")
      * @Method("POST")
-     * @Security("user == team.createdBy")
+     * @Security("user == team.getCreatedBy()")
      *
      */
     public function editAction(Request $request, Team $team)
@@ -151,7 +151,7 @@ class TeamController extends Controller
      * @return Response
      * @Route("/delete/{name}", name="team_delete")
      *
-     * @Security("user == team.createdBy()")
+     * @Security("user == team.getCreatedBy()")
      *
      */
     public function deleteAction(Team $team)

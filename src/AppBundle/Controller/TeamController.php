@@ -261,7 +261,7 @@ class TeamController extends Controller
         /** @var Team $team */
         $team = $player->getMembership()->getTeam();
 
-        if($player != $team.getCreatedBy()){
+        if($player != $team->getCreatedBy()){
             throw new AccessDeniedException();
         }
 

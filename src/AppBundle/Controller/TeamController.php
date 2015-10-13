@@ -98,7 +98,7 @@ class TeamController extends Controller
     public function editFormAction(Request $originalRequest, Team $team)
     {
         $form = $this->createForm('team', $team, array(
-            'action' => $this->generateUrl('team_edit', array('team' => $team)),
+            'action' => $this->generateUrl('team_edit', array('name' => $team->getName())),
             'method' => "POST",
             'game' => $this->getUser()->getSpotlightGame(),
         ));

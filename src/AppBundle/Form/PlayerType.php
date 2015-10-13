@@ -21,7 +21,7 @@ class PlayerType extends BaseType
                 'attr' => array(
                     'minlength' => 2,
                     'maxlength' => 255,
-                    'placeholder' => 'Pseudonyme',
+                    'placeholder' => 'Pseudo',
                     'class' => 'nickname'
                 )
             ))
@@ -33,7 +33,7 @@ class PlayerType extends BaseType
                 'attr' => array(
                     'minlength' => 3,
                     'maxlength' => 255,
-                    'placeholder' => 'Courriel',
+                    'placeholder' => 'Mail',
                     'class' => 'email'
                 )
             ))
@@ -49,7 +49,7 @@ class PlayerType extends BaseType
                 'label' => false,
                 'attr' => array(
                     'maxlength' => 255,
-                    'placeholder' => 'Nom de famille',
+                    'placeholder' => 'Nom',
                     'class' => 'last-name'
                 )
             ))

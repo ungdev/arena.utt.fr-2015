@@ -92,19 +92,19 @@ class SecurityController extends Controller
                     )
                 );
 
-                $this->addFlash('success', 'Un email va bientot vous parvenir.
+                $this->addFlash('success', 'Un mail va bientôt vous parvenir.
             Veuillez suivre ses instructions.');
 
                 return $this->redirectToRoute('homepage');
 
             } else {
                 $this->addFlash('error', "Aucun joueur ne pouvant demander une
-                réinitialisation du mot de passe n'a été trouvé");
+                réinitialisation du mot de passe n'a été trouvé.");
             }
         }
         return $this->render(":security:password.html.twig", array(
             'form' => $form->createView(),
-             'title'  =>  "Demande d'un nouveau mot de passe"
+             'title'  =>  "Demande d'un nouveau mot de passe."
             )
         );
     }
@@ -129,12 +129,12 @@ class SecurityController extends Controller
             ->findOneBy(array('token' => $token, 'enabled' => true));
 
         if (!$player) {
-            $this->addFlash('error', "Ce jeton est invalide");
+            $this->addFlash('error', "Ce jeton est invalide.");
             return $this->redirectToRoute("homepage");
         }
 
         if ($player->getUpdatedAt()->diff(new \DateTime(), true)->days > 1) {
-            $this->addFlash('error', "Ce jeton a expiré");
+            $this->addFlash('error', "Ce jeton a expiré.");
             return $this->redirectToRoute("homepage");
         }
 

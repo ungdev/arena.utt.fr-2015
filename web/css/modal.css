@@ -26,6 +26,10 @@
     margin-left: -300px;
 }
 
+.teeshirt {
+    max-width: 20%;
+}
+
 #teeshirt-modal {
     top: -800px;
 }

@@ -7,14 +7,17 @@
 <p>Vous avez une place {{ player.ticket.reduced ? 'UT' : 'extérieur' }} à {{ player.ticket.price.formatted }}</p>
 
 {% if  player.ticket.tshirt %}
-<p>Votre place inclut la réservation d'un t-shirt {{ player.ticket.tshirt.genderLabel }} de taille {{ player.ticket.tshirt.size }}</p>
+<p>Elle inclut la réservation d'un tee-shirt {{ player.ticket.tshirt.genderLabel }} de taille {{ player.ticket.tshirt.size }}.</p>
 {% endif %}
 
-<p>Nous vous demandons lors de votre venue de bien vouloir vous présenter avec une pièce d'identité.</p>
+<p>Liste des pièces à fournir</p>
+<ul>
+  <li>Une pièce d'identité</li>
 
 {% if  player.ticket.reduced %}
-<p>Votre place ayant bénéficiée d'un prix réduit, veuillez aussi vous munir d'une pièce justificative.</p>
+  <li>Votre place ayant bénéficiée d'un prix réduit : une pièce justificative (carte étudiante)</li>
 {% endif %}
 
-<p>Si vous êtes mineur, merci de venir avec une authorisation parentale.</p>
+  <li>Si vous êtes mineur, merci de venir avec une authorisation parentale.</li>
+</ul>
 {% endblock %}

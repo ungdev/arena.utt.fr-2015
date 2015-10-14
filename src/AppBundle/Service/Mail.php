@@ -13,34 +13,37 @@ use \Swift_Message;
 
 class Mail
 {
-    private $transport;
+    /** @var Swift_Mailer $transport */
+    protected $transport;
 
-    private $from;
+    /** @var  string the expeditor email */
+    protected $expeditorEmail;
 
-    public function __construct(Swift_Mailer $transport, $from) {
+    /** @var  string the expeditor name */
+    protected $expeditorName;
+
+    public function __construct(Swift_Mailer $transport, $expeditorEmail, $expeditorName) {
         $this->transport = $transport;
-        $this->from = $from;
+        $this->expeditorEmail = $expeditorEmail;
+        $this->expeditorName = $expeditorName;
     }
 
     public function send(
         $to,
         $subject,
         $body,
-        $attachements = array(),
-        $from = false,
-        $mime = 'text/html'
+        $attachements = array()
     ) {
         /** @var Swift_Message $message */
         $message = Swift_Message::newInstance($subject)
-            ->setFrom($from ?: $this->from)
+            ->setFrom($this->expeditorEmail, $this->expeditorName)
             ->setTo($to);
 
         foreach($attachements as $fileName => $data) {
             $message->attach(new \Swift_Attachment($data, $fileName));
         }    
 
-        $message->setReplyTo($from ?: $this->from)
-                ->setBody($body, $mime, 'utf-8');
+        $message->setBody($body, 'text/html', 'utf-8');
 
         $this->transport->send($message);
     }

@@ -1,24 +1,57 @@
 <!doctype html>
 <html>
-    <body>
-        <h1>Ticket pour l'UTT Arena</h1>
-        <p>Ce ticket est nominatif. Il ne peut être cédé à des tiers.</p>
-        <p>
-            <strong>Nom</strong> : {{ player.fullName }} <br>
-            <strong>Pseudo </strong> : {{ player.nickname }} <br>
-            {% if player.ticket.reduced %}
-                <em>Ce ticket bénificie d'un prix réduit dû à la réduction des UTs</em>
-            {% endif %}
-        </p>
-        {% if player.ticket.tshirt %}
-            <p>Le ticket inclus un tshirt {{ player.ticket.tshirt.genderLabel }} de taille {{ player.ticket.tshirt.size }}.</p>
-        {% endif %}
-        <p>
-            <img src="{{ player.ticket.code|barcode }}" alt="{{ player.ticket.code }}"/>
-        </p>
+<style>
+    .background {
+        width: 710px;
+        height: auto;
+    }
 
-        <p>
-            <img src="img/logo.png" alt="Logo UTT Arena" width="200"/>
-        </p>
-    </body>
+    div {
+        position: absolute;
+        right: 30px;
+        background: rgba(245, 245, 245, 0.7);
+        top: 20px;
+        width: 200px;
+        padding: 10px;
+        border: 1px solid black;
+        border-radius: 5px;
+        text-shadow: 0 0 2px #fff;
+        color: black;
+    }
+
+    div span {
+        margin-bottom: 10px;
+    }
+    h1 {
+        font-size: 30px;
+    }
+
+    span {
+        font-size: 18px;
+    }
+
+    .danger {
+        padding: 10px;
+        background: indianred;
+        color: white;
+        margin-left: 5px;
+    }
+</style>
+<body>
+
+<img src="img/ticket.png" class="background">
+<div>
+    <h1>UTT Arena 2015</h1>
+    <span><strong>Nom :</strong>  {{ player.fullName }} <br></span>
+    <span><strong>Pseudo :</strong> {{ player.nickname }} <br></span>
+    {% if player.ticket.tshirt %}
+    <span><strong>T-Shirt :</strong>  {{ player.ticket.tshirt.genderLabel }} {{ player.ticket.tshirt.size }} <br></span>
+    {% else %}
+    <span><strong>T-Shirt :</strong> Non <br></span>
+    {% endif %}
+    <img src="{{ player.ticket.code|barcode }}" alt="{{ player.ticket.code }}"/>
+</div>
+
+<p class="danger">Ce ticket est nominatif. Il ne peut être cédé à des tiers.</p>
+</body>
 </html>

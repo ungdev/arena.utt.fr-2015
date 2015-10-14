@@ -2,7 +2,8 @@
 {% block body %}
     <p>Bonjour {{ player.nickname }},</p>
 
-    <p>Une équipe {{ team.name }} a été supprimée. </p>
+    <p>Votre équipe {{ team.name }} a été supprimée. </p>
+    <p>Pour participer au tournois, vous devez créer votre équipe ou en rejoindre une.</p>
     {% if team.createdBy == player %}
         <p>Un email a été envoyé aux autre membres de l'équipe pour les informer de la situation.</p>
     {% endif %}

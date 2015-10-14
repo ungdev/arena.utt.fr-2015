@@ -124,7 +124,7 @@ services:
 
     app.mail:
         class: AppBundle\Service\Mail
-        arguments: [ @mailer, "%mailer_expeditor%" ]
+        arguments: [ @mailer, "%mailer_expeditor_email%", "%mailer_expeditor_name%" ]
 
     app.barcode:
         class: AppBundle\Service\Barcode

@@ -82,7 +82,7 @@ class Ticket  implements Timestampable
      *
      * @var TShirt
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\TShirt")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\TShirt")
      */
     private $tshirt;
 

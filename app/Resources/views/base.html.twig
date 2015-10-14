@@ -21,11 +21,12 @@
 
         <title>{% block title %}UTT Arena 2015{% endblock %}</title>
         {% stylesheets
-        'vendors/iCheck/skins/flat/aero.css'
         'vendors/normalize.css/normalize.css'
+        'vendors/iCheck/skins/flat/aero.css'
         'vendors/selectize/dist/css/selectize.css'
-        'vendors/tether/dist/css/tether.min.css'
-        'vendors/tether-drop/dist/css/drop-theme-arrows.min.css'
+        'vendors/sweetalert/dist/sweetalert.css'
+        'vendors/html5tooltipsjs/html5tooltips.css'
+        'vendors/html5tooltipsjs/html5tooltips.animation.css'
         'css/account.css'
         'css/boilerplate.css'
         'css/fonts.css'
@@ -47,9 +48,8 @@
         'vendors/microplugin/src/microplugin.js'
         'vendors/sifter/sifter.min.js'
         'vendors/selectize/dist/js/selectize.min.js'
-        'vendors/tether/dist/js/tether.min.js'
-        'vendors/tether-drop/dist/js/drop.min.js'
-        'vendors/tether-tooltip/dist/js/tooltip.min.js'
+        'vendors/html5tooltipsjs/html5tooltips.js'
+        'vendors/sweetalert/dist/sweetalert.min.js'
         %}
         <script src="{{ asset_url }}"></script>
         {% endjavascripts %}

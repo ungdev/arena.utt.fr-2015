@@ -14,9 +14,9 @@ use Symfony\Component\Form\AbstractType;
 
 abstract class BaseType extends AbstractType
 {
-    protected $listner;
+    protected $listener;
 
     public function __construct(FormListener $listener) {
-        $this->listner = $listener;
+        $this->listener = $listener;
     }
 }

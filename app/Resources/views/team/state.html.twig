@@ -5,12 +5,12 @@
         <dt>{{ team.name }}</dt>
         <dd>Membres de l'équipe</dd>
         {% for member in team.memberships %}
-            <dt>{{ member.player }} {{ member.player == team.createdBy ? 'cap' }}</dt>
+            <dt>{{ member.player }} {% if member.player == team.createdBy %} <span title="Capitaine">&#9873;</span>{% endif %}</dt>
         {% endfor %}
     </dl>
     {% if team.createdBy == app.user %}
         <button class="button" data-modal="editForm">Modifier</button>
-        {{ render(controller('AppBundle:Team:editForm', {'team' : team,  'originalRequest': app.request})) }}
+        {{ render(controller('AppBundle:Team:edit')) }}
     {% endif %}
     {% if team.complete %}
         <p class="success">Votre équipe est complète</p>
@@ -18,19 +18,22 @@
         <p class="danger">Votre équipe est incomplète. </p>
         <p>Trouvez le plus rapidement possible des coéquipiers pour la compléter.</p>
 
-                <button data-modal="addForm">Ajouter un coéquipier</button>
-                {{ render(controller('AppBundle:Team:addForm', {'team' : team, 'originalRequest': app.request})) }}
-
+        {% if team.createdBy == app.user %}
+            <button data-modal="addForm">Ajouter un coéquipier</button>
+            {{ render(controller('AppBundle:Team:add')) }}
+        {% else %}
+            <p>Passez par votre capitaine pour ajouter des membres à votre équipe</p>
+        {% endif %}
     {% endif %}
 
-    <a class="button red" href="{{ path('team_quit') }}">Quitter</a>
+    <a class="button red confirmation" href="{{ path('team_quit') }}">Quitter</a>
     {% if team.createdBy == app.user %}
-        <a class="button red" href="{{ path('team_delete',  {'name' : team.getName}) }}">Supprimer l'équipe</a>
+        <a class="button red confirmation" href="{{ path('team_delete') }}">Supprimer l'équipe</a>
     {% endif %}
 
 {% else %}
-    <p>Vous n'est pas encore dans une équipe. Vous pouvez soit attendre qu'une autre équipe vous recrute ou en
+    <p>Vous n'êtes pas encore dans une équipe. Vous pouvez soit attendre qu'une autre équipe vous recrute ou en
     créer une.</p>
    <button data-modal="createForm">Créer une équipe</button>
-    {{ render(controller('AppBundle:Team:createForm', {'originalRequest': app.request})) }}
+    {{ render(controller('AppBundle:Team:create')) }}
 {% endif %}

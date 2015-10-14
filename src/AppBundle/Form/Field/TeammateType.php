@@ -38,8 +38,10 @@ class TeammateType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $transformer = new PlayersToMembershipsTransformer($this->om, $options['team']);
-        $builder->addModelTransformer($transformer, true);
+        if ($options['multiple']) {
+            $transformer = new PlayersToMembershipsTransformer($this->om, $options['team']);
+            $builder->addModelTransformer($transformer, true);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)

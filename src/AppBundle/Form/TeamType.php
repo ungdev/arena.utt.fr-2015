@@ -34,7 +34,7 @@ class TeamType extends BaseType
                         'data-maximum' => $options['game']->getTeammateNumber() - 1
                     )
                 ))
-            ->addEventSubscriber($this->listner);
+            ->addEventSubscriber($this->listener);
     }
 
     public function configureOptions(OptionsResolver $resolver)

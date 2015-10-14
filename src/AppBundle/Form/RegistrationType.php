@@ -21,7 +21,7 @@ class RegistrationType extends BaseType
             ))
             ->add('cgu', 'checkbox')
             ->add('rules', 'checkbox')
-            ->addEventSubscriber($this->listner);
+            ->addEventSubscriber($this->listener);
     }
 
     public function configureOptions(OptionsResolver $resolver)

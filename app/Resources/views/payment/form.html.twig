@@ -50,8 +50,8 @@
     });
 
     stripeButton.on('click', function(e) {
+        e.preventDefault();
         if (checkbox.is(':checked') && (!gender.is(':checked') || !size.is(':checked'))) {
-            e.preventDefault();
             noty({timeout: 10000,
                 layout: 'topRight',
                 text: 'Vous devez choisir une taille et une coupe', 'type': 'error'});
@@ -73,11 +73,5 @@
                 $('form').append($input).submit();
             }
         });
-        e.preventDefault();
-    });
-
-    // Close Checkout on page navigation
-    $(window).on('popstate', function() {
-        handler.close();
     });
 </script>

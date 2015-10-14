@@ -11,13 +11,7 @@
                         {% if game is teamSpotlightGame %}
                             <span id="{{ selector.slug }}">{{ selector }}</span>
                             <script>
-                                //drop
-                                new Drop ({
-                                    target : "#{{ selector.slug  }}",
-                                    content : "{{  selector.memberships|join(',')|e('js') }}",
-                                    position: 'bottom',
-                                    openOn: 'click'
-                                });
+
                             </script>
                         {% else %}
                             {{ selector }}

@@ -33,7 +33,7 @@
     "parallax.js": "~1.3.2",
     "iCheck": "~1.0.2",
     "noty": "~2.3",
-    "tether-tooltip": "~1.1.0"
+    "html5tooltipsjs": "~1.4"
   }
 }
 

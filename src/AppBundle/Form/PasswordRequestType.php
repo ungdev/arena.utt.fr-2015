@@ -24,7 +24,7 @@ class PasswordRequestType extends BaseType
                     'label' => 'Pseudo'
                 )
             )
-            ->addEventSubscriber($this->listner);
+            ->addEventSubscriber($this->listener);
     }
 
     public function configureOptions(OptionsResolver $resolver)

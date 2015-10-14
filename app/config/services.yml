@@ -80,6 +80,12 @@ services:
             - { name: form.type, alias: team }
         parent: form.type.base
 
+    voter.team:
+        class: AppBundle\Security\Voter\TeamVoter
+        tags:
+            - { name: security.voter }
+        public: false
+
     repository.tshirt:
         class: Doctrine\ORM\EntityRepository
         factory_service: doctrine.orm.default_entity_manager

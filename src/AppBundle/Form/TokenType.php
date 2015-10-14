@@ -49,7 +49,7 @@ class TokenType extends BaseType
                 'constraints' => array(
                     new Email()
                 )
-            ))->addEventSubscriber($this->listner);
+            ))->addEventSubscriber($this->listener);
     }
 
     public function configureOptions(OptionsResolver $resolver)

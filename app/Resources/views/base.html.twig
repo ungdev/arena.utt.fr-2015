@@ -74,7 +74,7 @@
                     </li>
                     <li><a href="{{ path('homepage') }}#infos">Infos pratiques</a><div class="separator"></div></li>
                     <li><a href="{{ path('homepage') }}#partners">Partenaires</a><div class="separator"></div></li>
-                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    {% if app.user and is_granted('IS_AUTHENTICATED_FULLY') %}
                         <li><a href="{{ path('profile') }}#">Profil</a><div class="separator"></div></li>
                         <li><a href="{{ path('logout') }}#">Déconnexion</a></li>
                     {% else %}
@@ -96,12 +96,12 @@
                     <li><a href="{{ path('homepage') }}#event">Évènement</a><div class="separator"></div></li>
                     <li><a href="{{ path('homepage') }}#infos">Infos pratiques</a><div class="separator"></div></li>
                     <li><a href="{{ path('homepage') }}#partners">Partenaires</a><div class="separator"></div></li>
-                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    {% if not app.user and not is_granted('IS_AUTHENTICATED_FULLY') %}
+                       <li><a href="{{ path('homepage') }}#register">Inscription</a><div class="separator"></div></li>
+                        <li><a href="{{ path('homepage') }}#" data-modal="login-modal">Connexion</a></li>
+                    {% else %}
                         <li><a href="{{ path('profile') }}#">Profil</a><div class="separator"></div></li>
                         <li><a href="{{ path('logout') }}#">Déconnexion</a></li>
-                    {% else %}
-                        <li><a href="{{ path('homepage') }}#register">Inscription</a><div class="separator"></div></li>
-                        <li><a href="{{ path('homepage') }}#" data-modal="login-modal">Connexion</a></li>
                     {% endif %}
                 </ul>
             </nav>
@@ -120,7 +120,7 @@
                 $cookiesScript.parentNode.removeChild($cookiesScript);
             </script>
         </div>
-        {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+        {% if not app.user and not is_granted('IS_AUTHENTICATED_FULLY') %}
             {{ render(controller('AppBundle:Security:loginForm')) }}
         {% endif %}
         {% block body %}{% endblock %}

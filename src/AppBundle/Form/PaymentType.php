@@ -58,7 +58,7 @@ class PaymentType extends BaseType
                     },
                 )
             )
-            ->addEventSubscriber($this->listner);
+            ->addEventSubscriber($this->listener);
     }
 
     public function configureOptions(OptionsResolver $resolver)

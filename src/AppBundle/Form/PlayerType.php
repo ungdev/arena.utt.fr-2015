@@ -61,7 +61,7 @@ class PlayerType extends BaseType
                     'placeholder' => 'Téléphone',
                     'class' => 'phone'
                 )
-            ))->addEventSubscriber($this->listner);
+            ))->addEventSubscriber($this->listener);
     }
 
     public function configureOptions(OptionsResolver $resolver)

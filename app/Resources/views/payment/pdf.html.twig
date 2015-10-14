@@ -23,7 +23,7 @@
         margin-bottom: 10px;
     }
     h1 {
-        font-size: 30px;
+        font-size: 25px;
     }
 
     span {
@@ -49,6 +49,7 @@
     {% else %}
     <span><strong>T-Shirt :</strong> Non <br></span>
     {% endif %}
+    <span><strong>Réduit :</strong> {{ player.ticket.reduced ? 'Oui' : 'Non' }} <br></span>
     <img src="{{ player.ticket.code|barcode }}" alt="{{ player.ticket.code }}"/>
 </div>
 

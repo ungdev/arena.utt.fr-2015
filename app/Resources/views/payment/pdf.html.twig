@@ -29,13 +29,6 @@
     span {
         font-size: 18px;
     }
-
-    .danger {
-        padding: 10px;
-        background: indianred;
-        color: white;
-        margin-left: 5px;
-    }
 </style>
 <body>
 
@@ -47,12 +40,25 @@
     {% if player.ticket.tshirt %}
     <span><strong>Tee-shirt :</strong>  {{ player.ticket.tshirt.genderLabel }} {{ player.ticket.tshirt.size }} <br></span>
     {% else %}
-    <span><strong>Tee-shirt :</strong> Non <br></span>
+    <span><strong>Tee-shirt :</strong> Non<br></span>
     {% endif %}
     <span><strong>Réduit :</strong> {{ player.ticket.reduced ? 'Oui' : 'Non' }} <br></span>
     <img src="{{ player.ticket.code|barcode }}" alt="{{ player.ticket.code }}"/>
 </div>
 
-<p class="danger">Ce ticket est nominatif. Il ne peut être cédé à des tiers.</p>
+<p><strong>L'UTT Arena 2015 se tiendra au Parc des Expositions de Troyes, le Cube, du 04 décembre 18h au 6 décembre 18h.</strong></p>
+<p>Adresse : TROYES EXPO CUBE 20 rue des Gayettes 10000 TROYES<br>
+Coordonnées GPS : 48°17'24N 4°04'18E</p>
+
+<p>N'oublier pas d'amener :</p>
+<ul>
+    <li>Votre matériel informatique habituel.</li>
+    <li>Une multiprise si vous en avez besoin de plus d'une prise électrique. Vous pourrez acheter une multiprise 3 trous à 5 €.</li>
+    <li>Un câble réseau (RJ45) de 5 mètres minimum. Là aussi, vous pourrez acheter un câble de bonne qualité à 7 €.</li>
+    <li>Un casque ou des écouteurs.</li>
+    <li><strong>Une pièce d'identité.</strong> Vous ne serez pas accepté sans une pièce valide. Pour les étudiants du groupe UT, <strong>n'oubliez pas votre carte étu</strong>.</li>
+    <li><strong>Une autorisation parentale pour les mineurs.</strong></li>
+</ul>
+
 </body>
 </html>

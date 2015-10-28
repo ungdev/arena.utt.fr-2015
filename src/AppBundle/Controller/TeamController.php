@@ -61,14 +61,14 @@ class TeamController extends Controller
             $em->persist($team);
             $em->flush();
 
-            $this->sendTeamEmail($team,'Création de l\' équipe', ':emails:teamCreation.html.twig');
+            $this->sendTeamEmail($team,'Création de l\'équipe', ':emails:teamCreation.html.twig');
 
             $this->addFlash('success', 'Votre équipe est créée.');
             return $this->redirectToRoute('profile');
         }
 
         if ($form->isSubmitted()) {
-            $this->addFlash('error', "La création de l'équipe a échouée");
+            $this->addFlash('error', "La création de l'équipe a échoué");
             return $this->redirectToRoute('profile');
         }
 
@@ -118,7 +118,7 @@ class TeamController extends Controller
         }
 
         if ($form->isSubmitted()) {
-            $this->addFlash('error', "L'éditon de l'équipe a échouée");
+            $this->addFlash('error', "L'éditon de l'équipe a échoué");
             return $this->redirectToRoute('profile');
         }
 
@@ -253,7 +253,7 @@ class TeamController extends Controller
 
         $this->sendTeamEmail(
             $team,
-            "Départ d'un des membre de votre équipe",
+            "Départ d'un des membres de votre équipe",
             ':emails:memberLeave.html.twig',
             array('leavingMember' => $membership->getPlayer())
         );

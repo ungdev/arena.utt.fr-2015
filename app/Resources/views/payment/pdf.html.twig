@@ -45,9 +45,9 @@
     <span><strong>Nom :</strong>  {{ player.fullName }} <br></span>
     <span><strong>Pseudo :</strong> {{ player.nickname }} <br></span>
     {% if player.ticket.tshirt %}
-    <span><strong>T-Shirt :</strong>  {{ player.ticket.tshirt.genderLabel }} {{ player.ticket.tshirt.size }} <br></span>
+    <span><strong>Tee-shirt :</strong>  {{ player.ticket.tshirt.genderLabel }} {{ player.ticket.tshirt.size }} <br></span>
     {% else %}
-    <span><strong>T-Shirt :</strong> Non <br></span>
+    <span><strong>Tee-shirt :</strong> Non <br></span>
     {% endif %}
     <span><strong>Réduit :</strong> {{ player.ticket.reduced ? 'Oui' : 'Non' }} <br></span>
     <img src="{{ player.ticket.code|barcode }}" alt="{{ player.ticket.code }}"/>

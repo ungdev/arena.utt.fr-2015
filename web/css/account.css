@@ -164,6 +164,8 @@ ul.gameList {
 
 .selectorsList {
     margin-bottom: 10px;
+    max-height: 300px;
+    overflow-y: auto;
     text-align: center;
 }
 .selectorsList dt {

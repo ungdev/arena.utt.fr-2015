@@ -14,8 +14,6 @@
 <script src="https://checkout.stripe.com/checkout.js"></script>
 <script>
     var stripeButton = $('#pay');
-    var tshirtData = $('#tshirtData');
-    var checkbox = $("input[type=checkbox]");
     var amount = {{ ticketPrice.amount }};
 
     stripeButton.on('click', function(e) {

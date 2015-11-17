@@ -21,23 +21,44 @@ class Place
 
     protected $maximumPlayerNumber;
 
+    protected $tshirtReservable;
+
+    protected $placePayable;
+
+    protected $playerRegistrable;
+
     /**
      * Ticketter constructor.
      * @param EntityRepository $repository
      * @param int $maximumPlayerNumber
+     * @param bool $tshirtReservable
+     * @param bool $placePayable
+     * @param bool $playerRegistrable
      */
-    public function __construct(EntityRepository $repository, $maximumPlayerNumber = 300)
+    public function __construct(
+        EntityRepository $repository,
+        $maximumPlayerNumber = 300,
+        $tshirtReservable = true,
+        $placePayable = true,
+        $playerRegistrable = true)
     {
         $this->repository = $repository;
         $this->maximumPlayerNumber = $maximumPlayerNumber;
+        $this->tshirtReservable = $tshirtReservable;
+        $this->placePayable = $placePayable;
+        $this->playerRegistrable = $playerRegistrable;
     }
 
     public function canRegister() {
-        return count($this->repository->findAll()) < $this->maximumPlayerNumber;
+        return count($this->repository->findAll()) < $this->maximumPlayerNumber && $this->playerRegistrable;
     }
 
     public function canPay() {
-        return count($this->repository->findAll()) < $this->maximumPlayerNumber;
+        return count($this->repository->findAll()) < $this->maximumPlayerNumber && $this->placePayable;
+    }
+
+    public function canTshirt() {
+        return $this->tshirtReservable;
     }
 
     public function isTooLate() {

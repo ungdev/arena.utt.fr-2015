@@ -37,7 +37,7 @@ services:
         class: AppBundle\Form\PaymentType
         tags:
             - { name: form.type, alias: payment }
-        arguments: ["@form.listener", "@repository.tshirt"]
+        arguments: ["@form.listener", "@repository.tshirt", "@app.place"]
 
     form.type.player:
         class: AppBundle\Form\PlayerType
@@ -116,7 +116,7 @@ services:
 
     app.place:
         class: AppBundle\Service\Place
-        arguments: ["@repository.ticket", %maximumplayernumber%]
+        arguments: ["@repository.ticket", %maximumplayernumber%, %tshirtReservable%, %placePayable%, %playerRegistrable%]
 
     app.price:
         class: AppBundle\Service\Price

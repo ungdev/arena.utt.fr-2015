@@ -31,3 +31,7 @@ parameters:
     reducedPriceDomains: ~
 
     maximumPlayerNumber: ~
+
+    tshirtReservable : true
+    placePayable : true
+    playerRegistrable : true

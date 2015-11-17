@@ -24,4 +24,8 @@ class Price
     public function getFormatted() {
         return number_format($this->amount / 100, 2, ',', '.') . ' €';
     }
+
+    public function __toString() {
+        return $this->getFormatted();
+    }
 }

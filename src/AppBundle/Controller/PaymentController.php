@@ -7,10 +7,6 @@ use AppBundle\Entity\Ticket;
 use AppBundle\Form\Model\Payment;
 use AppBundle\Model\Price;
 use Monolog\Logger;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Stripe\Charge;
 use Stripe\Error\Card;
 use Stripe\Stripe;
@@ -74,7 +70,14 @@ class PaymentController extends Controller {
             $stripeToken = $request->get('stripeToken');
 
             $price = $this->get('app.price')->getPrice($this->getUser())->getAmount();
-            $price += $ticket->getTshirt() ? $this->getParameter('price.tshirt') : 0;
+
+            if ($this->get('app.place')->canTshirt() && $ticket->getTshirt()) {
+                $price += $this->getParameter('price.tshirt');
+            }
+
+            if (!$this->get('app.place')->canTshirt() && $ticket->getTshirt()) {
+                $this->addFlash('warning', 'La vente de tshirt est arrêtée. Vous pourrez venir le payer sur place.');
+            }
 
             $ticket->setPrice($price);
 
@@ -124,7 +127,8 @@ class PaymentController extends Controller {
             'tshirtPrice' => new Price($this->getParameter('price.tshirt')),
             'paymentForm' => $form->createView(),
             'key' => $this->getParameter('payment.stripe.publishable'),
-            'payable' => $this->get('app.place')->canPay()
+            'payable' => $this->get('app.place')->canPay(),
+            'canPayTshirt' => $this->get('app.place')->canTshirt()
         );
     }
 

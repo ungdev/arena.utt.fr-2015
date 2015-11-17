@@ -3,13 +3,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Player;
-use AppBundle\Form\Model\Registration;
-use AppBundle\Form\PlayerType;
-use AppBundle\Form\RegistrationType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Swift_Mime_Headers_MailboxHeader;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -53,7 +46,7 @@ class PlayerController extends Controller
                 'editForm' => $editForm->createView(),
                 'passwordFrom' => $passwordForm->createView(),
                 'editMode' => boolval($edit),
-                "payable" => $this->get('app.place')->canPay()
+                'payable' => $this->get('app.place')->canPay()
             )
         );
     }

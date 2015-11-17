@@ -1,38 +1,43 @@
-<p>Votre place coûte {{ ticketPrice.formatted }}. Ce prix n'est valable qu'en prévente, alors dépéchez-vous !</p>
+{% if payable %}
+    <p>Votre place coûte {{ ticketPrice.formatted }}. Ce prix n'est valable qu'en prévente, alors dépéchez-vous !</p>
 
-<p>
-    Il n'est plus possible d'acheter un tee-shirt en prévente. Vous pourrez toujours en acheter sur place pour 10 €, dans la limite des stocks et des tailles disponibles.
-</p>
+    {% if not canPayTshirt %}
+    <p>
+        Il n'est plus possible d'acheter un tee-shirt en prévente. Vous pourrez toujours en acheter sur place pour {{ tshirtPrice.formatted }}, dans la limite des stocks et des tailles disponibles.
+    </p>
+    {% endif %}
+    <noscript>
+        <p>Vous devez avoir Javascript d'activé pour pouvoir payer votre place</p>
+    </noscript>
 
-<noscript>
-    <p>Vous devez avoir Javascript d'activé pour pouvoir payer votre place</p>
-</noscript>
+    {{ form_start(paymentForm) }}
+        <button id="pay">Payer</button>
+    {{ form_end(paymentForm) }}
+    <script src="https://checkout.stripe.com/checkout.js"></script>
+    <script>
+        var stripeButton = $('#pay');
+        var amount = {{ ticketPrice.amount }};
 
-{{ form_start(paymentForm) }}
-    <button id="pay">Payer</button>
-{{ form_end(paymentForm) }}
-<script src="https://checkout.stripe.com/checkout.js"></script>
-<script>
-    var stripeButton = $('#pay');
-    var amount = {{ ticketPrice.amount }};
-
-    stripeButton.on('click', function(e) {
-        e.preventDefault();
-        StripeCheckout.open({
-            key: '{{ key }}',
-            image: '{{ asset('img/logo.png') }}',
-            name: 'UTT Arena',
-            description: 'Place pour la LAN',
-            currency: 'EUR',
-            panelLabel: 'Payer {% verbatim %}{{amount}}{% endverbatim %}',
-            allowRememberMe: false,
-            amount: amount,
-            billingAddress: true,
-            zipCode: true,
-            token: function(token) {
-                var $input = $('<input type=hidden name=stripeToken />').val(token.id);
-                $('form').append($input).submit();
-            }
+        stripeButton.on('click', function(e) {
+            e.preventDefault();
+            StripeCheckout.open({
+                key: '{{ key }}',
+                image: '{{ asset('img/logo.png') }}',
+                name: 'UTT Arena',
+                description: 'Place pour la LAN',
+                currency: 'EUR',
+                panelLabel: 'Payer {% verbatim %}{{amount}}{% endverbatim %}',
+                allowRememberMe: false,
+                amount: amount,
+                billingAddress: true,
+                zipCode: true,
+                token: function(token) {
+                    var $input = $('<input type=hidden name=stripeToken />').val(token.id);
+                    $('form').append($input).submit();
+                }
+            });
         });
-    });
-</script>
+    </script>
+{% else %}
+    <p>Vous ne pouvez plus acheté votre place en prévente car nous avons atteint le nombre maximum de joueurs.</p>
+{% endif %}

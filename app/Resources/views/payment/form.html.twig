@@ -1,18 +1,7 @@
 <p>Votre place coûte {{ ticketPrice.formatted }}. Ce prix n'est valable qu'en prévente, alors dépéchez-vous !</p>
 
 <p>
-    Il est possible d'acheter un tee-shirt en prévente en même temps que votre ticket pour 8 €. L'avantage est d'être sûr que votre taille soit disponible.<br>
-    Sinon, vous pourrez toujours l'acheter sur place pour 10 €, dans la limite des stocks et des tailles disponibles.
-</p>
-<p>
-    Attention ! Une fois votre place payée, il n'est plus possible de pré-commander un tee-shirt et seule la vente sur place sera possible.<br>
-    De plus, il ne sera plus possible de pré-commander des tee-shirts environ 3 semaines avant l'UA, histoire de nous laisser le temps de les recevoir de notre fournisseur.
-</p>
-<p>
-    Enfin, si jamais vous voudriez en commander plusieurs (pour votre copain(e), mère, tante ou hamster), contactez-nous !
-</p>
-<p>
-    <img src="img/tshirt/homme.jpg" alt="Avant Homme" class="teeshirt"> <img src="img/tshirt/femme.jpg" alt="Avant Femme" class="teeshirt"> <img src="img/tshirt/dos_joueur.jpg" alt="Dos" class="teeshirt"> <img src="img/tshirt/players_1024.jpg" alt="Logo" class="teeshirt">
+    Il n'est plus possible d'acheter un tee-shirt en prévente. Vous pourrez toujours en acheter sur place pour 10 €, dans la limite des stocks et des tailles disponibles.
 </p>
 
 <noscript>
@@ -20,17 +9,6 @@
 </noscript>
 
 {{ form_start(paymentForm) }}
-    <div>
-        {{ form_errors(paymentForm.tshirt) }}
-        <label class="tshirt_checkbox">
-            {{ form_widget(paymentForm.tshirt) }}
-            Voulez-vous réserver un tee-shirt ? Il coute {{ tshirtPrice.formatted }}.
-        </label>
-    </div>
-    <div id="tshirtData" style="display: none">
-        {{ form_row(paymentForm.tshirtSize) }}
-        {{ form_row(paymentForm.tshirtGender) }}
-    </div>
     <button id="pay">Payer</button>
 {{ form_end(paymentForm) }}
 <script src="https://checkout.stripe.com/checkout.js"></script>
@@ -38,27 +16,10 @@
     var stripeButton = $('#pay');
     var tshirtData = $('#tshirtData');
     var checkbox = $("input[type=checkbox]");
-    var gender = $('input[name="payment[tshirtGender]"]');
-    var size = $('input[name="payment[tshirtSize]"]');
     var amount = {{ ticketPrice.amount }};
-    checkbox.on('ifChecked', function () {
-        tshirtData.show();
-        amount = {{ tshirtPrice.amount + ticketPrice.amount }};
-    });
-
-    checkbox.on('ifUnchecked', function () {
-        tshirtData.hide();
-        amount = {{ ticketPrice.amount }};
-    });
 
     stripeButton.on('click', function(e) {
         e.preventDefault();
-        if (checkbox.is(':checked') && (!gender.is(':checked') || !size.is(':checked'))) {
-            noty({timeout: 10000,
-                layout: 'topRight',
-                text: 'Vous devez choisir une taille et une coupe', 'type': 'error'});
-            return;
-        }
         StripeCheckout.open({
             key: '{{ key }}',
             image: '{{ asset('img/logo.png') }}',

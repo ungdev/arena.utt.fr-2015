@@ -7,7 +7,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
+use AppBundle\Form\Model\Registration;
+use AppBundle\Form\PlayerType;
+use AppBundle\Form\RegistrationType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Swift_Mime_Headers_MailboxHeader;
 
 /**
  * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
